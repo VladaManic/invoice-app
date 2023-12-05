@@ -15,20 +15,20 @@ const Content = () => {
     return (
         <div>
             {invoice.loading && <h2>Loading</h2>}
-            {!invoice.loading && invoice.error ? (
+            {!invoice.loading && invoice.error && (
                 <h2>Error: {invoice.error}</h2>
-            ) : null}
-            {!invoice.loading &&
-                invoice.invoices.length &&
-                invoice.invoices.map((singleInvoice: InvoiceObj) => (
-                    <div key={singleInvoice.id}>
-                        <p>#{singleInvoice.id}</p>
-                        <p>{singleInvoice.paymentDue}</p>
-                        <p>{singleInvoice.clientName}</p>
-                        <p>{singleInvoice.total}</p>
-                        <p>{singleInvoice.status}</p>
-                    </div>
-                ))}
+            )}
+            {!invoice.loading && invoice.invoices.length
+                ? invoice.invoices.map((singleInvoice: InvoiceObj) => (
+                      <div key={singleInvoice.id}>
+                          <p>#{singleInvoice.id}</p>
+                          <p>{singleInvoice.paymentDue}</p>
+                          <p>{singleInvoice.clientName}</p>
+                          <p>{singleInvoice.total}</p>
+                          <p>{singleInvoice.status}</p>
+                      </div>
+                  ))
+                : null}
         </div>
     )
 }
