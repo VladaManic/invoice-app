@@ -1,7 +1,13 @@
-import React from 'react'
+import Intro from '../../components/Home/Intro'
+import Content from '../../components/Home/Content'
 
 const Home = () => {
-    return <div>Home</div>
+    return (
+        <div>
+            <Intro />
+            <Content />
+        </div>
+    )
 }
 
 export default Home

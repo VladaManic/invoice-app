@@ -11,9 +11,12 @@
     "serve": "json-server --watch ./server/data.json --port 3004 --delay 2000"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
+    "axios": "^1.6.2",
     "json-server": "^0.17.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^9.0.1",
     "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
