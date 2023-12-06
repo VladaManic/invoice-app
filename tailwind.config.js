@@ -21,7 +21,6 @@ export default {
         asideBg: '#373B53',
         packmanUp: '#7C5DFA',
         packmanDown: '#9277FF',
-        asideBorder: '#494E6E',
       }
     },
   },
