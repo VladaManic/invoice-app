@@ -17,7 +17,11 @@ export default {
         'spartan-bold': ['Spartan Bold', 'sans-serif']
       },
       colors: {
-        lightBg: 'F8F8F8',
+        lightBg: '#F8F8F8',
+        asideBg: '#373B53',
+        packmanUp: '#7C5DFA',
+        packmanDown: '#9277FF',
+        asideBorder: '#494E6E',
       }
     },
   },
