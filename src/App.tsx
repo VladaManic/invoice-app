@@ -1,5 +1,6 @@
-// import { useEffect } from 'react'
-// import axios from 'axios'
+import { useEffect } from 'react'
+import { useAppDispatch } from './state/hooks'
+import { fetchInvoices } from './state/invoice/invoiceSlice'
 
 import Aside from './layout/Aside'
 import Main from './layout/Main'
@@ -7,20 +8,11 @@ import Main from './layout/Main'
 import './App.css'
 
 function App() {
-    // const fetchData = () => {
-    //     axios
-    //         .get('http://localhost:3004/invoics')
-    //         .then((res) => {
-    //             console.log(res.data)
+    const dispatch = useAppDispatch()
 
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error)
-    //         })
-    // }
-    // useEffect(() => {
-    //     fetchData()
-    // }, [])
+    useEffect(() => {
+        dispatch(fetchInvoices())
+    }, [])
 
     return (
         <div id="app-wrap">

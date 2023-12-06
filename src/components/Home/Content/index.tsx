@@ -1,16 +1,9 @@
-import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import { fetchInvoices } from '../../../state/invoice/invoiceSlice'
+import { useAppSelector } from '../../../state/hooks'
 
 import { InvoiceObj } from '../../../types/interfaces'
 
 const Content = () => {
     const invoice = useAppSelector((state) => state.invoice)
-    const dispatch = useAppDispatch()
-
-    useEffect(() => {
-        dispatch(fetchInvoices())
-    }, [])
 
     return (
         <div>
