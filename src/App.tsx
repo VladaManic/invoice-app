@@ -15,7 +15,7 @@ function App() {
     }, [])
 
     return (
-        <div id="app-wrap">
+        <div id="app-wrap" className="flex">
             <Aside />
             <Main />
         </div>
