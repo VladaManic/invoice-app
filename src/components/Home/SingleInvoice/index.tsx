@@ -10,7 +10,6 @@ interface Props {
 
 const SingleInvoice = ({ invoice }: Props) => {
     const date = new Date(invoice.paymentDue)
-    console.log(date)
 
     return (
         <div className="mb-4 flex w-[730px] items-center rounded-lg bg-defaultWhite p-4 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)]">
