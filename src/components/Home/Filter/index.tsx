@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { useAppDispatch } from '../../../state/hooks'
+import { fetchInvoicesByStatus } from '../../../state/invoice/invoiceSlice'
 import useAccordion from '../../../hooks/useAccordion'
 import clsx from 'clsx'
 
 import arrowIcon from '../../../assets/img/arrow.svg'
 
 const Filter = () => {
+    const dispatch = useAppDispatch()
     const [status, setStatus] = useState<string | null>(null)
     //Using custom hook for opening/closing region
     const { opened, setOpened } = useAccordion(false)
@@ -15,6 +18,7 @@ const Filter = () => {
             | React.TouchEvent<HTMLButtonElement>
     ) => {
         setStatus(e.currentTarget.value)
+        dispatch(fetchInvoicesByStatus(e.currentTarget.value))
     }
 
     return (

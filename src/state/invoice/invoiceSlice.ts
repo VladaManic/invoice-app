@@ -16,6 +16,15 @@ export const fetchInvoices = createAsyncThunk('invoice/fetcInvoices', () => {
         .then((response) => response.data)
 })
 
+export const fetchInvoicesByStatus = createAsyncThunk(
+    'invoice/fetcInvoicesByStatus',
+    (invoiceStatus: string) => {
+        return axios
+            .get('http://localhost:3004/invoices?status=' + invoiceStatus)
+            .then((response) => response.data)
+    }
+)
+
 const invoiceSlice = createSlice({
     name: 'invoice',
     initialState,
@@ -30,6 +39,19 @@ const invoiceSlice = createSlice({
             state.error = ''
         })
         builder.addCase(fetchInvoices.rejected, (state, action) => {
+            state.loading = false
+            state.invoices = []
+            state.error = action.error.message
+        })
+        builder.addCase(fetchInvoicesByStatus.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(fetchInvoicesByStatus.fulfilled, (state, action) => {
+            state.loading = false
+            state.invoices = action.payload
+            state.error = ''
+        })
+        builder.addCase(fetchInvoicesByStatus.rejected, (state, action) => {
             state.loading = false
             state.invoices = []
             state.error = action.error.message
