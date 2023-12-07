@@ -4,7 +4,7 @@ import personImg from '../../assets/img/person.png'
 
 const Aside = () => {
     return (
-        <div className="bg-asideBg flex h-screen w-24 flex-col justify-between overflow-hidden rounded-r-2xl">
+        <div className="bg-asideBg absolute left-0 top-0 flex h-screen w-24 flex-col justify-between overflow-hidden rounded-r-2xl">
             <div className="bg-packmanUp relative h-24 overflow-hidden rounded-br-2xl">
                 <div className="h-1/2"></div>
                 <div className="bg-packmanDown h-1/2 rounded-tl-2xl"></div>

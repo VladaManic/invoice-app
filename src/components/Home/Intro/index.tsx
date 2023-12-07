@@ -4,13 +4,15 @@ const Intro = () => {
     const invoice = useAppSelector((state) => state.invoice)
 
     return (
-        <div>
+        <div className="mb-14 flex w-[730px] justify-between">
             <div>
-                <h1>Invoices</h1>
+                <h1 className="text-defaultBlack">Invoices</h1>
                 <p>There are {invoice.invoices.length} total invoices</p>
             </div>
-            <p>Filter by status</p>
-            <button>New Invoice</button>
+            <div>
+                <p>Filter by status</p>
+                <button>New Invoice</button>
+            </div>
         </div>
     )
 }

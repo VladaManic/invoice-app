@@ -4,13 +4,11 @@
 
 @font-face {
     font-family: 'Spartan Medium';
-    font-weight: 500;
     src: url('./assets/font/SpartanMedium500.ttf');
 }
 
 @font-face {
     font-family: 'Spartan Bold';
-    font-family: 700;
     src: url('./assets/font/SpartanBold700.ttf');
 }
 
@@ -40,6 +38,7 @@ a:hover {
 }
 
 body {
+    position: relative;
     margin: 0;
     display: flex;
     place-items: center;
@@ -47,14 +46,16 @@ body {
     min-height: 100vh;
     background-color: #f8f8f8;
     font-family: 'Spartan Medium', 'sans-serif';
+    color: #858bb2;
 }
 
 h1 {
-    font-size: 3.2em;
+    font-family: 'Spartan Bold', 'sans-serif';
+    font-size: 32px;
     line-height: 1.1;
 }
 
-/* button {
+button {
     border-radius: 8px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
@@ -65,13 +66,13 @@ h1 {
     cursor: pointer;
     transition: border-color 0.25s;
 }
-button:hover {
+/* button:hover {
     border-color: #646cff;
-}
+} */
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
-} */
+}
 
 @media (prefers-color-scheme: light) {
     :root {

@@ -1,5 +1,7 @@
 import { useAppSelector } from '../../../state/hooks'
 
+import SingleInvoice from '../SingleInvoice'
+
 import { InvoiceObj } from '../../../types/interfaces'
 
 const Content = () => {
@@ -13,13 +15,10 @@ const Content = () => {
             )}
             {!invoice.loading && invoice.invoices.length
                 ? invoice.invoices.map((singleInvoice: InvoiceObj) => (
-                      <div key={singleInvoice.id}>
-                          <p>#{singleInvoice.id}</p>
-                          <p>{singleInvoice.paymentDue}</p>
-                          <p>{singleInvoice.clientName}</p>
-                          <p>{singleInvoice.total}</p>
-                          <p>{singleInvoice.status}</p>
-                      </div>
+                      <SingleInvoice
+                          key={singleInvoice.id}
+                          invoice={singleInvoice}
+                      />
                   ))
                 : null}
         </div>
