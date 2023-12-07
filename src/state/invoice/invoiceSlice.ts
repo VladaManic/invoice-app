@@ -16,6 +16,7 @@ export const fetchInvoices = createAsyncThunk('invoice/fetcInvoices', () => {
         .then((response) => response.data)
 })
 
+//Filtering by invoice status
 export const fetchInvoicesByStatus = createAsyncThunk(
     'invoice/fetcInvoicesByStatus',
     (invoiceStatus: string) => {
