@@ -30,6 +30,7 @@ export default {
         pendingBg: 'rgba(255, 143, 0, 0.1)',
         draftGrey: '#373B53',
         draftBg: 'rgba(55, 59, 83, 0.1)',
+        checkboxViolet: '#DFE3FA',
       }
     },
   },
