@@ -9,5 +9,6 @@ export type InvoiceObj = {
 export type InitialStateObj = {
     loading: boolean
     invoices: [] | InvoiceObj[]
+    singleInvoice: null | InvoiceObj
     error: string | undefined
 }

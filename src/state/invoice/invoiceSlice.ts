@@ -6,10 +6,11 @@ import { InitialStateObj } from '../../types/interfaces'
 const initialState: InitialStateObj = {
     loading: false,
     invoices: [],
+    singleInvoice: null,
     error: '',
 }
 
-//Generates pendind, fullfiled and rejcted action types
+//Generates pendind, fullfiled and rejcted action types for fetching all invoices
 export const fetchInvoices = createAsyncThunk('invoice/fetcInvoices', () => {
     return axios
         .get('http://localhost:3004/invoices')
@@ -22,6 +23,16 @@ export const fetchInvoicesByStatus = createAsyncThunk(
     (invoiceStatus: string) => {
         return axios
             .get('http://localhost:3004/invoices?status=' + invoiceStatus)
+            .then((response) => response.data)
+    }
+)
+
+//Fetching single invoice
+export const fetchSingleInvoice = createAsyncThunk(
+    'invoice/fetchSingleInvoice',
+    (singleInvoiceId: string) => {
+        return axios
+            .get('http://localhost:3004/invoices/' + singleInvoiceId)
             .then((response) => response.data)
     }
 )
@@ -55,6 +66,19 @@ const invoiceSlice = createSlice({
         builder.addCase(fetchInvoicesByStatus.rejected, (state, action) => {
             state.loading = false
             state.invoices = []
+            state.error = action.error.message
+        })
+        builder.addCase(fetchSingleInvoice.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(fetchSingleInvoice.fulfilled, (state, action) => {
+            state.loading = false
+            state.singleInvoice = action.payload
+            state.error = ''
+        })
+        builder.addCase(fetchSingleInvoice.rejected, (state, action) => {
+            state.loading = false
+            state.singleInvoice = null
             state.error = action.error.message
         })
     },

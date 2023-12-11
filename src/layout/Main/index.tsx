@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 
 import Home from '../../pages/Home'
-import SingleInvoice from '../../pages/SingleInvoice'
+import Single from '../../pages/Single'
 import Page404 from '../../pages/Page404'
 
 const Main = () => {
@@ -9,7 +9,7 @@ const Main = () => {
         <div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/invoice/:invoiceId" element={<SingleInvoice />} />
+                <Route path="/invoice/:invoiceId" element={<Single />} />
                 <Route path="*" element={<Page404 />} />
             </Routes>
         </div>
