@@ -16,7 +16,7 @@ const SingleInvoice = ({ invoice }: Props) => {
 
     return (
         <NavLink to={`/invoice/${invoice.id}`}>
-            <button className="mb-4 flex w-[730px] items-center rounded-lg bg-defaultWhite p-4 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)]">
+            <button className="mb-4 flex w-[730px] items-center rounded-lg bg-defaultWhite p-4 pl-8 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)]">
                 <div className="flex w-3/5">
                     <p className="w-28 text-left text-xs text-defaultText">
                         #
