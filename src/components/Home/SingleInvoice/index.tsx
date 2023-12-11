@@ -18,17 +18,21 @@ const SingleInvoice = ({ invoice }: Props) => {
         <NavLink to={`/invoice/${invoice.id}`}>
             <button className="mb-4 flex w-[730px] items-center rounded-lg bg-defaultWhite p-4 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)]">
                 <div className="flex w-3/5">
-                    <p className="w-28 text-left text-xs">
+                    <p className="w-28 text-left text-xs text-defaultText">
                         #
                         <span className="font-spartanBold text-defaultBlack">
                             {invoice.id}
                         </span>
                     </p>
                     <p className="w-40 text-left text-xs">
-                        <span>Due&nbsp;</span>
-                        <span>{format(date, 'dd MMM y')}</span>
+                        <span className="text-defaultText">Due&nbsp;</span>
+                        <span className="text-defaultText">
+                            {format(date, 'dd MMM y')}
+                        </span>
                     </p>
-                    <p className="text-left text-xs">{invoice.clientName}</p>
+                    <p className="text-left text-xs text-defaultText">
+                        {invoice.clientName}
+                    </p>
                 </div>
                 <div className="flex w-2/5 items-center justify-end">
                     <p className="mr-10 flex font-spartanBold text-base text-defaultBlack">
