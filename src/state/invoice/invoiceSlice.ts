@@ -45,7 +45,7 @@ export const deleteSingleInvoice = createAsyncThunk(
     'invoice/deleteSingleInvoice',
     (singleInvoiceId: string) => {
         return axios
-            .delete('http://localhost:3004/invoics/' + singleInvoiceId)
+            .delete('http://localhost:3004/invoices/' + singleInvoiceId)
             .then((response) => response.data)
     }
 )

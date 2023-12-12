@@ -1,7 +1,13 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import { deleteSingleInvoice } from '../../../state/invoice/invoiceSlice'
+import {
+    deleteSingleInvoice,
+    resetError,
+} from '../../../state/invoice/invoiceSlice'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { TOASTIFY_PARAMS } from '../../../constants/toastifyConstant'
 
 import LoaderSmall from '../../../components/Reusable/LoaderSmall'
 
@@ -18,10 +24,18 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
+        //If error while deleting single invoice
+        if (invoiceRedux.errorDelete) {
+            toast.error('Error while deleting the invoice!', TOASTIFY_PARAMS)
+            //After showing the error for deleting invoice, reseting the error to undefined for new potencial delete try
+            dispatch(resetError())
+        }
+        //If single invoice successfully deleted
         if (invoiceRedux.successDelete) {
+            //Redirect to home page
             navigate('/')
         }
-    }, [invoiceRedux.successDelete])
+    }, [invoiceRedux.errorDelete, invoiceRedux.successDelete])
 
     const onClickHandler = (
         e:
@@ -38,8 +52,8 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
                 Confirm Deletion
             </h2>
             <p className="mb-[15px] text-[12px] leading-[22px]">
-                Are you sure you want to delete invoice #XM9141? This action
-                cannot be undone.
+                Are you sure you want to delete invoice {invoice.id}? This
+                action cannot be undone.
             </p>
             <div className="text-right">
                 <button
@@ -57,6 +71,7 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
                 </button>
             </div>
             {invoiceRedux.loadingDelete && <LoaderSmall />}
+            <ToastContainer />
         </div>
     )
 }
