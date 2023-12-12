@@ -32,6 +32,8 @@ export default {
         draftBg: 'rgba(55, 59, 83, 0.1)',
         checkboxViolet: '#DFE3FA',
         deleteRed: '#EC5757',
+        singleGrey: '#7E88C3',
+        tableGrey: '#F9FAFE',
       }
     },
   },
