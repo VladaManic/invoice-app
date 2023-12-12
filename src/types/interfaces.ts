@@ -1,3 +1,5 @@
+import { Theme, ToastPosition } from 'react-toastify'
+
 export type SenderAddressObj = {
     street: string
     city: string
@@ -35,7 +37,20 @@ export type InvoiceObj = {
 
 export type InitialStateObj = {
     loading: boolean
+    loadingDelete: boolean
     invoices: [] | InvoiceObj[]
     singleInvoice: null | InvoiceObj
     error: string | undefined
+    errorDelete: string | undefined
+}
+
+export type ToastifyPropsObj = {
+    position: ToastPosition | undefined
+    autoClose: number
+    hideProgressBar: boolean
+    closeOnClick: boolean
+    pauseOnHover: boolean
+    draggable: boolean
+    progress: undefined
+    theme: Theme | undefined
 }

@@ -1,5 +1,7 @@
-import { useAppDispatch } from '../../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { deleteSingleInvoice } from '../../../state/invoice/invoiceSlice'
+
+import LoaderSmall from '../../../components/Reusable/LoaderSmall'
 
 import { InvoiceObj } from '../../../types/interfaces'
 
@@ -9,6 +11,7 @@ interface Props {
 }
 
 const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
     const onClickHandler = (
@@ -44,6 +47,7 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
                     Delete
                 </button>
             </div>
+            {invoiceRedux.loadingDelete && <LoaderSmall />}
         </div>
     )
 }

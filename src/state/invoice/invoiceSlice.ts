@@ -5,9 +5,11 @@ import { InitialStateObj } from '../../types/interfaces'
 
 const initialState: InitialStateObj = {
     loading: false,
+    loadingDelete: false,
     invoices: [],
     singleInvoice: null,
     error: '',
+    errorDelete: '',
 }
 
 //Generates pendind, fullfiled and rejcted action types for fetching all invoices
@@ -42,7 +44,7 @@ export const deleteSingleInvoice = createAsyncThunk(
     'invoice/deleteSingleInvoice',
     (singleInvoiceId: string) => {
         return axios
-            .delete('http://localhost:3004/invoices/' + singleInvoiceId)
+            .delete('http://localhost:3004/invoics/' + singleInvoiceId)
             .then((response) => response.data)
     }
 )
@@ -50,7 +52,13 @@ export const deleteSingleInvoice = createAsyncThunk(
 const invoiceSlice = createSlice({
     name: 'invoice',
     initialState,
-    reducers: {},
+    //Sync reducers
+    reducers: {
+        resetError: (state) => {
+            state.errorDelete = ''
+        },
+    },
+    //Async reducers
     extraReducers: (builder) => {
         //Fetching all invoices
         builder.addCase(fetchInvoices.pending, (state) => {
@@ -96,18 +104,20 @@ const invoiceSlice = createSlice({
         })
         //Delete single invoice
         builder.addCase(deleteSingleInvoice.pending, (state) => {
-            state.loading = true
+            state.loadingDelete = true
         })
         builder.addCase(deleteSingleInvoice.fulfilled, (state, action) => {
-            state.loading = false
+            state.loadingDelete = false
             state.invoices = action.payload
-            state.error = ''
+            state.errorDelete = ''
         })
         builder.addCase(deleteSingleInvoice.rejected, (state, action) => {
-            state.loading = false
-            state.error = action.error.message
+            state.loadingDelete = false
+            state.errorDelete = action.error.message
         })
     },
 })
+
+export const { resetError } = invoiceSlice.actions
 
 export default invoiceSlice.reducer
