@@ -36,7 +36,8 @@ const SingleInvoice = ({ invoice }: Props) => {
                 </div>
                 <div className="flex w-2/5 items-center justify-end">
                     <p className="mr-10 flex font-spartanBold text-base text-defaultBlack">
-                        <span>£</span> {invoice.total}
+                        <span>£</span>{' '}
+                        {parseFloat(invoice.total.toString()).toFixed(2)}
                     </p>
                     <StatusBtn invoice={invoice} />
                     <div className="ml-5 p-0">
