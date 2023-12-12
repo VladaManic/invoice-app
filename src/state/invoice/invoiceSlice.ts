@@ -17,7 +17,7 @@ export const fetchInvoices = createAsyncThunk('invoice/fetcInvoices', () => {
         .then((response) => response.data)
 })
 
-//Filtering by invoice status
+//Filtering by invoice status (pendind, fullfiled and rejcted action types)
 export const fetchInvoicesByStatus = createAsyncThunk(
     'invoice/fetcInvoicesByStatus',
     (invoiceStatus: string) => {
@@ -27,7 +27,7 @@ export const fetchInvoicesByStatus = createAsyncThunk(
     }
 )
 
-//Fetching single invoice
+//Fetching single invoice (pendind, fullfiled and rejcted action types)
 export const fetchSingleInvoice = createAsyncThunk(
     'invoice/fetchSingleInvoice',
     (singleInvoiceId: string) => {
@@ -37,11 +37,22 @@ export const fetchSingleInvoice = createAsyncThunk(
     }
 )
 
+//Deleting single invoice
+export const deleteSingleInvoice = createAsyncThunk(
+    'invoice/deleteSingleInvoice',
+    (singleInvoiceId: string) => {
+        return axios
+            .delete('http://localhost:3004/invoices/' + singleInvoiceId)
+            .then((response) => response.data)
+    }
+)
+
 const invoiceSlice = createSlice({
     name: 'invoice',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        //Fetching all invoices
         builder.addCase(fetchInvoices.pending, (state) => {
             state.loading = true
         })
@@ -55,6 +66,7 @@ const invoiceSlice = createSlice({
             state.invoices = []
             state.error = action.error.message
         })
+        //Fetching invoices filtered by status
         builder.addCase(fetchInvoicesByStatus.pending, (state) => {
             state.loading = true
         })
@@ -68,6 +80,7 @@ const invoiceSlice = createSlice({
             state.invoices = []
             state.error = action.error.message
         })
+        //Fetching single invoice
         builder.addCase(fetchSingleInvoice.pending, (state) => {
             state.loading = true
         })
@@ -79,6 +92,19 @@ const invoiceSlice = createSlice({
         builder.addCase(fetchSingleInvoice.rejected, (state, action) => {
             state.loading = false
             state.singleInvoice = null
+            state.error = action.error.message
+        })
+        //Delete single invoice
+        builder.addCase(deleteSingleInvoice.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(deleteSingleInvoice.fulfilled, (state, action) => {
+            state.loading = false
+            state.invoices = action.payload
+            state.error = ''
+        })
+        builder.addCase(deleteSingleInvoice.rejected, (state, action) => {
+            state.loading = false
             state.error = action.error.message
         })
     },
