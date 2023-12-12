@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { fetchInvoices } from '../../state/invoice/invoiceSlice'
 
+import Loader from '../../components/Reusable/Loader'
 import Intro from '../../components/Home/Intro'
 import Content from '../../components/Home/Content'
 
@@ -15,7 +16,7 @@ const Home = () => {
 
     return (
         <div>
-            {invoice.loading && <h2>Loading...</h2>}
+            {invoice.loading && <Loader />}
             {!invoice.loading && invoice.error && (
                 <h2>Error: {invoice.error}</h2>
             )}
