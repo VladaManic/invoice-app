@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { deleteSingleInvoice } from '../../../state/invoice/invoiceSlice'
 
@@ -11,8 +13,15 @@ interface Props {
 }
 
 const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
+    const navigate = useNavigate()
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (invoiceRedux.successDelete) {
+            navigate('/')
+        }
+    }, [invoiceRedux.successDelete])
 
     const onClickHandler = (
         e:

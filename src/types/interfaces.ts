@@ -42,6 +42,7 @@ export type InitialStateObj = {
     singleInvoice: null | InvoiceObj
     error: string | undefined
     errorDelete: string | undefined
+    successDelete: boolean
 }
 
 export type ToastifyPropsObj = {

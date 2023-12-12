@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
-import { fetchInvoices } from '../../state/invoice/invoiceSlice'
+import { fetchInvoices, resetSuccess } from '../../state/invoice/invoiceSlice'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { TOASTIFY_PARAMS } from '../../constants/toastifyConstant'
 
 import Loader from '../../components/Reusable/Loader'
 import Intro from '../../components/Home/Intro'
@@ -12,6 +15,14 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(fetchInvoices())
+        if (invoice.successDelete) {
+            toast.success(
+                'You successfully deleted the invoice!',
+                TOASTIFY_PARAMS
+            )
+            //After showing the success message for deleting invoice, reseting the success to false for new potencial delete
+            dispatch(resetSuccess())
+        }
     }, [])
 
     return (
@@ -26,6 +37,7 @@ const Home = () => {
                     <Content invoice={invoice} />
                 </>
             ) : null}
+            <ToastContainer />
         </div>
     )
 }

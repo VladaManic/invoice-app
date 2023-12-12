@@ -10,6 +10,7 @@ const initialState: InitialStateObj = {
     singleInvoice: null,
     error: '',
     errorDelete: '',
+    successDelete: false,
 }
 
 //Generates pendind, fullfiled and rejcted action types for fetching all invoices
@@ -52,10 +53,13 @@ export const deleteSingleInvoice = createAsyncThunk(
 const invoiceSlice = createSlice({
     name: 'invoice',
     initialState,
-    //Sync reducers
+    //Sync reducers list
     reducers: {
         resetError: (state) => {
             state.errorDelete = ''
+        },
+        resetSuccess: (state) => {
+            state.successDelete = false
         },
     },
     //Async reducers
@@ -110,6 +114,7 @@ const invoiceSlice = createSlice({
             state.loadingDelete = false
             state.invoices = action.payload
             state.errorDelete = ''
+            state.successDelete = true
         })
         builder.addCase(deleteSingleInvoice.rejected, (state, action) => {
             state.loadingDelete = false
@@ -118,6 +123,6 @@ const invoiceSlice = createSlice({
     },
 })
 
-export const { resetError } = invoiceSlice.actions
+export const { resetError, resetSuccess } = invoiceSlice.actions
 
 export default invoiceSlice.reducer
