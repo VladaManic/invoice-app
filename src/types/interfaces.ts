@@ -43,6 +43,7 @@ export type InitialStateObj = {
     error: string | undefined
     errorDelete: string | undefined
     successDelete: boolean
+    itemList: number[]
 }
 
 export type ToastifyPropsObj = {

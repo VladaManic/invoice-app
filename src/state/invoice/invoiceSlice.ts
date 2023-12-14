@@ -11,6 +11,7 @@ const initialState: InitialStateObj = {
     error: '',
     errorDelete: '',
     successDelete: false,
+    itemList: [],
 }
 
 //Generates pendind, fullfiled and rejcted action types for fetching all invoices
@@ -60,6 +61,22 @@ const invoiceSlice = createSlice({
         },
         resetSuccess: (state) => {
             state.successDelete = false
+        },
+        addItem: (state) => {
+            //If empty array
+            if (state.itemList[state.itemList.length - 1] === undefined) {
+                state.itemList.push(1)
+                //If already numbers in array
+            } else {
+                state.itemList.push(
+                    state.itemList[state.itemList.length - 1] + 1
+                )
+            }
+        },
+        removeItem: (state, action) => {
+            state.itemList = state.itemList.filter(
+                (index: number) => index !== action.payload
+            )
         },
     },
     //Async reducers
@@ -123,6 +140,7 @@ const invoiceSlice = createSlice({
     },
 })
 
-export const { resetError, resetSuccess } = invoiceSlice.actions
+export const { resetError, resetSuccess, addItem, removeItem } =
+    invoiceSlice.actions
 
 export default invoiceSlice.reducer

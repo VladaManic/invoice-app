@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import { addItem } from '../../../state/invoice/invoiceSlice'
 
 import Item from '../Item'
 
 const ItemList = () => {
-    const [itemCount, setItemCount] = useState<number>(0)
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const dispatch = useAppDispatch()
 
     //Adding new item
     const onClickHandler = (
@@ -12,7 +14,7 @@ const ItemList = () => {
             | React.TouchEvent<HTMLButtonElement>
     ) => {
         e.preventDefault()
-        setItemCount((prevItemCount) => prevItemCount + 1)
+        dispatch(addItem())
     }
 
     return (
@@ -28,8 +30,8 @@ const ItemList = () => {
                     <p className="w-[15%]">Total</p>
                     <p className="w-[10%]"></p>
                 </div>
-                {[...Array(itemCount)].map((x, index) => (
-                    <Item key={index} />
+                {invoiceRedux.itemList.map((item: number) => (
+                    <Item key={item} itemIndex={item} />
                 ))}
             </div>
             <button
