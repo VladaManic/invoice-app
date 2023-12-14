@@ -55,3 +55,19 @@ export type ToastifyPropsObj = {
     progress: undefined
     theme: Theme | undefined
 }
+
+export type FormDataObj = {
+    senderAddress: string
+    senderCity: string
+    senderPostcode: string
+    senderCountry: string
+    clientName: string
+    clientEmail: string
+    clientAddress: string
+    clientCity: string
+    clientPostcode: string
+    clientCountry: string
+    paymentDue: string
+    paymentTerms: string
+    description: string
+}

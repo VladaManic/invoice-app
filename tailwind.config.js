@@ -36,6 +36,7 @@ export default {
         tableGrey: '#F9FAFE',
         overlayGrey: 'rgba(101, 101, 101, 0.5)',
         draftText: '#888EB0',
+        errorRed: 'red',
       }
     },
   },
