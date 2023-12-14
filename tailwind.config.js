@@ -35,6 +35,7 @@ export default {
         singleGrey: '#7E88C3',
         tableGrey: '#F9FAFE',
         overlayGrey: 'rgba(101, 101, 101, 0.5)',
+        draftText: '#888EB0',
       }
     },
   },

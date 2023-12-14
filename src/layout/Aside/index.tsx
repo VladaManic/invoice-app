@@ -4,10 +4,10 @@ import personImg from '../../assets/img/person.png'
 
 const Aside = () => {
     return (
-        <div className="bg-asideBg absolute left-0 top-0 flex h-screen w-24 flex-col justify-between overflow-hidden rounded-r-2xl">
-            <div className="bg-packmanUp relative h-24 overflow-hidden rounded-br-2xl">
+        <div className="fixed left-0 top-0 z-[101] flex h-screen w-[96px] flex-col justify-between overflow-hidden rounded-r-2xl  bg-asideBg">
+            <div className="relative h-24 overflow-hidden rounded-br-2xl bg-packmanUp">
                 <div className="h-1/2"></div>
-                <div className="bg-packmanDown h-1/2 rounded-tl-2xl"></div>
+                <div className="h-1/2 rounded-tl-2xl bg-packmanDown"></div>
                 <img
                     src={packmanIcon}
                     alt="Packman icon"
@@ -15,7 +15,7 @@ const Aside = () => {
                 />
             </div>
             <div>
-                <button className="bg-asideBg mb-10 ml-auto mr-auto block">
+                <button className="mb-10 ml-auto mr-auto block bg-asideBg">
                     <img src={moonIcon} alt="Moon icon" />
                 </button>
                 <div className="flex h-20 w-full border border-solid border-[#494E6E]">
