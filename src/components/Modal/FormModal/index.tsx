@@ -40,11 +40,6 @@ const FormModal = ({ onClose }: Props) => {
         console.log(data)
     }
 
-    const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const id = e.currentTarget.value
-        console.log(id)
-    }
-
     return (
         <form onSubmit={handleSubmit(submitData)}>
             <div
@@ -285,7 +280,6 @@ const FormModal = ({ onClose }: Props) => {
                                 id="payment-terms"
                                 defaultValue="1"
                                 {...register('paymentTerms')}
-                                onChange={onChangeHandler}
                             >
                                 <option value="1">Net 1 Day</option>
                                 <option value="2">Net 7 Days</option>
