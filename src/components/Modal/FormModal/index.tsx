@@ -20,19 +20,19 @@ const FormModal = ({ onClose }: Props) => {
     const [selectOpened, setSelectOpened] = useState<boolean>(false)
     //Setting validation form rules
     const schema: ZodType<FormDataObj> = z.object({
-        senderAddress: z.string().min(1, { message: "Field can't be empty" }),
-        senderCity: z.string().min(1, { message: "Field can't be empty" }),
-        senderPostcode: z.string().min(1, { message: "Field can't be empty" }),
-        senderCountry: z.string().min(1, { message: "Field can't be empty" }),
-        clientName: z.string().min(1, { message: "Field can't be empty" }),
+        senderAddress: z.string().min(1, { message: "can't be empty" }),
+        senderCity: z.string().min(1, { message: "can't be empty" }),
+        senderPostcode: z.string().min(1, { message: "can't be empty" }),
+        senderCountry: z.string().min(1, { message: "can't be empty" }),
+        clientName: z.string().min(1, { message: "can't be empty" }),
         clientEmail: z.string().email(),
-        clientAddress: z.string().min(1, { message: "Field can't be empty" }),
-        clientCity: z.string().min(1, { message: "Field can't be empty" }),
-        clientPostcode: z.string().min(1, { message: "Field can't be empty" }),
-        clientCountry: z.string().min(1, { message: "Field can't be empty" }),
+        clientAddress: z.string().min(1, { message: "can't be empty" }),
+        clientCity: z.string().min(1, { message: "can't be empty" }),
+        clientPostcode: z.string().min(1, { message: "can't be empty" }),
+        clientCountry: z.string().min(1, { message: "can't be empty" }),
         paymentDue: z.string().min(1, { message: 'Must choose the date' }),
         paymentTerms: z.string(),
-        description: z.string().min(1, { message: "Field can't be empty" }),
+        description: z.string().min(1, { message: "can't be empty" }),
     })
 
     const {
@@ -84,82 +84,118 @@ const FormModal = ({ onClose }: Props) => {
                             Bill From
                         </h3>
                         <div className="mb-[12px]">
-                            <label
-                                htmlFor="street-address"
-                                className="font-spartanMedium text-xs text-singleGrey"
-                            >
-                                Street Address
-                            </label>
+                            <div className="flex justify-between text-singleGrey">
+                                <label
+                                    htmlFor="street-address"
+                                    className={clsx(
+                                        'font-spartanMedium text-xs',
+                                        errors.senderAddress && 'text-errorRed'
+                                    )}
+                                >
+                                    Street Address
+                                </label>
+                                {errors.senderAddress && (
+                                    <span className="block text-xs text-errorRed">
+                                        {errors.senderAddress.message}
+                                    </span>
+                                )}
+                            </div>
                             <input
                                 type="text"
                                 id="street-address"
-                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className={clsx(
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    errors.senderAddress && 'border-errorRed'
+                                )}
                                 {...register('senderAddress')}
                             />
-                            {errors.senderAddress && (
-                                <span className="mt-[5px] block text-xs text-errorRed">
-                                    {errors.senderAddress.message}
-                                </span>
-                            )}
                         </div>
 
                         <div className="mb-[35px] flex justify-between">
                             <div className="w-[30%]">
-                                <label
-                                    htmlFor="city"
-                                    className="font-spartanMedium text-xs text-singleGrey"
-                                >
-                                    City
-                                </label>
+                                <div className="flex justify-between text-singleGrey">
+                                    <label
+                                        htmlFor="city"
+                                        className={clsx(
+                                            'font-spartanMedium text-xs',
+                                            errors.senderCity && 'text-errorRed'
+                                        )}
+                                    >
+                                        City
+                                    </label>
+                                    {errors.senderCity && (
+                                        <span className="block text-xs text-errorRed">
+                                            {errors.senderCity.message}
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="text"
                                     id="city"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className={clsx(
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        errors.senderCity && 'border-errorRed'
+                                    )}
                                     {...register('senderCity')}
                                 />
-                                {errors.senderCity && (
-                                    <span className="mt-[5px] block text-xs text-errorRed">
-                                        {errors.senderCity.message}
-                                    </span>
-                                )}
                             </div>
                             <div className="w-[30%]">
-                                <label
-                                    htmlFor="post-code"
-                                    className="font-spartanMedium text-xs text-singleGrey"
-                                >
-                                    Post Code
-                                </label>
+                                <div className="flex justify-between text-singleGrey">
+                                    <label
+                                        htmlFor="post-code"
+                                        className={clsx(
+                                            'font-spartanMedium text-xs',
+                                            errors.senderPostcode &&
+                                                'text-errorRed'
+                                        )}
+                                    >
+                                        Post Code
+                                    </label>
+                                    {errors.senderPostcode && (
+                                        <span className="block text-xs text-errorRed">
+                                            {errors.senderPostcode.message}
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="text"
                                     id="post-code"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className={clsx(
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        errors.senderPostcode &&
+                                            'border-errorRed'
+                                    )}
                                     {...register('senderPostcode')}
                                 />
-                                {errors.senderPostcode && (
-                                    <span className="mt-[5px] block text-xs text-errorRed">
-                                        {errors.senderPostcode.message}
-                                    </span>
-                                )}
                             </div>
                             <div className="w-[30%]">
-                                <label
-                                    htmlFor="country"
-                                    className="font-spartanMedium text-xs text-singleGrey"
-                                >
-                                    Country
-                                </label>
+                                <div className="flex justify-between text-singleGrey">
+                                    <label
+                                        htmlFor="country"
+                                        className={clsx(
+                                            'font-spartanMedium text-xs',
+                                            errors.senderCountry &&
+                                                'text-errorRed'
+                                        )}
+                                    >
+                                        Country
+                                    </label>
+                                    {errors.senderCountry && (
+                                        <span className="block text-xs text-errorRed">
+                                            {errors.senderCountry.message}
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="text"
                                     id="country"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className={clsx(
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        errors.senderCountry &&
+                                            'border-errorRed'
+                                    )}
                                     {...register('senderCountry')}
                                 />
-                                {errors.senderCountry && (
-                                    <span className="mt-[5px] block text-xs text-errorRed">
-                                        {errors.senderCountry.message}
-                                    </span>
-                                )}
                             </div>
                         </div>
 
@@ -167,134 +203,191 @@ const FormModal = ({ onClose }: Props) => {
                             Bill To
                         </h3>
                         <div className="mb-[12px]">
-                            <label
-                                htmlFor="clients-name"
-                                className="font-spartanMedium text-xs text-singleGrey"
-                            >
-                                Client's Name
-                            </label>
+                            <div className="flex justify-between text-singleGrey">
+                                <label
+                                    htmlFor="clients-name"
+                                    className={clsx(
+                                        'font-spartanMedium text-xs',
+                                        errors.clientName && 'text-errorRed'
+                                    )}
+                                >
+                                    Client's Name
+                                </label>
+                                {errors.clientName && (
+                                    <span className="block text-xs text-errorRed">
+                                        {errors.clientName.message}
+                                    </span>
+                                )}
+                            </div>
                             <input
                                 type="text"
                                 id="clients-name"
-                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className={clsx(
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    errors.clientName && 'border-errorRed'
+                                )}
                                 {...register('clientName')}
                             />
-                            {errors.clientName && (
-                                <span className="mt-[5px] block text-xs text-errorRed">
-                                    {errors.clientName.message}
-                                </span>
-                            )}
                         </div>
                         <div className="mb-[12px]">
-                            <label
-                                htmlFor="clients-email"
-                                className="font-spartanMedium text-xs text-singleGrey"
-                            >
-                                Client's Email
-                            </label>
+                            <div className="flex justify-between text-singleGrey">
+                                <label
+                                    htmlFor="clients-email"
+                                    className={clsx(
+                                        'font-spartanMedium text-xs',
+                                        errors.clientEmail && 'text-errorRed'
+                                    )}
+                                >
+                                    Client's Email
+                                </label>
+                                {errors.clientEmail && (
+                                    <span className="block text-xs text-errorRed">
+                                        {errors.clientEmail.message}
+                                    </span>
+                                )}
+                            </div>
                             <input
                                 type="email"
                                 id="clients-email"
-                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className={clsx(
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    errors.clientEmail && 'border-errorRed'
+                                )}
                                 {...register('clientEmail')}
                             />
-                            {errors.clientEmail && (
-                                <span className="mt-[5px] block text-xs text-errorRed">
-                                    {errors.clientEmail.message}
-                                </span>
-                            )}
                         </div>
                         <div className="mb-[12px]">
-                            <label
-                                htmlFor="street-address-from"
-                                className="font-spartanMedium text-xs text-singleGrey"
-                            >
-                                Street Address
-                            </label>
+                            <div className="flex justify-between text-singleGrey">
+                                <label
+                                    htmlFor="street-address-from"
+                                    className={clsx(
+                                        'font-spartanMedium text-xs',
+                                        errors.clientAddress && 'text-errorRed'
+                                    )}
+                                >
+                                    Street Address
+                                </label>
+                                {errors.clientAddress && (
+                                    <span className="block text-xs text-errorRed">
+                                        {errors.clientAddress.message}
+                                    </span>
+                                )}
+                            </div>
                             <input
                                 type="text"
                                 id="street-address-from"
-                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className={clsx(
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    errors.clientAddress && 'border-errorRed'
+                                )}
                                 {...register('clientAddress')}
                             />
-                            {errors.clientAddress && (
-                                <span className="mt-[5px] block text-xs text-errorRed">
-                                    {errors.clientAddress.message}
-                                </span>
-                            )}
                         </div>
                         <div className="mb-[35px] flex justify-between">
                             <div className="w-[30%]">
-                                <label
-                                    htmlFor="city-from"
-                                    className="font-spartanMedium text-xs text-singleGrey"
-                                >
-                                    City
-                                </label>
+                                <div className="flex justify-between text-singleGrey">
+                                    <label
+                                        htmlFor="city-from"
+                                        className={clsx(
+                                            'font-spartanMedium text-xs',
+                                            errors.clientCity && 'text-errorRed'
+                                        )}
+                                    >
+                                        City
+                                    </label>
+                                    {errors.clientCity && (
+                                        <span className="block text-xs text-errorRed">
+                                            {errors.clientCity.message}
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="text"
                                     id="city-from"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className={clsx(
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        errors.clientCity && 'border-errorRed'
+                                    )}
                                     {...register('clientCity')}
                                 />
-                                {errors.clientCity && (
-                                    <span className="mt-[5px] block text-xs text-errorRed">
-                                        {errors.clientCity.message}
-                                    </span>
-                                )}
                             </div>
                             <div className="w-[30%]">
-                                <label
-                                    htmlFor="post-code-from"
-                                    className="font-spartanMedium text-xs text-singleGrey"
-                                >
-                                    Post Code
-                                </label>
+                                <div className="flex justify-between text-singleGrey">
+                                    <label
+                                        htmlFor="post-code-from"
+                                        className={clsx(
+                                            'font-spartanMedium text-xs',
+                                            errors.clientPostcode &&
+                                                'text-errorRed'
+                                        )}
+                                    >
+                                        Post Code
+                                    </label>
+                                    {errors.clientPostcode && (
+                                        <span className="block text-xs text-errorRed">
+                                            {errors.clientPostcode.message}
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="text"
                                     id="post-code-from"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className={clsx(
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        errors.clientPostcode &&
+                                            'border-errorRed'
+                                    )}
                                     {...register('clientPostcode')}
                                 />
-                                {errors.clientPostcode && (
-                                    <span className="mt-[5px] block text-xs text-errorRed">
-                                        {errors.clientPostcode.message}
-                                    </span>
-                                )}
                             </div>
                             <div className="w-[30%]">
-                                <label
-                                    htmlFor="country-from"
-                                    className="font-spartanMedium text-xs text-singleGrey"
-                                >
-                                    Country
-                                </label>
+                                <div className="flex justify-between text-singleGrey">
+                                    <label
+                                        htmlFor="country-from"
+                                        className={clsx(
+                                            'font-spartanMedium text-xs',
+                                            errors.clientCountry &&
+                                                'text-errorRed'
+                                        )}
+                                    >
+                                        Country
+                                    </label>
+                                    {errors.clientCountry && (
+                                        <span className="block text-xs text-errorRed">
+                                            {errors.clientCountry.message}
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="text"
                                     id="country-from"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className={clsx(
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        errors.clientCountry &&
+                                            'border-errorRed'
+                                    )}
                                     {...register('clientCountry')}
                                 />
-                                {errors.clientCountry && (
-                                    <span className="mt-[5px] block text-xs text-errorRed">
-                                        {errors.clientCountry.message}
-                                    </span>
-                                )}
                             </div>
                         </div>
                         <div className="mb-[20px] flex justify-between">
                             <div className="w-[48%]">
-                                <label
-                                    htmlFor="invoice-date"
-                                    className="font-spartanMedium text-xs text-singleGrey"
-                                >
-                                    Invoice Date
-                                </label>
-                                {errors.paymentDue && (
-                                    <span className="mb-[5px] block text-xs text-errorRed">
-                                        {errors.paymentDue.message}
-                                    </span>
-                                )}
+                                <div className="flex justify-between text-singleGrey">
+                                    <label
+                                        htmlFor="invoice-date"
+                                        className={clsx(
+                                            'font-spartanMedium text-xs',
+                                            errors.paymentDue && 'text-errorRed'
+                                        )}
+                                    >
+                                        Invoice Date
+                                    </label>
+                                    {errors.paymentDue && (
+                                        <span className="block text-xs text-errorRed">
+                                            {errors.paymentDue.message}
+                                        </span>
+                                    )}
+                                </div>
                                 <input
                                     type="date"
                                     id="invoice-date"
@@ -359,23 +452,31 @@ const FormModal = ({ onClose }: Props) => {
                             </div>
                         </div>
                         <div className="mb-[32px]">
-                            <label
-                                htmlFor="project-description"
-                                className="font-spartanMedium text-xs text-singleGrey"
-                            >
-                                Project Description
-                            </label>
+                            <div className="flex justify-between text-singleGrey">
+                                <label
+                                    htmlFor="project-description"
+                                    className={clsx(
+                                        'font-spartanMedium text-xs',
+                                        errors.description && 'text-errorRed'
+                                    )}
+                                >
+                                    Project Description
+                                </label>
+                                {errors.description && (
+                                    <span className="block text-xs text-errorRed">
+                                        {errors.description.message}
+                                    </span>
+                                )}
+                            </div>
                             <input
                                 type="text"
                                 id="project-description"
-                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className={clsx(
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    errors.description && 'border-errorRed'
+                                )}
                                 {...register('description')}
                             />
-                            {errors.description && (
-                                <span className="mt-[5px] block text-xs text-errorRed">
-                                    {errors.description.message}
-                                </span>
-                            )}
                         </div>
                         <ItemList />
                     </div>
