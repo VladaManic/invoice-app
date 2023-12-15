@@ -104,7 +104,7 @@ const FormModal = ({ onClose }: Props) => {
                                 type="text"
                                 id="street-address"
                                 className={clsx(
-                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                     errors.senderAddress && 'border-errorRed'
                                 )}
                                 {...register('senderAddress')}
@@ -133,7 +133,7 @@ const FormModal = ({ onClose }: Props) => {
                                     type="text"
                                     id="city"
                                     className={clsx(
-                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                         errors.senderCity && 'border-errorRed'
                                     )}
                                     {...register('senderCity')}
@@ -161,7 +161,7 @@ const FormModal = ({ onClose }: Props) => {
                                     type="text"
                                     id="post-code"
                                     className={clsx(
-                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                         errors.senderPostcode &&
                                             'border-errorRed'
                                     )}
@@ -190,7 +190,7 @@ const FormModal = ({ onClose }: Props) => {
                                     type="text"
                                     id="country"
                                     className={clsx(
-                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                         errors.senderCountry &&
                                             'border-errorRed'
                                     )}
@@ -223,7 +223,7 @@ const FormModal = ({ onClose }: Props) => {
                                 type="text"
                                 id="clients-name"
                                 className={clsx(
-                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                     errors.clientName && 'border-errorRed'
                                 )}
                                 {...register('clientName')}
@@ -250,7 +250,7 @@ const FormModal = ({ onClose }: Props) => {
                                 type="email"
                                 id="clients-email"
                                 className={clsx(
-                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                     errors.clientEmail && 'border-errorRed'
                                 )}
                                 {...register('clientEmail')}
@@ -277,7 +277,7 @@ const FormModal = ({ onClose }: Props) => {
                                 type="text"
                                 id="street-address-from"
                                 className={clsx(
-                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                     errors.clientAddress && 'border-errorRed'
                                 )}
                                 {...register('clientAddress')}
@@ -305,7 +305,7 @@ const FormModal = ({ onClose }: Props) => {
                                     type="text"
                                     id="city-from"
                                     className={clsx(
-                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                         errors.clientCity && 'border-errorRed'
                                     )}
                                     {...register('clientCity')}
@@ -333,7 +333,7 @@ const FormModal = ({ onClose }: Props) => {
                                     type="text"
                                     id="post-code-from"
                                     className={clsx(
-                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                         errors.clientPostcode &&
                                             'border-errorRed'
                                     )}
@@ -362,7 +362,7 @@ const FormModal = ({ onClose }: Props) => {
                                     type="text"
                                     id="country-from"
                                     className={clsx(
-                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                         errors.clientCountry &&
                                             'border-errorRed'
                                     )}
@@ -472,7 +472,7 @@ const FormModal = ({ onClose }: Props) => {
                                 type="text"
                                 id="project-description"
                                 className={clsx(
-                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                                     errors.description && 'border-errorRed'
                                 )}
                                 {...register('description')}
