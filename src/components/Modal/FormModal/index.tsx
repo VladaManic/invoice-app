@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { z, ZodType } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 
 import ItemList from '../ItemList'
 
@@ -305,12 +306,18 @@ const FormModal = ({ onClose }: Props) => {
                             </label>
                             <button
                                 value={selectValue}
-                                className="flex w-[240px] items-center justify-between rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-defaultWhite p-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className="flex w-[240px] items-center justify-between rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-defaultWhite p-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0"
                                 onClick={dropdownHandler}
                                 {...register('paymentTerms')}
                             >
                                 <p>{selectText}</p>
-                                <img src={arrowIcon} alt="Arrow down" />
+                                <img
+                                    src={arrowIcon}
+                                    alt="Arrow down"
+                                    className={clsx(
+                                        selectOpened && 'rotate-180'
+                                    )}
+                                />
                             </button>
                             {selectOpened && (
                                 <div className="absolute top-[80px] w-[240px] rounded-[10px] bg-defaultWhite font-spartanBold text-xs text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]">
