@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 
 import arrowIcon from '../../../../assets/img/arrow.svg'
+import { FormDataObj } from '../../../../types/interfaces'
 
 interface Props {
-    register: any
-    errors: any
+    register: UseFormRegister<FormDataObj>
+    errors: FieldErrors<FormDataObj>
 }
 
 const DateTerms = ({ register, errors }: Props) => {
@@ -44,7 +45,7 @@ const DateTerms = ({ register, errors }: Props) => {
                             htmlFor="invoice-date"
                             className={clsx(
                                 'font-spartanMedium text-xs',
-                                errors.paymentDue && 'text-errorRed'
+                                errors!.paymentDue && 'text-errorRed'
                             )}
                         >
                             Invoice Date

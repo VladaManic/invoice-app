@@ -1,9 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 
+import { FormDataObj } from '../../../../types/interfaces'
+
 interface Props {
-    register: any
-    errors: any
+    register: UseFormRegister<FormDataObj>
+    errors: FieldErrors<FormDataObj>
 }
 
 const SenderFields = ({ register, errors }: Props) => {
