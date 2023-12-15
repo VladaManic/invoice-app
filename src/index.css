@@ -100,28 +100,17 @@ button:focus-visible {
 }
 
 /* width */
-/* ::-webkit-scrollbar {
+#form-inner::-webkit-scrollbar {
     width: 8px;
-} */
-
-/* Track */
-/* ::-webkit-scrollbar-track {
-    border-radius: 10px;
-} */
-
-/* Handle */
-/* ::-webkit-scrollbar-thumb {
-    background: #dfe3fa;
-    border-radius: 10px;
-} */
-
-/* #form-wrapper::-webkit-scrollbar {
-    width: 41px;
 }
 
-#form-wrapper::-webkit-scrollbar-thumb {
-    border-right: 24px solid rgba(0, 0, 0, 0);
-    border-left: 10px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    background-color: #aaaaaa;
-} */
+/* Track */
+#form-inner::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+#form-inner::-webkit-scrollbar-thumb {
+    background: #dfe3fa;
+    border-radius: 10px;
+}

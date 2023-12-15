@@ -35,7 +35,7 @@ const ItemList = () => {
                 ))}
             </div>
             <button
-                className="mb-[130px] w-full pb-[12px] pt-[12px] font-spartanBold text-xs text-singleGrey"
+                className="mb-[20px] w-full pb-[12px] pt-[12px] font-spartanBold text-xs text-singleGrey"
                 onClick={onClickHandler}
             >
                 + Add New Item
