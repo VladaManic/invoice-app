@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react'
-import { useAppDispatch } from '../../../state/hooks'
-import { removeItem } from '../../../state/invoice/invoiceSlice'
+import { useAppDispatch } from '../../../../state/hooks'
+import { removeItem } from '../../../../state/invoice/invoiceSlice'
 
-import trashIcon from '../../../assets/img/trash.svg'
+import trashIcon from '../../../../assets/img/trash.svg'
 
 interface Props {
     itemIndex: number
