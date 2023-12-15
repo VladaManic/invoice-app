@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { z, ZodType } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import ItemList from '../ItemList'
+
+import arrowIcon from '../../../assets/img/arrow.svg'
 
 import { FormDataObj } from '../../../types/interfaces'
 
@@ -11,6 +14,9 @@ interface Props {
 }
 
 const FormModal = ({ onClose }: Props) => {
+    const [selectValue, setSelectValue] = useState<string>('1')
+    const [selectText, setSelectText] = useState<string>('Net 1 day')
+    const [selectOpened, setSelectOpened] = useState<boolean>(false)
     //Setting validation form rules
     const schema: ZodType<FormDataObj> = z.object({
         senderAddress: z.string().min(1, { message: "Field can't be empty" }),
@@ -35,6 +41,27 @@ const FormModal = ({ onClose }: Props) => {
     } = useForm<FormDataObj>({
         resolver: zodResolver(schema),
     })
+
+    //Opening/closing dropdown
+    const dropdownHandler = (
+        e:
+            | React.MouseEvent<HTMLButtonElement>
+            | React.TouchEvent<HTMLButtonElement>
+    ) => {
+        e.preventDefault()
+        setSelectOpened(!selectOpened)
+    }
+
+    //Selecting options in dropdown
+    const onClickDropdown = (
+        e:
+            | React.MouseEvent<HTMLButtonElement>
+            | React.TouchEvent<HTMLButtonElement>
+    ) => {
+        e.preventDefault()
+        setSelectValue(e.currentTarget.value)
+        setSelectText(e.currentTarget.name)
+    }
 
     const submitData = (data: FormDataObj) => {
         console.log(data)
@@ -68,7 +95,7 @@ const FormModal = ({ onClose }: Props) => {
                             {...register('senderAddress')}
                         />
                         {errors.senderAddress && (
-                            <span className="text-errorRed mt-[5px] block text-xs">
+                            <span className="mt-[5px] block text-xs text-errorRed">
                                 {errors.senderAddress.message}
                             </span>
                         )}
@@ -89,7 +116,7 @@ const FormModal = ({ onClose }: Props) => {
                                 {...register('senderCity')}
                             />
                             {errors.senderCity && (
-                                <span className="text-errorRed mt-[5px] block text-xs">
+                                <span className="mt-[5px] block text-xs text-errorRed">
                                     {errors.senderCity.message}
                                 </span>
                             )}
@@ -108,7 +135,7 @@ const FormModal = ({ onClose }: Props) => {
                                 {...register('senderPostcode')}
                             />
                             {errors.senderPostcode && (
-                                <span className="text-errorRed mt-[5px] block text-xs">
+                                <span className="mt-[5px] block text-xs text-errorRed">
                                     {errors.senderPostcode.message}
                                 </span>
                             )}
@@ -127,7 +154,7 @@ const FormModal = ({ onClose }: Props) => {
                                 {...register('senderCountry')}
                             />
                             {errors.senderCountry && (
-                                <span className="text-errorRed mt-[5px] block text-xs">
+                                <span className="mt-[5px] block text-xs text-errorRed">
                                     {errors.senderCountry.message}
                                 </span>
                             )}
@@ -151,7 +178,7 @@ const FormModal = ({ onClose }: Props) => {
                             {...register('clientName')}
                         />
                         {errors.clientName && (
-                            <span className="text-errorRed mt-[5px] block text-xs">
+                            <span className="mt-[5px] block text-xs text-errorRed">
                                 {errors.clientName.message}
                             </span>
                         )}
@@ -170,7 +197,7 @@ const FormModal = ({ onClose }: Props) => {
                             {...register('clientEmail')}
                         />
                         {errors.clientEmail && (
-                            <span className="text-errorRed mt-[5px] block text-xs">
+                            <span className="mt-[5px] block text-xs text-errorRed">
                                 {errors.clientEmail.message}
                             </span>
                         )}
@@ -189,7 +216,7 @@ const FormModal = ({ onClose }: Props) => {
                             {...register('clientAddress')}
                         />
                         {errors.clientAddress && (
-                            <span className="text-errorRed mt-[5px] block text-xs">
+                            <span className="mt-[5px] block text-xs text-errorRed">
                                 {errors.clientAddress.message}
                             </span>
                         )}
@@ -209,7 +236,7 @@ const FormModal = ({ onClose }: Props) => {
                                 {...register('clientCity')}
                             />
                             {errors.clientCity && (
-                                <span className="text-errorRed mt-[5px] block text-xs">
+                                <span className="mt-[5px] block text-xs text-errorRed">
                                     {errors.clientCity.message}
                                 </span>
                             )}
@@ -228,7 +255,7 @@ const FormModal = ({ onClose }: Props) => {
                                 {...register('clientPostcode')}
                             />
                             {errors.clientPostcode && (
-                                <span className="text-errorRed mt-[5px] block text-xs">
+                                <span className="mt-[5px] block text-xs text-errorRed">
                                     {errors.clientPostcode.message}
                                 </span>
                             )}
@@ -247,7 +274,7 @@ const FormModal = ({ onClose }: Props) => {
                                 {...register('clientCountry')}
                             />
                             {errors.clientCountry && (
-                                <span className="text-errorRed mt-[5px] block text-xs">
+                                <span className="mt-[5px] block text-xs text-errorRed">
                                     {errors.clientCountry.message}
                                 </span>
                             )}
@@ -262,7 +289,7 @@ const FormModal = ({ onClose }: Props) => {
                                 Invoice Date
                             </label>
                             {errors.paymentDue && (
-                                <span className="text-errorRed mb-[5px] block text-xs">
+                                <span className="mb-[5px] block text-xs text-errorRed">
                                     {errors.paymentDue.message}
                                 </span>
                             )}
@@ -272,20 +299,55 @@ const FormModal = ({ onClose }: Props) => {
                                 {...register('paymentDue')}
                             />
                         </div>
-                        <div className="w-[48%]">
+                        <div className="relative w-[48%]">
                             <label className="font-spartanMedium text-xs text-singleGrey">
                                 Payment Terms
                             </label>
-                            <select
-                                id="payment-terms"
-                                defaultValue="1"
+                            <button
+                                value={selectValue}
+                                className="flex w-[240px] items-center justify-between rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-defaultWhite p-[15px] font-spartanBold text-xs text-defaultBlack"
+                                onClick={dropdownHandler}
                                 {...register('paymentTerms')}
                             >
-                                <option value="1">Net 1 Day</option>
-                                <option value="2">Net 7 Days</option>
-                                <option value="3">Net 14 s</option>
-                                <option value="4">Net 30 Days</option>
-                            </select>
+                                <p>{selectText}</p>
+                                <img src={arrowIcon} alt="Arrow down" />
+                            </button>
+                            {selectOpened && (
+                                <div className="absolute top-[80px] w-[240px] rounded-[10px] bg-defaultWhite font-spartanBold text-xs text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]">
+                                    <button
+                                        value="1"
+                                        name="Net 1 Day"
+                                        className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
+                                        onClick={onClickDropdown}
+                                    >
+                                        Net 1 Day
+                                    </button>
+                                    <button
+                                        value="2"
+                                        name="Net 7 Days"
+                                        className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
+                                        onClick={onClickDropdown}
+                                    >
+                                        Net 7 Days
+                                    </button>
+                                    <button
+                                        value="3"
+                                        name="Net 14 Days"
+                                        className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
+                                        onClick={onClickDropdown}
+                                    >
+                                        Net 14 Dayss
+                                    </button>
+                                    <button
+                                        value="4"
+                                        name="Net 30 Days"
+                                        className="w-full rounded-none pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:text-packmanUp"
+                                        onClick={onClickDropdown}
+                                    >
+                                        Net 30 Days
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="mb-[32px]">
@@ -302,7 +364,7 @@ const FormModal = ({ onClose }: Props) => {
                             {...register('description')}
                         />
                         {errors.description && (
-                            <span className="text-errorRed mt-[5px] block text-xs">
+                            <span className="mt-[5px] block text-xs text-errorRed">
                                 {errors.description.message}
                             </span>
                         )}
