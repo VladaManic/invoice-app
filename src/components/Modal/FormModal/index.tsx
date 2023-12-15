@@ -70,7 +70,10 @@ const FormModal = ({ onClose }: Props) => {
 
     return (
         <form onSubmit={handleSubmit(submitData)}>
-            <div className="fixed left-[87px] top-0 z-[100] h-screen w-[630px] rounded-r-2xl bg-defaultWhite pb-[110px] pl-[50px] pr-[24px] pt-[40px]">
+            <div
+                className="fixed left-[87px] top-0 z-[100] h-screen w-[630px] rounded-r-2xl bg-defaultWhite pb-[110px] pl-[50px] pr-[24px] pt-[40px]"
+                id="form-wrapper"
+            >
                 <div className="h-full overflow-y-scroll" id="form-inner">
                     <div className="mr-[10px] h-full">
                         <h2 className="mb-[30px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack">
@@ -211,7 +214,7 @@ const FormModal = ({ onClose }: Props) => {
                             <input
                                 type="text"
                                 id="street-address-from"
-                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                                 {...register('clientAddress')}
                             />
                             {errors.clientAddress && (
@@ -231,7 +234,7 @@ const FormModal = ({ onClose }: Props) => {
                                 <input
                                     type="text"
                                     id="city-from"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                                     {...register('clientCity')}
                                 />
                                 {errors.clientCity && (
@@ -250,7 +253,7 @@ const FormModal = ({ onClose }: Props) => {
                                 <input
                                     type="text"
                                     id="post-code-from"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                                     {...register('clientPostcode')}
                                 />
                                 {errors.clientPostcode && (
@@ -269,7 +272,7 @@ const FormModal = ({ onClose }: Props) => {
                                 <input
                                     type="text"
                                     id="country-from"
-                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                                     {...register('clientCountry')}
                                 />
                                 {errors.clientCountry && (
@@ -304,7 +307,7 @@ const FormModal = ({ onClose }: Props) => {
                                 </label>
                                 <button
                                     value={selectValue}
-                                    className="flex w-full items-center justify-between rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-defaultWhite p-[15px] text-right font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0"
+                                    className="flex w-full items-center justify-between rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent p-[15px] text-right font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0"
                                     onClick={dropdownHandler}
                                     {...register('paymentTerms')}
                                 >
@@ -365,7 +368,7 @@ const FormModal = ({ onClose }: Props) => {
                             <input
                                 type="text"
                                 id="project-description"
-                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                                className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                                 {...register('description')}
                             />
                             {errors.description && (

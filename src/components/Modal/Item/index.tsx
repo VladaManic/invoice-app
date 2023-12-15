@@ -42,13 +42,13 @@ const Item = ({ itemIndex }: Props) => {
             <div className="w-[40%]">
                 <input
                     type="text"
-                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                 />
             </div>
             <div className="w-[10%]">
                 <input
                     type="number"
-                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                     ref={quantityRef}
                     onChange={onChangeHandler}
                 />
@@ -56,16 +56,16 @@ const Item = ({ itemIndex }: Props) => {
             <div className="w-[15%]">
                 <input
                     type="text"
-                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack"
+                    className="h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack"
                     ref={priceRef}
                     onChange={onChangeHandler}
                 />
             </div>
             <div className="flex w-[15%] items-center">
-                <p>{total}</p>
+                <p className="bg-transparent">{total}</p>
             </div>
             <div className="flex w-[10%] items-center">
-                <button onClick={onClickTrash}>
+                <button onClick={onClickTrash} className="bg-transparent">
                     <img src={trashIcon} alt="Trash icon" />
                 </button>
             </div>

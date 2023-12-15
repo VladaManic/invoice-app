@@ -35,7 +35,7 @@ const ItemList = () => {
                 ))}
             </div>
             <button
-                className="mb-[20px] w-full pb-[12px] pt-[12px] font-spartanBold text-xs text-singleGrey"
+                className="mb-[20px] w-full rounded-[20px] pb-[12px] pt-[12px] font-spartanBold text-xs text-singleGrey hover:border-checkboxViolet hover:bg-checkboxViolet"
                 onClick={onClickHandler}
             >
                 + Add New Item

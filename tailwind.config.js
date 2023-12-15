@@ -37,6 +37,7 @@ export default {
         overlayGrey: 'rgba(101, 101, 101, 0.5)',
         draftText: '#888EB0',
         errorRed: 'red',
+        gradientGrey: 'rgba(218, 218, 218, 1)',
       }
     },
   },
