@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import { updateToPaid } from '../../../state/invoice/invoiceSlice'
 
 import Modal from '../../Reusable/Modal'
 import StatusBtn from '../../Reusable/StatusBtn'
@@ -12,10 +14,18 @@ interface Props {
 
 const Header = ({ invoice }: Props) => {
     const [openModal, setOpenModal] = useState<boolean>(false)
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const dispatch = useAppDispatch()
 
     //Opening delete confirmation modal
     const onClickDelete = () => {
         setOpenModal(true)
+    }
+
+    //On click 'Mark as Paid' btn
+    const onClickPaid = () => {
+        const currentInvoice = invoiceRedux.singleInvoice
+        dispatch(updateToPaid(currentInvoice))
     }
 
     //On click modal overlay, closes modal
@@ -39,9 +49,14 @@ const Header = ({ invoice }: Props) => {
                 >
                     Delete
                 </button>
-                <button className="rounded-[50px] bg-packmanUp pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite">
-                    Mark as Paid
-                </button>
+                {invoice.status === 'pending' && (
+                    <button
+                        className="rounded-[50px] bg-packmanUp pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
+                        onClick={onClickPaid}
+                    >
+                        Mark as Paid
+                    </button>
+                )}
             </div>
             {openModal && (
                 <Modal onClose={onCloseHandler}>

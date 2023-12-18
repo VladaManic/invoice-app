@@ -10,12 +10,12 @@ import Intro from '../../components/Home/Intro'
 import Content from '../../components/Home/Content'
 
 const Home = () => {
-    const invoice = useAppSelector((state) => state.invoice)
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(fetchInvoices())
-        if (invoice.successDelete) {
+        if (invoiceRedux.successDelete) {
             toast.success(
                 'You successfully deleted the invoice!',
                 TOASTIFY_PARAMS
@@ -27,14 +27,14 @@ const Home = () => {
 
     return (
         <div>
-            {invoice.loading && <Loader />}
-            {!invoice.loading && invoice.error && (
-                <h2>Error: {invoice.error}</h2>
+            {invoiceRedux.loading && <Loader />}
+            {!invoiceRedux.loading && invoiceRedux.error && (
+                <h2>Error: {invoiceRedux.error}</h2>
             )}
-            {!invoice.loading && invoice.invoices.length ? (
+            {!invoiceRedux.loading && invoiceRedux.invoices.length ? (
                 <>
                     <Intro />
-                    <Content invoice={invoice} />
+                    <Content invoice={invoiceRedux} />
                 </>
             ) : null}
             <ToastContainer />

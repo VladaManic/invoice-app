@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-import { InitialStateObj } from '../../types/interfaces'
+import { InitialStateObj, InvoiceObj } from '../../types/interfaces'
 
 const initialState: InitialStateObj = {
     loading: false,
@@ -47,6 +47,20 @@ export const deleteSingleInvoice = createAsyncThunk(
     (singleInvoiceId: string) => {
         return axios
             .delete('http://localhost:3004/invoices/' + singleInvoiceId)
+            .then((response) => response.data)
+    }
+)
+
+//Updating status from pending to paid
+export const updateToPaid = createAsyncThunk(
+    'invoice/updatePaid',
+    (singleInvoice: InvoiceObj | null) => {
+        const updatedInvoice = { ...singleInvoice, status: 'paid' }
+        return axios
+            .patch(
+                `http://localhost:3004/invoices/${singleInvoice!.id}`,
+                updatedInvoice
+            )
             .then((response) => response.data)
     }
 )
@@ -134,6 +148,19 @@ const invoiceSlice = createSlice({
             state.successDelete = true
         })
         builder.addCase(deleteSingleInvoice.rejected, (state, action) => {
+            state.loadingDelete = false
+            state.errorDelete = action.error.message
+        })
+        //Update single invoice status to "Paid"
+        builder.addCase(updateToPaid.pending, (state) => {
+            state.loadingDelete = true
+        })
+        builder.addCase(updateToPaid.fulfilled, (state, action) => {
+            state.loadingDelete = false
+            state.singleInvoice = action.payload
+            state.errorDelete = ''
+        })
+        builder.addCase(updateToPaid.rejected, (state, action) => {
             state.loadingDelete = false
             state.errorDelete = action.error.message
         })

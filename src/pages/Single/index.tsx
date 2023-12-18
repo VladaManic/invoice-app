@@ -11,7 +11,7 @@ import Content from '../../components/Single/Content'
 const Single = () => {
     //Get URL
     const { pathname } = useLocation()
-    const invoice = useAppSelector((state) => state.invoice)
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -20,15 +20,15 @@ const Single = () => {
 
     return (
         <div>
-            {invoice.loading && <Loader />}
-            {!invoice.loading && invoice.error && (
-                <h2>Error: {invoice.error}</h2>
+            {invoiceRedux.loading && <Loader />}
+            {!invoiceRedux.loading && invoiceRedux.error && (
+                <h2>Error: {invoiceRedux.error}</h2>
             )}
-            {!invoice.loading && invoice.singleInvoice !== null ? (
+            {!invoiceRedux.loading && invoiceRedux.singleInvoice !== null ? (
                 <>
                     <Nav />
-                    <Header invoice={invoice.singleInvoice} />
-                    <Content invoice={invoice.singleInvoice} />
+                    <Header invoice={invoiceRedux.singleInvoice} />
+                    <Content invoice={invoiceRedux.singleInvoice} />
                 </>
             ) : null}
         </div>

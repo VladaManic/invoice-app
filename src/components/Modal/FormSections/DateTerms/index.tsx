@@ -62,6 +62,7 @@ const DateTerms = ({ register, errors }: Props) => {
                         {...register('paymentDue')}
                     />
                 </div>
+
                 <div className="relative w-[48%]">
                     <label className="font-spartanMedium text-xs text-singleGrey">
                         Payment Terms
@@ -117,6 +118,7 @@ const DateTerms = ({ register, errors }: Props) => {
                     )}
                 </div>
             </div>
+
             <div className="mb-[32px]">
                 <div className="flex justify-between text-singleGrey">
                     <label
