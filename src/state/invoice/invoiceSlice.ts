@@ -153,16 +153,16 @@ const invoiceSlice = createSlice({
         })
         //Update single invoice status to "Paid"
         builder.addCase(updateToPaid.pending, (state) => {
-            state.loadingDelete = true
+            state.loading = true
         })
         builder.addCase(updateToPaid.fulfilled, (state, action) => {
-            state.loadingDelete = false
+            state.loading = false
             state.singleInvoice = action.payload
-            state.errorDelete = ''
+            state.error = ''
         })
         builder.addCase(updateToPaid.rejected, (state, action) => {
-            state.loadingDelete = false
-            state.errorDelete = action.error.message
+            state.loading = false
+            state.error = action.error.message
         })
     },
 })
