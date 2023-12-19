@@ -141,9 +141,8 @@ const invoiceSlice = createSlice({
         builder.addCase(deleteSingleInvoice.pending, (state) => {
             state.loadingDelete = true
         })
-        builder.addCase(deleteSingleInvoice.fulfilled, (state, action) => {
+        builder.addCase(deleteSingleInvoice.fulfilled, (state) => {
             state.loadingDelete = false
-            state.invoices = action.payload
             state.errorDelete = ''
             state.successDelete = true
         })
