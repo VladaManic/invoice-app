@@ -79,7 +79,7 @@ const invoiceSlice = createSlice({
         addItem: (state) => {
             //If empty array
             if (state.itemList[state.itemList.length - 1] === undefined) {
-                state.itemList.push(1)
+                state.itemList.push(0)
                 //If already numbers in array
             } else {
                 state.itemList.push(

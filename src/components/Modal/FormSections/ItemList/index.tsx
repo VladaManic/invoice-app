@@ -1,9 +1,17 @@
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
 import { addItem } from '../../../../state/invoice/invoiceSlice'
 
 import Item from '../Item'
 
-const ItemList = () => {
+import { FormDataObj } from '../../../../types/interfaces'
+
+interface Props {
+    register: UseFormRegister<FormDataObj>
+    errors: FieldErrors<FormDataObj>
+}
+
+const ItemList = ({ register, errors }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
@@ -31,7 +39,12 @@ const ItemList = () => {
                     <p className="w-[10%]"></p>
                 </div>
                 {invoiceRedux.itemList.map((item: number) => (
-                    <Item key={item} itemIndex={item} />
+                    <Item
+                        key={item}
+                        itemIndex={item}
+                        register={register}
+                        errors={errors}
+                    />
                 ))}
             </div>
             <button
@@ -40,6 +53,11 @@ const ItemList = () => {
             >
                 + Add New Item
             </button>
+            {errors.items && (
+                <span className="block text-xs text-errorRed">
+                    {errors.items.message}
+                </span>
+            )}
         </div>
     )
 }

@@ -71,4 +71,10 @@ export type FormDataObj = {
     paymentDue: string
     paymentTerms: string
     description: string
+    items: {
+        name: string
+        quantity: number
+        price: string
+        total: number
+    }[]
 }

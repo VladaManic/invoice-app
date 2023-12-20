@@ -1,4 +1,4 @@
-import { z, ZodType } from 'zod'
+import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -14,8 +14,18 @@ interface Props {
 }
 
 const FormModal = ({ onClose }: Props) => {
-    //Setting validation form rules
-    const schema: ZodType<FormDataObj> = z.object({
+    // Define a single schema for the entire `items` array
+    const itemSchema = z.array(
+        z.object({
+            name: z.string().min(1),
+            quantity: z.number().min(1),
+            price: z.string().min(1),
+            total: z.number().min(1),
+        })
+    )
+
+    // Define the schema for the static properties
+    const staticPropertiesSchema = z.object({
         senderAddress: z.string().min(1, { message: "can't be empty" }),
         senderCity: z.string().min(1, { message: "can't be empty" }),
         senderPostcode: z.string().min(1, { message: "can't be empty" }),
@@ -31,6 +41,12 @@ const FormModal = ({ onClose }: Props) => {
         description: z.string().min(1, { message: "can't be empty" }),
     })
 
+    // Merge the static schema with the items schema
+    const schema = z.object({
+        ...staticPropertiesSchema.shape,
+        items: itemSchema,
+    })
+
     const {
         register,
         handleSubmit,
@@ -42,6 +58,8 @@ const FormModal = ({ onClose }: Props) => {
     const submitData = (data: FormDataObj) => {
         console.log(data)
     }
+
+    console.log(errors)
 
     return (
         <form onSubmit={handleSubmit(submitData)}>
@@ -57,7 +75,7 @@ const FormModal = ({ onClose }: Props) => {
                         <SenderFields register={register} errors={errors} />
                         <ClientFields register={register} errors={errors} />
                         <DateTerms register={register} errors={errors} />
-                        <ItemList />
+                        <ItemList register={register} errors={errors} />
                     </div>
                 </div>
                 <div className="fixed bottom-0 left-[87px] z-[100] flex h-[110px] w-[630px] items-center justify-between rounded-r-2xl bg-defaultBlack bg-defaultWhite pl-[50px] pr-[42px]">
