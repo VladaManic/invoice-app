@@ -14,16 +14,6 @@ interface Props {
 }
 
 const FormModal = ({ onClose }: Props) => {
-    // Define a single schema for the entire `items` array
-    const itemSchema = z.array(
-        z.object({
-            name: z.string().min(1),
-            quantity: z.string().min(1),
-            price: z.string().min(1),
-            total: z.string(),
-        })
-    )
-
     // Define the schema for the static properties
     const staticPropertiesSchema = z.object({
         senderAddress: z.string().min(1, { message: "can't be empty" }),
@@ -40,6 +30,16 @@ const FormModal = ({ onClose }: Props) => {
         paymentTerms: z.string(),
         description: z.string().min(1, { message: "can't be empty" }),
     })
+
+    // Define a single schema for the entire `items` array
+    const itemSchema = z.array(
+        z.object({
+            name: z.string().min(1),
+            quantity: z.string().min(1),
+            price: z.string().min(1),
+            total: z.string(),
+        })
+    )
 
     // Merge the static schema with the items schema
     const schema = z.object({
