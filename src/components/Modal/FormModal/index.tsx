@@ -67,7 +67,9 @@ const FormModal = ({ onClose }: Props) => {
         console.log(data)
     }
 
-    console.log(errors)
+    if (errors.items !== undefined) {
+        console.log(errors.items!.length)
+    }
 
     return (
         <form onSubmit={handleSubmit(submitData)}>

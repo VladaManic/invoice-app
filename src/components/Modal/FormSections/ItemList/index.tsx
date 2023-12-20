@@ -53,9 +53,14 @@ const ItemList = ({ register, errors }: Props) => {
             >
                 + Add New Item
             </button>
-            {errors.items && errors.items.message === 'Required' && (
+            {errors.items && errors.items.length !== undefined && (
                 <span className="block text-xs text-errorRed">
                     - All fields must be added
+                </span>
+            )}
+            {errors.items && errors.items.message === 'Required' && (
+                <span className="block text-xs text-errorRed">
+                    - An item must be added
                 </span>
             )}
         </div>
