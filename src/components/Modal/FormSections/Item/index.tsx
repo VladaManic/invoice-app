@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { useAppDispatch } from '../../../../state/hooks'
 import { removeItem } from '../../../../state/invoice/invoiceSlice'
@@ -14,20 +14,20 @@ interface Props {
 }
 
 const Item = ({ itemIndex, register, errors }: Props) => {
-    const [total, setTotal] = useState<string | null>(null)
+    const [total, setTotal] = useState<string | number | readonly string[]>(0.0)
     const dispatch = useAppDispatch()
-    const quantityRef = useRef<HTMLInputElement>(null)
-    const priceRef = useRef<HTMLInputElement>(null)
 
     //Calculating total from price and quantity
     const onChangeHandler = () => {
-        if (
-            quantityRef.current!.value !== '' &&
-            priceRef.current!.value !== ''
-        ) {
+        const quantityInput = document.getElementById(
+            `quantity-${itemIndex}`
+        ) as HTMLInputElement
+        const priceInput = document.getElementById(
+            `price-${itemIndex}`
+        ) as HTMLInputElement
+        if (quantityInput!.value !== '' && priceInput!.value !== '') {
             const total =
-                parseFloat(quantityRef.current!.value) *
-                parseFloat(priceRef.current!.value)
+                parseFloat(quantityInput!.value) * parseFloat(priceInput!.value)
             setTotal(parseFloat(total!.toString()).toFixed(2))
         }
     }
@@ -49,7 +49,10 @@ const Item = ({ itemIndex, register, errors }: Props) => {
                     type="text"
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
-                        errors.items && 'border-errorRed'
+                        errors.items &&
+                            errors.items[itemIndex] &&
+                            errors.items[itemIndex]!.name &&
+                            'border-errorRed'
                     )}
                     {...register(`items.${itemIndex}.name`)}
                 />
@@ -57,34 +60,40 @@ const Item = ({ itemIndex, register, errors }: Props) => {
             <div className="w-[10%]">
                 <input
                     type="number"
+                    id={`quantity-${itemIndex}`}
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
-                        errors.items && 'border-errorRed'
+                        errors.items &&
+                            errors.items[itemIndex] &&
+                            errors.items[itemIndex]!.quantity &&
+                            'border-errorRed'
                     )}
                     {...register(`items.${itemIndex}.quantity`)}
-                    ref={quantityRef}
                     onChange={onChangeHandler}
                 />
             </div>
             <div className="w-[15%]">
                 <input
                     type="text"
+                    id={`price-${itemIndex}`}
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
-                        errors.items && 'border-errorRed'
+                        errors.items &&
+                            errors.items[itemIndex] &&
+                            errors.items[itemIndex]!.price &&
+                            'border-errorRed'
                     )}
                     {...register(`items.${itemIndex}.price`)}
-                    ref={priceRef}
                     onChange={onChangeHandler}
                 />
             </div>
             <div className="flex w-[15%] items-center">
-                <p
-                    className="bg-transparent"
+                <input
+                    className="w-full bg-transparent focus:outline-none focus:ring-0"
+                    readOnly
+                    value={total}
                     {...register(`items.${itemIndex}.total`)}
-                >
-                    {total}
-                </p>
+                />
             </div>
             <div className="flex w-[10%] items-center">
                 <button onClick={onClickTrash} className="bg-transparent">

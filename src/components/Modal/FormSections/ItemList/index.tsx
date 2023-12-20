@@ -26,7 +26,7 @@ const ItemList = ({ register, errors }: Props) => {
     }
 
     return (
-        <div>
+        <div className="pb-[30px]">
             <h3 className="mb-[12px] font-spartanBold text-[18px] leading-[32px]">
                 Item List
             </h3>
@@ -53,9 +53,9 @@ const ItemList = ({ register, errors }: Props) => {
             >
                 + Add New Item
             </button>
-            {errors.items && (
+            {errors.items && errors.items.message === 'Required' && (
                 <span className="block text-xs text-errorRed">
-                    {errors.items.message}
+                    - All fields must be added
                 </span>
             )}
         </div>

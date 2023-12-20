@@ -18,9 +18,9 @@ const FormModal = ({ onClose }: Props) => {
     const itemSchema = z.array(
         z.object({
             name: z.string().min(1),
-            quantity: z.number().min(1),
+            quantity: z.string().min(1),
             price: z.string().min(1),
-            total: z.number().min(1),
+            total: z.string(),
         })
     )
 
