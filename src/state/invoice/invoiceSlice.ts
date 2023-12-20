@@ -31,6 +31,16 @@ export const fetchInvoicesByStatus = createAsyncThunk(
     }
 )
 
+//Creating new invoice
+export const createInvoice = createAsyncThunk(
+    'invoice/createInvoice',
+    (singleInvoice: InvoiceObj | null) => {
+        return axios
+            .post(`http://localhost:3004/invoices`, singleInvoice)
+            .then((response) => response.data)
+    }
+)
+
 //Fetching single invoice (pendind, fullfiled and rejcted action types)
 export const fetchSingleInvoice = createAsyncThunk(
     'invoice/fetchSingleInvoice',
@@ -119,6 +129,20 @@ const invoiceSlice = createSlice({
             state.error = ''
         })
         builder.addCase(fetchInvoicesByStatus.rejected, (state, action) => {
+            state.loading = false
+            state.invoices = []
+            state.error = action.error.message
+        })
+        //Creating new invoice
+        builder.addCase(createInvoice.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(createInvoice.fulfilled, (state, action) => {
+            state.loading = false
+            state.invoices = action.payload
+            state.error = ''
+        })
+        builder.addCase(createInvoice.rejected, (state, action) => {
             state.loading = false
             state.invoices = []
             state.error = action.error.message

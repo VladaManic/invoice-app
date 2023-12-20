@@ -1,21 +1,24 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAppSelector } from '../../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import { createInvoice } from '../../../state/invoice/invoiceSlice'
+import { format } from 'date-fns'
+import stringGenerator from '../../../utils/stringGenerator'
 
 import SenderFields from '../FormSections/SenderFields'
 import ClientFields from '../FormSections/ClientFields'
 import DateTerms from '../FormSections/DateTerms'
 import ItemList from '../FormSections/ItemList'
 
-import { FormDataObj } from '../../../types/interfaces'
-
+import { FormDataObj, InvoiceObj, ItemObj } from '../../../types/interfaces'
 interface Props {
     onClose: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const FormModal = ({ onClose }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
+    const dispatch = useAppDispatch()
 
     // Define the schema for the static properties
     const staticPropertiesSchema = z.object({
@@ -65,10 +68,44 @@ const FormModal = ({ onClose }: Props) => {
 
     const submitData = (data: FormDataObj) => {
         console.log(data)
+        const letterPart = stringGenerator(2, 'letters')
+        const numberPart = stringGenerator(4, 'numbers')
+        const id = letterPart + numberPart
+        const now = new Date()
+        const currentTime = format(now, 'y-MM-dd')
+        let total: number = 0
+        data.items.forEach((item: ItemObj) => {
+            item.total = item.quantity * item.price
+            total = total + item.total
+        })
+        const newObj: InvoiceObj = {
+            id: id,
+            createdAt: currentTime,
+            paymentDue: data.paymentDue,
+            description: data.description,
+            clientName: data.clientName,
+            clientEmail: data.clientEmail,
+            status: 'pending',
+            senderAddress: {
+                street: data.senderAddress,
+                city: data.senderCity,
+                postCode: data.senderPostcode,
+                country: data.senderCountry,
+            },
+            clientAddress: {
+                street: data.clientAddress,
+                city: data.clientCity,
+                postCode: data.clientPostcode,
+                country: data.clientCountry,
+            },
+            items: data.items,
+            total: total,
+        }
+        dispatch(createInvoice(newObj))
     }
 
     if (errors.items !== undefined) {
-        console.log(errors.items!.length)
+        console.log(errors.items)
     }
 
     return (
