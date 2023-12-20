@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useAppSelector } from '../../../state/hooks'
 
 import SenderFields from '../FormSections/SenderFields'
 import ClientFields from '../FormSections/ClientFields'
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const FormModal = ({ onClose }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+
     // Define the schema for the static properties
     const staticPropertiesSchema = z.object({
         senderAddress: z.string().min(1, { message: "can't be empty" }),
@@ -54,6 +57,11 @@ const FormModal = ({ onClose }: Props) => {
     } = useForm<FormDataObj>({
         resolver: zodResolver(schema),
     })
+
+    // console.log('Schema properties:')
+    // Object.keys(schema.shape).forEach((key) => {
+    //     console.log(key)
+    // })
 
     const submitData = (data: FormDataObj) => {
         console.log(data)
