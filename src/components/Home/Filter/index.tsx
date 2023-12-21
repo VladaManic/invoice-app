@@ -9,7 +9,7 @@ import arrowIcon from '../../../assets/img/arrow.svg'
 const Filter = () => {
     const dispatch = useAppDispatch()
     const [status, setStatus] = useState<string | null>(null)
-    //Using custom hook for opening/closing region
+    //Using custom hook for opening/closing dropdown
     const { opened, setOpened } = useAccordion(false)
 
     const onClickHandler = (
@@ -43,7 +43,7 @@ const Filter = () => {
                             <button
                                 value="draft"
                                 className={clsx(
-                                    'bg-checkboxViolet mr-1 h-4 w-4 rounded-[3px] p-0',
+                                    'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
                                     status === 'draft' && 'checked-field'
                                 )}
                                 onClick={onClickHandler}
@@ -60,7 +60,7 @@ const Filter = () => {
                             <button
                                 value="pending"
                                 className={clsx(
-                                    'bg-checkboxViolet mr-1 h-4 w-4 rounded-[3px] p-0',
+                                    'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
                                     status === 'pending' && 'checked-field'
                                 )}
                                 onClick={onClickHandler}
@@ -77,7 +77,7 @@ const Filter = () => {
                             <button
                                 value="paid"
                                 className={clsx(
-                                    'bg-checkboxViolet mr-1 h-4 w-4 rounded-[3px] p-0',
+                                    'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
                                     status === 'paid' && 'checked-field'
                                 )}
                                 onClick={onClickHandler}

@@ -15,7 +15,7 @@ const initialState: InitialStateObj = {
 }
 
 //Generates pendind, fullfiled and rejcted action types for fetching all invoices
-export const fetchInvoices = createAsyncThunk('invoice/fetcInvoices', () => {
+export const fetchInvoices = createAsyncThunk('invoice/fetchInvoices', () => {
     return axios
         .get('http://localhost:3004/invoices')
         .then((response) => response.data)
