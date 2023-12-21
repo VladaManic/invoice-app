@@ -74,7 +74,8 @@ const Item = ({ itemIndex, register, errors }: Props) => {
             </div>
             <div className="w-[15%]">
                 <input
-                    type="text"
+                    type="number"
+                    step="0.01"
                     id={`price-${itemIndex}`}
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
