@@ -139,7 +139,7 @@ const invoiceSlice = createSlice({
         })
         builder.addCase(createInvoice.fulfilled, (state, action) => {
             state.loading = false
-            state.invoices = action.payload
+            state.invoices = [...state.invoices, action.payload]
             state.error = ''
         })
         builder.addCase(createInvoice.rejected, (state, action) => {
