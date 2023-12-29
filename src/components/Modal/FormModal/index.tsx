@@ -1,7 +1,8 @@
+import { useLocation } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import { useAppDispatch } from '../../../state/hooks'
 import { createInvoice } from '../../../state/invoice/invoiceSlice'
 import { format } from 'date-fns'
 import stringGenerator from '../../../utils/stringGenerator'
@@ -13,12 +14,20 @@ import ItemList from '../FormSections/ItemList'
 
 import { FormDataObj, InvoiceObj, ItemObj } from '../../../types/interfaces'
 interface Props {
+    invoice: InvoiceObj
     onClose: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const FormModal = ({ onClose }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+const FormModal = ({ invoice, onClose }: Props) => {
+    const { pathname } = useLocation()
     const dispatch = useAppDispatch()
+
+    let singleInvoice
+    if (pathname.includes('/invoice/')) {
+        singleInvoice = invoice
+    } else {
+        singleInvoice = undefined
+    }
 
     // Define the schema for the static properties
     const staticPropertiesSchema = z.object({
@@ -83,6 +92,7 @@ const FormModal = ({ onClose }: Props) => {
             createdAt: currentTime,
             paymentDue: data.paymentDue,
             description: data.description,
+            paymentTerms: data.paymentTerms,
             clientName: data.clientName,
             clientEmail: data.clientEmail,
             status: 'pending',
@@ -119,10 +129,26 @@ const FormModal = ({ onClose }: Props) => {
                         <h2 className="mb-[30px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack">
                             New invoice
                         </h2>
-                        <SenderFields register={register} errors={errors} />
-                        <ClientFields register={register} errors={errors} />
-                        <DateTerms register={register} errors={errors} />
-                        <ItemList register={register} errors={errors} />
+                        <SenderFields
+                            register={register}
+                            errors={errors}
+                            invoice={singleInvoice}
+                        />
+                        <ClientFields
+                            register={register}
+                            errors={errors}
+                            invoice={singleInvoice}
+                        />
+                        <DateTerms
+                            register={register}
+                            errors={errors}
+                            invoice={singleInvoice}
+                        />
+                        <ItemList
+                            register={register}
+                            errors={errors}
+                            invoice={singleInvoice}
+                        />
                     </div>
                 </div>
                 <div className="fixed bottom-0 left-[87px] z-[100] flex h-[110px] w-[630px] items-center justify-between rounded-r-2xl bg-defaultBlack bg-defaultWhite pl-[50px] pr-[42px]">

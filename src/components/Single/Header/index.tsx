@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import { useAppDispatch } from '../../../state/hooks'
 import { updateToPaid } from '../../../state/invoice/invoiceSlice'
 
 import Modal from '../../Reusable/Modal'
 import StatusBtn from '../../Reusable/StatusBtn'
 import DeleteConfirmationModal from '../../Modal/DeleteConfirmationModal'
+import FormModal from '../../Modal/FormModal'
 
 import { InvoiceObj } from '../../../types/interfaces'
 
@@ -13,24 +14,29 @@ interface Props {
 }
 
 const Header = ({ invoice }: Props) => {
-    const [openModal, setOpenModal] = useState<boolean>(false)
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const [openEditModal, setOpenEditModal] = useState<boolean>(false)
+    const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
     const dispatch = useAppDispatch()
+
+    //Opening edit form
+    const onClickEdit = () => {
+        setOpenEditModal(true)
+    }
 
     //Opening delete confirmation modal
     const onClickDelete = () => {
-        setOpenModal(true)
-    }
-
-    //On click 'Mark as Paid' btn
-    const onClickPaid = () => {
-        const currentInvoice = invoiceRedux.singleInvoice
-        dispatch(updateToPaid(currentInvoice))
+        setOpenDeleteModal(true)
     }
 
     //On click modal overlay, closes modal
     const onCloseHandler = () => {
-        setOpenModal(false)
+        setOpenEditModal(false)
+        setOpenDeleteModal(false)
+    }
+
+    //On click 'Mark as Paid' btn
+    const onClickPaid = () => {
+        dispatch(updateToPaid(invoice))
     }
 
     return (
@@ -40,7 +46,10 @@ const Header = ({ invoice }: Props) => {
                 <StatusBtn invoice={invoice} />
             </div>
             <div>
-                <button className="mr-3 rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs">
+                <button
+                    className="mr-3 rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs"
+                    onClick={onClickEdit}
+                >
                     Edit
                 </button>
                 <button
@@ -58,12 +67,17 @@ const Header = ({ invoice }: Props) => {
                     </button>
                 )}
             </div>
-            {openModal && (
+            {openDeleteModal && (
                 <Modal onClose={onCloseHandler}>
                     <DeleteConfirmationModal
                         invoice={invoice}
                         onClose={onCloseHandler}
                     />
+                </Modal>
+            )}
+            {openEditModal && (
+                <Modal onClose={onCloseHandler}>
+                    <FormModal invoice={invoice} onClose={onCloseHandler} />
                 </Modal>
             )}
         </div>

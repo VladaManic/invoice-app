@@ -6,16 +6,31 @@ import clsx from 'clsx'
 
 import trashIcon from '../../../../assets/img/trash.svg'
 
-import { FormDataObj } from '../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 interface Props {
     itemIndex: number
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
+    invoice: InvoiceObj | undefined
 }
 
-const Item = ({ itemIndex, register, errors }: Props) => {
-    const [total, setTotal] = useState<string | number | readonly string[]>(0.0)
+const Item = ({ itemIndex, register, errors, invoice }: Props) => {
     const dispatch = useAppDispatch()
+    let defaultName, defaultQuantity, defaultPrice, defaultTotal
+    if (invoice !== undefined) {
+        defaultName = invoice.items[itemIndex].name
+        defaultQuantity = invoice.items[itemIndex].quantity
+        defaultPrice = invoice.items[itemIndex].price
+        defaultTotal = invoice.items[itemIndex].total
+    } else {
+        defaultName = ''
+        defaultQuantity = ''
+        defaultPrice = ''
+        defaultTotal = '0.00'
+    }
+    const [total, setTotal] = useState<string | number | readonly string[]>(
+        defaultTotal
+    )
 
     //Calculating total from price and quantity
     const onChangeHandler = () => {
@@ -54,6 +69,7 @@ const Item = ({ itemIndex, register, errors }: Props) => {
                             errors.items[itemIndex]!.name &&
                             'border-errorRed'
                     )}
+                    defaultValue={defaultName}
                     {...register(`items.${itemIndex}.name`)}
                 />
             </div>
@@ -68,6 +84,7 @@ const Item = ({ itemIndex, register, errors }: Props) => {
                             errors.items[itemIndex]!.quantity &&
                             'border-errorRed'
                     )}
+                    defaultValue={defaultQuantity}
                     {...register(`items.${itemIndex}.quantity`)}
                     onChange={onChangeHandler}
                 />
@@ -84,6 +101,7 @@ const Item = ({ itemIndex, register, errors }: Props) => {
                             errors.items[itemIndex]!.price &&
                             'border-errorRed'
                     )}
+                    defaultValue={defaultPrice}
                     {...register(`items.${itemIndex}.price`)}
                     onChange={onChangeHandler}
                 />

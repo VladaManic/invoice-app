@@ -1,14 +1,37 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 
-import { FormDataObj } from '../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
+    invoice: InvoiceObj | undefined
 }
 
-const ClientFields = ({ register, errors }: Props) => {
+const ClientFields = ({ register, errors, invoice }: Props) => {
+    let defaultName,
+        defaultEmail,
+        defaultStreet,
+        defaultCity,
+        defaultPostcode,
+        defaultCountry
+    if (invoice !== undefined) {
+        defaultName = invoice.clientName
+        defaultEmail = invoice.clientEmail
+        defaultStreet = invoice.clientAddress.street
+        defaultCity = invoice.clientAddress.city
+        defaultPostcode = invoice.clientAddress.postCode
+        defaultCountry = invoice.clientAddress.country
+    } else {
+        defaultName = ''
+        defaultEmail = ''
+        defaultStreet = ''
+        defaultCity = ''
+        defaultPostcode = ''
+        defaultCountry = ''
+    }
+
     return (
         <>
             <h3 className="mb-[12px] font-spartanBold text-xs text-packmanUp">
@@ -38,6 +61,7 @@ const ClientFields = ({ register, errors }: Props) => {
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                         errors.clientName && 'border-errorRed'
                     )}
+                    defaultValue={defaultName}
                     {...register('clientName')}
                 />
             </div>
@@ -66,6 +90,7 @@ const ClientFields = ({ register, errors }: Props) => {
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                         errors.clientEmail && 'border-errorRed'
                     )}
+                    defaultValue={defaultEmail}
                     {...register('clientEmail')}
                 />
             </div>
@@ -94,6 +119,7 @@ const ClientFields = ({ register, errors }: Props) => {
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                         errors.clientAddress && 'border-errorRed'
                     )}
+                    defaultValue={defaultStreet}
                     {...register('clientAddress')}
                 />
             </div>
@@ -123,6 +149,7 @@ const ClientFields = ({ register, errors }: Props) => {
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                             errors.clientCity && 'border-errorRed'
                         )}
+                        defaultValue={defaultCity}
                         {...register('clientCity')}
                     />
                 </div>
@@ -151,6 +178,7 @@ const ClientFields = ({ register, errors }: Props) => {
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                             errors.clientPostcode && 'border-errorRed'
                         )}
+                        defaultValue={defaultPostcode}
                         {...register('clientPostcode')}
                     />
                 </div>
@@ -179,6 +207,7 @@ const ClientFields = ({ register, errors }: Props) => {
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                             errors.clientCountry && 'border-errorRed'
                         )}
+                        defaultValue={defaultCountry}
                         {...register('clientCountry')}
                     />
                 </div>

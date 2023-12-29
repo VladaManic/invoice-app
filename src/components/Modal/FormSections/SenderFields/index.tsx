@@ -1,14 +1,28 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 
-import { FormDataObj } from '../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
+    invoice: InvoiceObj | undefined
 }
 
-const SenderFields = ({ register, errors }: Props) => {
+const SenderFields = ({ register, errors, invoice }: Props) => {
+    let defaultStreet, defaultCity, defaultPostcode, defaultCountry
+    if (invoice !== undefined) {
+        defaultStreet = invoice.senderAddress.street
+        defaultCity = invoice.senderAddress.city
+        defaultPostcode = invoice.senderAddress.postCode
+        defaultCountry = invoice.senderAddress.country
+    } else {
+        defaultStreet = ''
+        defaultCity = ''
+        defaultPostcode = ''
+        defaultCountry = ''
+    }
+
     return (
         <>
             <h3 className="mb-[12px] font-spartanBold text-xs text-packmanUp">
@@ -38,6 +52,7 @@ const SenderFields = ({ register, errors }: Props) => {
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                         errors.senderAddress && 'border-errorRed'
                     )}
+                    defaultValue={defaultStreet}
                     {...register('senderAddress')}
                 />
             </div>
@@ -67,6 +82,7 @@ const SenderFields = ({ register, errors }: Props) => {
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                             errors.senderCity && 'border-errorRed'
                         )}
+                        defaultValue={defaultCity}
                         {...register('senderCity')}
                     />
                 </div>
@@ -95,6 +111,7 @@ const SenderFields = ({ register, errors }: Props) => {
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                             errors.senderPostcode && 'border-errorRed'
                         )}
+                        defaultValue={defaultPostcode}
                         {...register('senderPostcode')}
                     />
                 </div>
@@ -123,6 +140,7 @@ const SenderFields = ({ register, errors }: Props) => {
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                             errors.senderCountry && 'border-errorRed'
                         )}
+                        defaultValue={defaultCountry}
                         {...register('senderCountry')}
                     />
                 </div>

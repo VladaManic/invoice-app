@@ -3,16 +3,42 @@ import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 
 import arrowIcon from '../../../../assets/img/arrow.svg'
-import { FormDataObj } from '../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
+    invoice: InvoiceObj | undefined
 }
 
-const DateTerms = ({ register, errors }: Props) => {
-    const [selectValue, setSelectValue] = useState<string>('1')
-    const [selectText, setSelectText] = useState<string>('Net 1 day')
+const DateTerms = ({ register, errors, invoice }: Props) => {
+    let defaultPaymentTerms, defaultPaymentText, defaultDescription
+    if (invoice !== undefined) {
+        defaultPaymentTerms = invoice.paymentTerms
+        switch (invoice.paymentTerms.toString()) {
+            case '1':
+                defaultPaymentText = 'Net 1 day'
+                break
+            case '7':
+                defaultPaymentText = 'Net 7 days'
+                break
+            case '14':
+                defaultPaymentText = 'Net 14 days'
+                break
+            case '30':
+                defaultPaymentText = 'Net 30 days'
+                break
+        }
+        defaultDescription = invoice.description
+    } else {
+        defaultPaymentTerms = '1'
+        defaultPaymentText = 'Net 1 day'
+        defaultDescription = ''
+    }
+    const [selectValue, setSelectValue] = useState<string>(defaultPaymentTerms)
+    const [selectText, setSelectText] = useState<string | undefined>(
+        defaultPaymentText
+    )
     const [selectOpened, setSelectOpened] = useState<boolean>(false)
 
     //Opening/closing dropdown
@@ -91,7 +117,7 @@ const DateTerms = ({ register, errors }: Props) => {
                                 Net 1 Day
                             </button>
                             <button
-                                value="2"
+                                value="7"
                                 name="Net 7 Days"
                                 className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
                                 onClick={onClickDropdown}
@@ -99,15 +125,15 @@ const DateTerms = ({ register, errors }: Props) => {
                                 Net 7 Days
                             </button>
                             <button
-                                value="3"
+                                value="14"
                                 name="Net 14 Days"
                                 className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
                                 onClick={onClickDropdown}
                             >
-                                Net 14 Dayss
+                                Net 14 Days
                             </button>
                             <button
-                                value="4"
+                                value="30"
                                 name="Net 30 Days"
                                 className="w-full rounded-none pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:text-packmanUp"
                                 onClick={onClickDropdown}
@@ -143,6 +169,7 @@ const DateTerms = ({ register, errors }: Props) => {
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                         errors.description && 'border-errorRed'
                     )}
+                    defaultValue={defaultDescription}
                     {...register('description')}
                 />
             </div>
