@@ -3,7 +3,10 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '../../../state/hooks'
-import { createInvoice } from '../../../state/invoice/invoiceSlice'
+import {
+    createInvoice,
+    updateInvoice,
+} from '../../../state/invoice/invoiceSlice'
 import { format } from 'date-fns'
 import stringGenerator from '../../../utils/stringGenerator'
 
@@ -76,42 +79,78 @@ const FormModal = ({ invoice, onClose }: Props) => {
     // })
 
     const submitData = (data: FormDataObj) => {
-        console.log(data)
-        const letterPart = stringGenerator(2, 'letters')
-        const numberPart = stringGenerator(4, 'numbers')
-        const id = letterPart + numberPart
-        const now = new Date()
-        const currentTime = format(now, 'y-MM-dd')
-        let total: number = 0
-        data.items.forEach((item: ItemObj) => {
-            item.total = item.quantity * item.price
-            total = total + item.total
-        })
-        const newObj: InvoiceObj = {
-            id: id,
-            createdAt: currentTime,
-            paymentDue: data.paymentDue,
-            description: data.description,
-            paymentTerms: data.paymentTerms,
-            clientName: data.clientName,
-            clientEmail: data.clientEmail,
-            status: 'pending',
-            senderAddress: {
-                street: data.senderAddress,
-                city: data.senderCity,
-                postCode: data.senderPostcode,
-                country: data.senderCountry,
-            },
-            clientAddress: {
-                street: data.clientAddress,
-                city: data.clientCity,
-                postCode: data.clientPostcode,
-                country: data.clientCountry,
-            },
-            items: data.items,
-            total: total,
+        //If Home page (add form)
+        if (!pathname.includes('/invoice/')) {
+            console.log(data)
+            const letterPart = stringGenerator(2, 'letters')
+            const numberPart = stringGenerator(4, 'numbers')
+            const id = letterPart + numberPart
+            const now = new Date()
+            const currentTime = format(now, 'y-MM-dd')
+            let total: number = 0
+            data.items.forEach((item: ItemObj) => {
+                item.total = item.quantity * item.price
+                total = total + item.total
+            })
+            const newObj: InvoiceObj = {
+                id: id,
+                createdAt: currentTime,
+                paymentDue: data.paymentDue,
+                description: data.description,
+                paymentTerms: data.paymentTerms,
+                clientName: data.clientName,
+                clientEmail: data.clientEmail,
+                status: 'pending',
+                senderAddress: {
+                    street: data.senderAddress,
+                    city: data.senderCity,
+                    postCode: data.senderPostcode,
+                    country: data.senderCountry,
+                },
+                clientAddress: {
+                    street: data.clientAddress,
+                    city: data.clientCity,
+                    postCode: data.clientPostcode,
+                    country: data.clientCountry,
+                },
+                items: data.items,
+                total: total,
+            }
+            dispatch(createInvoice(newObj))
+            //If single pade (edit form)
+        } else {
+            console.log(data)
+            let total: number = 0
+            data.items.forEach((item: ItemObj) => {
+                item.total = item.quantity * item.price
+                total = total + item.total
+            })
+            const newObj: InvoiceObj = {
+                id: invoice.id,
+                createdAt: invoice.createdAt,
+                paymentDue: data.paymentDue,
+                description: data.description,
+                paymentTerms: data.paymentTerms,
+                clientName: data.clientName,
+                clientEmail: data.clientEmail,
+                status: invoice.status,
+                senderAddress: {
+                    street: data.senderAddress,
+                    city: data.senderCity,
+                    postCode: data.senderPostcode,
+                    country: data.senderCountry,
+                },
+                clientAddress: {
+                    street: data.clientAddress,
+                    city: data.clientCity,
+                    postCode: data.clientPostcode,
+                    country: data.clientCountry,
+                },
+                items: data.items,
+                total: total,
+            }
+            dispatch(updateInvoice(newObj))
         }
-        dispatch(createInvoice(newObj))
     }
 
     if (errors.items !== undefined) {

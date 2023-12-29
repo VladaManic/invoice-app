@@ -61,6 +61,19 @@ export const deleteSingleInvoice = createAsyncThunk(
     }
 )
 
+//Update invoice
+export const updateInvoice = createAsyncThunk(
+    'invoice/updateInvoice',
+    (singleInvoice: InvoiceObj | null) => {
+        return axios
+            .patch(
+                `http://localhost:3004/invoices/` + singleInvoice!.id,
+                singleInvoice
+            )
+            .then((response) => response.data)
+    }
+)
+
 //Updating status from pending to paid
 export const updateToPaid = createAsyncThunk(
     'invoice/updatePaid',
@@ -173,6 +186,19 @@ const invoiceSlice = createSlice({
         builder.addCase(deleteSingleInvoice.rejected, (state, action) => {
             state.loadingDelete = false
             state.errorDelete = action.error.message
+        })
+        //Update single invoice
+        builder.addCase(updateInvoice.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(updateInvoice.fulfilled, (state, action) => {
+            state.loading = false
+            state.singleInvoice = action.payload
+            state.error = ''
+        })
+        builder.addCase(updateInvoice.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
         })
         //Update single invoice status to "Paid"
         builder.addCase(updateToPaid.pending, (state) => {
