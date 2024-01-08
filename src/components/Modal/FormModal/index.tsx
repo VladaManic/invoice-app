@@ -10,6 +10,7 @@ import {
 import { format } from 'date-fns'
 import stringGenerator from '../../../utils/stringGenerator'
 
+import FormTitle from '../FormSections/FormTitle'
 import SenderFields from '../FormSections/SenderFields'
 import ClientFields from '../FormSections/ClientFields'
 import DateTerms from '../FormSections/DateTerms'
@@ -25,11 +26,13 @@ const FormModal = ({ invoice, onClose }: Props) => {
     const { pathname } = useLocation()
     const dispatch = useAppDispatch()
 
-    let singleInvoice
+    let singleInvoice, formTitle
     if (pathname.includes('/invoice/')) {
         singleInvoice = invoice
+        formTitle = <FormTitle invoice={invoice} />
     } else {
         singleInvoice = undefined
+        formTitle = 'New invoice'
     }
 
     // Define the schema for the static properties
@@ -166,7 +169,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
                 <div className="h-full overflow-y-scroll" id="form-inner">
                     <div className="mr-[10px] h-full">
                         <h2 className="mb-[30px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack">
-                            New invoice
+                            {formTitle}
                         </h2>
                         <SenderFields
                             register={register}
