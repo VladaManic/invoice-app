@@ -29,10 +29,12 @@ const FormModal = ({ invoice, onClose }: Props) => {
     const dispatch = useAppDispatch()
 
     let singleInvoice, formTitle, submitText
+    //Update form features
     if (pathname.includes('/invoice/')) {
         singleInvoice = invoice
         formTitle = <FormTitle invoice={invoice} />
         submitText = 'Save changes'
+        //Insert form features
     } else {
         singleInvoice = undefined
         formTitle = 'New invoice'
@@ -86,6 +88,30 @@ const FormModal = ({ invoice, onClose }: Props) => {
     // })
 
     const submitData = (data: FormDataObj) => {
+        const newObj: InvoiceObj = {
+            id: '0',
+            createdAt: '0',
+            paymentDue: data.paymentDue,
+            description: data.description,
+            paymentTerms: data.paymentTerms,
+            clientName: data.clientName,
+            clientEmail: data.clientEmail,
+            status: 'pending',
+            senderAddress: {
+                street: data.senderAddress,
+                city: data.senderCity,
+                postCode: data.senderPostcode,
+                country: data.senderCountry,
+            },
+            clientAddress: {
+                street: data.clientAddress,
+                city: data.clientCity,
+                postCode: data.clientPostcode,
+                country: data.clientCountry,
+            },
+            items: data.items,
+            total: 0,
+        }
         //If Home page (add form)
         if (!pathname.includes('/invoice/')) {
             console.log(data)
@@ -99,30 +125,10 @@ const FormModal = ({ invoice, onClose }: Props) => {
                 item.total = item.quantity * item.price
                 total = total + item.total
             })
-            const newObj: InvoiceObj = {
-                id: id,
-                createdAt: currentTime,
-                paymentDue: data.paymentDue,
-                description: data.description,
-                paymentTerms: data.paymentTerms,
-                clientName: data.clientName,
-                clientEmail: data.clientEmail,
-                status: 'pending',
-                senderAddress: {
-                    street: data.senderAddress,
-                    city: data.senderCity,
-                    postCode: data.senderPostcode,
-                    country: data.senderCountry,
-                },
-                clientAddress: {
-                    street: data.clientAddress,
-                    city: data.clientCity,
-                    postCode: data.clientPostcode,
-                    country: data.clientCountry,
-                },
-                items: data.items,
-                total: total,
-            }
+            newObj.id = id
+            newObj.createdAt = currentTime
+            newObj.status = 'pending'
+            newObj.total = total
             dispatch(createInvoice(newObj))
             //If single pade (edit form)
         } else {
@@ -132,30 +138,10 @@ const FormModal = ({ invoice, onClose }: Props) => {
                 item.total = item.quantity * item.price
                 total = total + item.total
             })
-            const newObj: InvoiceObj = {
-                id: invoice.id,
-                createdAt: invoice.createdAt,
-                paymentDue: data.paymentDue,
-                description: data.description,
-                paymentTerms: data.paymentTerms,
-                clientName: data.clientName,
-                clientEmail: data.clientEmail,
-                status: invoice.status,
-                senderAddress: {
-                    street: data.senderAddress,
-                    city: data.senderCity,
-                    postCode: data.senderPostcode,
-                    country: data.senderCountry,
-                },
-                clientAddress: {
-                    street: data.clientAddress,
-                    city: data.clientCity,
-                    postCode: data.clientPostcode,
-                    country: data.clientCountry,
-                },
-                items: data.items,
-                total: total,
-            }
+            newObj.id = invoice.id
+            newObj.createdAt = invoice.createdAt
+            newObj.status = invoice.status
+            newObj.total = total
             dispatch(updateInvoice(newObj))
         }
     }
