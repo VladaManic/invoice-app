@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const FormModal = ({ invoice, onClose }: Props) => {
+    const [submitType, setSubmitType] = useState('pending')
     const { pathname } = useLocation()
     const dispatch = useAppDispatch()
 
@@ -127,8 +129,12 @@ const FormModal = ({ invoice, onClose }: Props) => {
             })
             newObj.id = id
             newObj.createdAt = currentTime
-            newObj.status = 'pending'
             newObj.total = total
+            if (submitType === 'pending') {
+                newObj.status = 'pending'
+            } else {
+                newObj.status = 'draft'
+            }
             dispatch(createInvoice(newObj))
             //If single pade (edit form)
         } else {
@@ -198,11 +204,12 @@ const FormModal = ({ invoice, onClose }: Props) => {
                         {pathname.includes('/invoice/') ? (
                             <BtnCancel onClose={onClose} />
                         ) : (
-                            <BtnDraft />
+                            <BtnDraft onClick={() => setSubmitType('draft')} />
                         )}
                         <button
                             type="submit"
                             className="rounded-[50px] bg-packmanUp pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
+                            onClick={() => setSubmitType('pending')}
                         >
                             {submitText}
                         </button>
