@@ -15,6 +15,8 @@ import SenderFields from '../FormSections/SenderFields'
 import ClientFields from '../FormSections/ClientFields'
 import DateTerms from '../FormSections/DateTerms'
 import ItemList from '../FormSections/ItemList'
+import BtnDraft from '../FormSections/BtnDraft'
+import BtnCancel from '../FormSections/BtnCancel'
 
 import { FormDataObj, InvoiceObj, ItemObj } from '../../../types/interfaces'
 interface Props {
@@ -26,13 +28,15 @@ const FormModal = ({ invoice, onClose }: Props) => {
     const { pathname } = useLocation()
     const dispatch = useAppDispatch()
 
-    let singleInvoice, formTitle
+    let singleInvoice, formTitle, submitText
     if (pathname.includes('/invoice/')) {
         singleInvoice = invoice
         formTitle = <FormTitle invoice={invoice} />
+        submitText = 'Save changes'
     } else {
         singleInvoice = undefined
         formTitle = 'New invoice'
+        submitText = 'Save & Send'
     }
 
     // Define the schema for the static properties
@@ -194,21 +198,27 @@ const FormModal = ({ invoice, onClose }: Props) => {
                     </div>
                 </div>
                 <div className="fixed bottom-0 left-[87px] z-[100] flex h-[110px] w-[630px] items-center justify-between rounded-r-2xl bg-defaultBlack bg-defaultWhite pl-[50px] pr-[42px]">
-                    <button
-                        className="rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs"
-                        onClick={onClose}
-                    >
-                        Discard
-                    </button>
-                    <div>
-                        <button className="mr-[15px] rounded-[50px] bg-asideBg pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-draftText">
-                            Save as Draft
+                    {pathname.includes('/invoice/') ? (
+                        <div></div>
+                    ) : (
+                        <button
+                            className="rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs"
+                            onClick={onClose}
+                        >
+                            Discard
                         </button>
+                    )}
+                    <div>
+                        {pathname.includes('/invoice/') ? (
+                            <BtnCancel onClose={onClose} />
+                        ) : (
+                            <BtnDraft />
+                        )}
                         <button
                             type="submit"
                             className="rounded-[50px] bg-packmanUp pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
                         >
-                            Save & Send
+                            {submitText}
                         </button>
                     </div>
                 </div>
