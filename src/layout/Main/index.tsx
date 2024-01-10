@@ -6,13 +6,13 @@ import Page404 from '../../pages/Page404'
 
 const Main = () => {
     return (
-        <div>
+        <>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/invoice/:invoiceId" element={<Single />} />
                 <Route path="*" element={<Page404 />} />
             </Routes>
-        </div>
+        </>
     )
 }
 

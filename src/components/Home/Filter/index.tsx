@@ -24,7 +24,7 @@ const Filter = () => {
     }
 
     return (
-        <div className="relative flex items-center font-spartanBold text-defaultBlack sm:mr-[2px] md:mr-3">
+        <div className="xs:mr-[2px] relative flex items-center font-spartanBold text-defaultBlack md:mr-3">
             <div className="flex items-center">
                 <p className="text-xs max-md:hidden md:block">
                     Filter by status
