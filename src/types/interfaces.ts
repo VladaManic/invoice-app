@@ -40,6 +40,7 @@ export type InitialStateObj = {
     loading: boolean
     loadingDelete: boolean
     invoices: [] | InvoiceObj[]
+    status: string | null
     singleInvoice: null | InvoiceObj
     error: string | undefined
     errorDelete: string | undefined

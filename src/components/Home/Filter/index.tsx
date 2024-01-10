@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import { useAppDispatch } from '../../../state/hooks'
-import { fetchInvoicesByStatus } from '../../../state/invoice/invoiceSlice'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import {
+    setStatus,
+    fetchInvoicesByStatus,
+} from '../../../state/invoice/invoiceSlice'
 import useAccordion from '../../../hooks/useAccordion'
 import clsx from 'clsx'
 
 import arrowIcon from '../../../assets/img/arrow.svg'
 
 const Filter = () => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
-    const [status, setStatus] = useState<string | null>(null)
     //Using custom hook for opening/closing dropdown
     const { opened, setOpened } = useAccordion(false)
 
@@ -17,7 +19,7 @@ const Filter = () => {
             | React.MouseEvent<HTMLButtonElement>
             | React.TouchEvent<HTMLButtonElement>
     ) => {
-        setStatus(e.currentTarget.value)
+        dispatch(setStatus(e.currentTarget.value))
         dispatch(fetchInvoicesByStatus(e.currentTarget.value))
     }
 
@@ -44,7 +46,8 @@ const Filter = () => {
                                 value="draft"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    status === 'draft' && 'checked-field'
+                                    invoiceRedux.status === 'draft' &&
+                                        'checked-field'
                                 )}
                                 onClick={onClickHandler}
                             ></button>
@@ -61,7 +64,8 @@ const Filter = () => {
                                 value="pending"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    status === 'pending' && 'checked-field'
+                                    invoiceRedux.status === 'pending' &&
+                                        'checked-field'
                                 )}
                                 onClick={onClickHandler}
                             ></button>
@@ -78,7 +82,8 @@ const Filter = () => {
                                 value="paid"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    status === 'paid' && 'checked-field'
+                                    invoiceRedux.status === 'paid' &&
+                                        'checked-field'
                                 )}
                                 onClick={onClickHandler}
                             ></button>

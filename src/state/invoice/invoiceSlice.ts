@@ -7,6 +7,7 @@ const initialState: InitialStateObj = {
     loading: false,
     loadingDelete: false,
     invoices: [],
+    status: null,
     singleInvoice: null,
     error: '',
     errorDelete: '',
@@ -93,6 +94,9 @@ const invoiceSlice = createSlice({
     initialState,
     //Sync reducers list
     reducers: {
+        setStatus: (state, action) => {
+            state.status = action.payload
+        },
         resetError: (state) => {
             state.errorDelete = ''
         },
@@ -216,7 +220,7 @@ const invoiceSlice = createSlice({
     },
 })
 
-export const { resetError, resetSuccess, addItem, removeItem } =
+export const { setStatus, resetError, resetSuccess, addItem, removeItem } =
     invoiceSlice.actions
 
 export default invoiceSlice.reducer
