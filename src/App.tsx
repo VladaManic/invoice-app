@@ -5,7 +5,7 @@ import './App.css'
 
 function App() {
     return (
-        <div id="app-wrap" className="flex">
+        <div id="app-wrap">
             <Aside />
             <Main />
         </div>
