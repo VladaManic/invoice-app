@@ -24,9 +24,12 @@ const Filter = () => {
     }
 
     return (
-        <div className="relative mr-3 flex items-center font-spartanBold text-defaultBlack">
+        <div className="relative flex items-center font-spartanBold text-defaultBlack sm:mr-[2px] md:mr-3">
             <div className="flex items-center">
-                <p className="text-xs">Filter by status</p>
+                <p className="text-xs max-md:hidden md:block">
+                    Filter by status
+                </p>
+                <p className="text-xs max-md:block md:hidden">Filter</p>
                 <button
                     className="p-3"
                     onClick={() => setOpened((curr: boolean) => !curr)}

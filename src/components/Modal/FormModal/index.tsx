@@ -21,7 +21,7 @@ import BtnCancel from '../FormSections/BtnCancel'
 
 import { FormDataObj, InvoiceObj, ItemObj } from '../../../types/interfaces'
 interface Props {
-    invoice: InvoiceObj
+    invoice: InvoiceObj | undefined
     onClose: React.MouseEventHandler<HTMLButtonElement>
 }
 
@@ -144,9 +144,9 @@ const FormModal = ({ invoice, onClose }: Props) => {
                 item.total = item.quantity * item.price
                 total = total + item.total
             })
-            newObj.id = invoice.id
-            newObj.createdAt = invoice.createdAt
-            newObj.status = invoice.status
+            newObj.id = invoice!.id
+            newObj.createdAt = invoice!.createdAt
+            newObj.status = invoice!.status
             newObj.total = total
             dispatch(updateInvoice(newObj))
         }

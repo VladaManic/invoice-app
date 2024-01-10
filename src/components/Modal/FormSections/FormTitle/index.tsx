@@ -1,13 +1,13 @@
 import { InvoiceObj } from '../../../../types/interfaces'
 interface Props {
-    invoice: InvoiceObj
+    invoice: InvoiceObj | undefined
 }
 
 const FormTitle = ({ invoice }: Props) => {
     return (
         <>
             Edit <span className="text-draftText">#</span>
-            {invoice.id}
+            {invoice!.id}
         </>
     )
 }
