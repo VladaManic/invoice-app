@@ -47,8 +47,8 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
     }
 
     return (
-        <div className="fixed left-[50%] top-[50%] z-[100] h-[249px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-defaultWhite p-[40px]">
-            <h2 className="mb-[15px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack">
+        <div className="fixed left-[50%] top-[50%] z-[100] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-defaultWhite p-[40px] xs:h-[230px] xs:w-[332px] md:h-[249px] md:w-[480px]">
+            <h2 className="mb-[15px] font-spartanBold text-defaultBlack xs:text-[20px] xs:leading-[32px] md:text-[24px] md:leading-[32px]">
                 Confirm Deletion
             </h2>
             <p className="mb-[15px] text-[12px] leading-[22px]">
