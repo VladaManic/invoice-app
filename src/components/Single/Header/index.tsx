@@ -40,7 +40,7 @@ const Header = ({ invoice }: Props) => {
     }
 
     return (
-        <div className="mb-4 flex w-[730px] items-center justify-between rounded-lg bg-defaultWhite p-4 pl-8 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)]">
+        <div className="mb-4 flex items-center justify-between rounded-lg bg-defaultWhite p-4 pl-8 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] md:w-[688px] lg:w-[730px]">
             <div className="flex items-center">
                 <p className="mr-5 text-xs">Status</p>
                 <StatusBtn invoice={invoice} />
