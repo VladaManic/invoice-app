@@ -14,8 +14,8 @@ const Intro = ({ openModal, onClick, onClose }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
 
     return (
-        <div className="mb-14 flex items-center justify-between lg:w-[730px]">
-            <div className="text-left">
+        <div className="mb-14 flex items-center justify-between md:w-[672px] lg:w-[730px]">
+            <div className="xs:mr-[15px] xs:text-left sm:mr-[70px]">
                 <h1 className="mb-3 text-defaultBlack">Invoices</h1>
                 {invoiceRedux.invoices.length > 0 ? (
                     <>
@@ -28,7 +28,7 @@ const Intro = ({ openModal, onClick, onClose }: Props) => {
                         </p>
                     </>
                 ) : (
-                    <p>No invoices</p>
+                    <p className="text-xs">No invoices</p>
                 )}
             </div>
             <div className="flex">
