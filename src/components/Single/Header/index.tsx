@@ -4,6 +4,7 @@ import { updateToPaid } from '../../../state/invoice/invoiceSlice'
 
 import Modal from '../../Reusable/Modal'
 import StatusBtn from '../../Reusable/StatusBtn'
+import ChangeButtons from '../ChangeButtons'
 import DeleteConfirmationModal from '../../Modal/DeleteConfirmationModal'
 import FormModal from '../../Modal/FormModal'
 
@@ -41,31 +42,17 @@ const Header = ({ invoice }: Props) => {
 
     return (
         <div className="mb-4 flex items-center justify-between rounded-lg bg-defaultWhite p-4 pl-8 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] md:w-[688px] lg:w-[730px]">
-            <div className="flex items-center">
+            <div className="flex items-center justify-between xs:w-full md:w-auto">
                 <p className="mr-5 text-xs">Status</p>
                 <StatusBtn invoice={invoice} />
             </div>
-            <div>
-                <button
-                    className="mr-3 rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs"
-                    onClick={onClickEdit}
-                >
-                    Edit
-                </button>
-                <button
-                    className="mr-3 rounded-[50px] bg-deleteRed pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
-                    onClick={onClickDelete}
-                >
-                    Delete
-                </button>
-                {invoice.status === 'pending' && (
-                    <button
-                        className="rounded-[50px] bg-packmanUp pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
-                        onClick={onClickPaid}
-                    >
-                        Mark as Paid
-                    </button>
-                )}
+            <div className="max-md:hidden md:block">
+                <ChangeButtons
+                    invoice={invoice}
+                    onClickEdit={onClickEdit}
+                    onClickDelete={onClickDelete}
+                    onClickPaid={onClickPaid}
+                />
             </div>
             {openDeleteModal && (
                 <Modal onClose={onCloseHandler}>
