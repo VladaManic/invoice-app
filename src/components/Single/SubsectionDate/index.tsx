@@ -11,34 +11,42 @@ const SubsectionDate = ({ invoice }: Props) => {
     const datePayment = new Date(invoice.paymentDue)
 
     return (
-        <div className="mb-10 flex">
-            <div className="w-[30%] text-left">
-                <p className="mb-3 font-spartanMedium text-xs">Invoice Date</p>
-                <p className="mb-8 font-spartanBold text-defaultBlack">
-                    {format(dateCreated, 'dd MMM y')}
-                </p>
-                <p className="mb-3 font-spartanMedium text-xs">Payment Due</p>
-                <p className="font-spartanBold text-defaultBlack">
-                    {format(datePayment, 'dd MMM y')}
-                </p>
-            </div>
-            <div className="w-[30%] text-left">
-                <p className="mb-[12px] font-spartanMedium text-xs">Bill To</p>
-                <p className="mb-2 font-spartanBold text-defaultBlack">
-                    {invoice.clientName}
-                </p>
-                <p className="text-[11px] leading-[18px]">
-                    {invoice.clientAddress.street}
-                </p>
-                <p className="text-[11px] leading-[18px]">
-                    {invoice.clientAddress.city}
-                </p>
-                <p className="text-[11px] leading-[18px]">
-                    {invoice.clientAddress.postCode}
-                </p>
-                <p className="text-[11px] leading-[18px]">
-                    {invoice.clientAddress.country}
-                </p>
+        <div className="mb-10 flex xs:flex-col md:flex-row">
+            <div className="flex xs:mb-[30px] xs:w-full md:mb-0 md:w-[60%]">
+                <div className="w-[50%] text-left">
+                    <p className="mb-3 font-spartanMedium text-xs">
+                        Invoice Date
+                    </p>
+                    <p className="mb-8 font-spartanBold text-defaultBlack">
+                        {format(dateCreated, 'dd MMM y')}
+                    </p>
+                    <p className="mb-3 font-spartanMedium text-xs">
+                        Payment Due
+                    </p>
+                    <p className="font-spartanBold text-defaultBlack">
+                        {format(datePayment, 'dd MMM y')}
+                    </p>
+                </div>
+                <div className="w-[50%] text-left">
+                    <p className="mb-[12px] font-spartanMedium text-xs">
+                        Bill To
+                    </p>
+                    <p className="mb-2 font-spartanBold text-defaultBlack">
+                        {invoice.clientName}
+                    </p>
+                    <p className="text-[11px] leading-[18px]">
+                        {invoice.clientAddress.street}
+                    </p>
+                    <p className="text-[11px] leading-[18px]">
+                        {invoice.clientAddress.city}
+                    </p>
+                    <p className="text-[11px] leading-[18px]">
+                        {invoice.clientAddress.postCode}
+                    </p>
+                    <p className="text-[11px] leading-[18px]">
+                        {invoice.clientAddress.country}
+                    </p>
+                </div>
             </div>
             <div className="w-[40%] text-left">
                 <p className="mb-[12px] font-spartanMedium text-xs">Send to</p>

@@ -14,15 +14,15 @@ const ChangeButtons = ({
     onClickPaid,
 }: Props) => {
     return (
-        <div>
+        <div className="flex min-[335px]:justify-between">
             <button
-                className="mr-3 rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs"
+                className="rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs xs:mr-1 sm:mr-3"
                 onClick={onClickEdit}
             >
                 Edit
             </button>
             <button
-                className="mr-3 rounded-[50px] bg-deleteRed pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
+                className="rounded-[50px] bg-deleteRed pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite xs:mr-1 sm:mr-3"
                 onClick={onClickDelete}
             >
                 Delete

@@ -6,8 +6,8 @@ interface Props {
 
 const SubsectionId = ({ invoice }: Props) => {
     return (
-        <div className="mb-5 flex justify-between">
-            <div className="text-left">
+        <div className="mb-5 flex justify-between xs:flex-col md:flex-row">
+            <div className="text-left xs:mb-[30px] md:mb-0">
                 <p className="mb-3 font-spartanBold text-base">
                     <span>#</span>
                     <span className="text-defaultBlack">{invoice.id}</span>
@@ -16,7 +16,7 @@ const SubsectionId = ({ invoice }: Props) => {
                     {invoice.description}
                 </p>
             </div>
-            <div className="text-right">
+            <div className="xs:text-left md:text-right">
                 <p className="text-[11px] leading-[18px]">
                     {invoice.senderAddress.street}
                 </p>
