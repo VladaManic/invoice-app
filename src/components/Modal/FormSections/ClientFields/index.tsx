@@ -124,8 +124,8 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                 />
             </div>
 
-            <div className="mb-[35px] flex justify-between">
-                <div className="w-[30%]">
+            <div className="mb-[35px] flex flex-wrap justify-between">
+                <div className="max-[525px]:mb-[12px] xs:w-[46%] min-[525px]:w-[30%]">
                     <div className="flex justify-between text-singleGrey">
                         <label
                             htmlFor="city-from"
@@ -154,7 +154,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                     />
                 </div>
 
-                <div className="w-[30%]">
+                <div className="max-[525px]:mb-[12px] xs:w-[46%] min-[525px]:w-[30%]">
                     <div className="flex justify-between text-singleGrey">
                         <label
                             htmlFor="post-code-from"
@@ -183,7 +183,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                     />
                 </div>
 
-                <div className="w-[30%]">
+                <div className="xs:w-[100%] min-[525px]:w-[30%]">
                     <div className="flex justify-between text-singleGrey">
                         <label
                             htmlFor="country-from"

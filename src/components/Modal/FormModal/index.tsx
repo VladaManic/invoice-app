@@ -159,7 +159,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
     return (
         <form onSubmit={handleSubmit(submitData)}>
             <div
-                className="fixed left-[87px] top-0 z-[100] h-screen w-[630px] rounded-r-2xl bg-defaultWhite pb-[110px] pl-[50px] pr-[24px] pt-[40px]"
+                className="fixed left-0 z-[100] h-screen bg-defaultWhite pb-[110px] pt-[40px] xs:top-[72px] xs:pl-[30px] xs:pr-[6px] min-[525px]:pl-[50px] min-[525px]:pr-[24px] min-[630px]:w-[630px] min-[630px]:rounded-r-2xl md:top-[80px] lg:left-[87px] lg:top-0"
                 id="form-wrapper"
             >
                 <div className="h-full overflow-y-scroll" id="form-inner">
@@ -189,7 +189,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
                         />
                     </div>
                 </div>
-                <div className="fixed bottom-0 left-[87px] z-[100] flex h-[110px] w-[630px] items-center justify-between rounded-r-2xl bg-defaultBlack bg-defaultWhite pl-[50px] pr-[42px]">
+                <div className="fixed bottom-0 left-0 z-[100] flex h-[110px] items-center justify-between bg-defaultBlack bg-defaultWhite pl-[50px] pr-[42px] xs:w-full min-[630px]:w-[630px] min-[630px]:rounded-r-2xl lg:left-[87px]">
                     {pathname.includes('/invoice/') ? (
                         <div></div>
                     ) : (

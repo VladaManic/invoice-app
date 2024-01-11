@@ -64,8 +64,8 @@ const DateTerms = ({ register, errors, invoice }: Props) => {
 
     return (
         <>
-            <div className="mb-[20px] flex justify-between">
-                <div className="w-[48%]">
+            <div className="mb-[20px] flex flex-wrap justify-between">
+                <div className="xs:w-full min-[525px]:w-[48%]">
                     <div className="flex justify-between text-singleGrey">
                         <label
                             htmlFor="invoice-date"
@@ -89,7 +89,7 @@ const DateTerms = ({ register, errors, invoice }: Props) => {
                     />
                 </div>
 
-                <div className="relative w-[48%]">
+                <div className="relative xs:w-full min-[525px]:w-[48%]">
                     <label className="font-spartanMedium text-xs text-singleGrey">
                         Payment Terms
                     </label>
