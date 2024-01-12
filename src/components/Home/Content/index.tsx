@@ -5,10 +5,9 @@ import { InvoiceObj, InitialStateObj } from '../../../types/interfaces'
 
 interface Props {
     invoice: InitialStateObj
-    onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Content = ({ invoice, onClick }: Props) => {
+const Content = ({ invoice }: Props) => {
     return (
         <>
             {invoice.invoices.length !== 0 ? (
@@ -21,7 +20,7 @@ const Content = ({ invoice, onClick }: Props) => {
                     ))}
                 </div>
             ) : (
-                <EmptyInvoices onClick={onClick} />
+                <EmptyInvoices />
             )}
         </>
     )

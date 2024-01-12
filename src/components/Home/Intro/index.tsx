@@ -1,17 +1,23 @@
-import { useAppSelector } from '../../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import { setOpenModal } from '../../../state/invoice/invoiceSlice'
 
 import Modal from '../../Reusable/Modal'
 import FormModal from '../../Modal/FormModal'
 import Filter from '../Filter'
 
-interface Props {
-    openModal: boolean
-    onClick: React.MouseEventHandler<HTMLButtonElement>
-    onClose: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>
-}
-
-const Intro = ({ openModal, onClick, onClose }: Props) => {
+const Intro = () => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
+    const dispatch = useAppDispatch()
+
+    //On click New Invoice btn, open form modal
+    const onClickHandler = () => {
+        dispatch(setOpenModal(true))
+    }
+
+    //On click modal overlay, closes modal
+    const onCloseHandler = () => {
+        dispatch(setOpenModal(false))
+    }
 
     return (
         <div className="mb-14 flex items-center justify-between md:w-[672px] lg:w-[730px]">
@@ -36,7 +42,7 @@ const Intro = ({ openModal, onClick, onClose }: Props) => {
                 <div className="flex h-12 items-center rounded-[50px] bg-packmanUp p-2 pr-[16px]">
                     <button
                         className="mr-4 flex h-[32px] w-[32px] rounded-[50px] p-0 text-packmanUp focus:outline-none focus:ring-0"
-                        onClick={onClick}
+                        onClick={onClickHandler}
                     >
                         <span className="m-auto font-spartanBold text-xl leading-[37px]">
                             +
@@ -50,9 +56,9 @@ const Intro = ({ openModal, onClick, onClose }: Props) => {
                     </p>
                 </div>
             </div>
-            {openModal && (
-                <Modal onClose={onClose}>
-                    <FormModal invoice={undefined} onClose={onClose} />
+            {invoiceRedux.openFormModal && (
+                <Modal onClose={onCloseHandler}>
+                    <FormModal invoice={undefined} onClose={onCloseHandler} />
                 </Modal>
             )}
         </div>

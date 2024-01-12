@@ -13,6 +13,7 @@ const initialState: InitialStateObj = {
     errorDelete: '',
     successDelete: false,
     itemList: [],
+    openFormModal: false,
 }
 
 //Generates pendind, fullfiled and rejcted action types for fetching all invoices
@@ -119,6 +120,9 @@ const invoiceSlice = createSlice({
                 (index: number) => index !== action.payload
             )
         },
+        setOpenModal: (state, action) => {
+            state.openFormModal = action.payload
+        },
     },
     //Async reducers
     extraReducers: (builder) => {
@@ -220,7 +224,13 @@ const invoiceSlice = createSlice({
     },
 })
 
-export const { setStatus, resetError, resetSuccess, addItem, removeItem } =
-    invoiceSlice.actions
+export const {
+    setStatus,
+    resetError,
+    resetSuccess,
+    addItem,
+    removeItem,
+    setOpenModal,
+} = invoiceSlice.actions
 
 export default invoiceSlice.reducer

@@ -1,10 +1,16 @@
+import { useAppDispatch } from '../../../state/hooks'
+import { setOpenModal } from '../../../state/invoice/invoiceSlice'
+
 import emptyIcon from '../../../assets/img/empty.png'
 
-interface Props {
-    onClick: React.MouseEventHandler<HTMLButtonElement>
-}
+const EmptyInvoices = () => {
+    const dispatch = useAppDispatch()
 
-const EmptyInvoices = ({ onClick }: Props) => {
+    //On click New Invoice btn, open form modal
+    const onClickHandler = () => {
+        dispatch(setOpenModal(true))
+    }
+
     return (
         <div className="mt-[130px]">
             <div className="mb-[50px]">
@@ -22,7 +28,7 @@ const EmptyInvoices = ({ onClick }: Props) => {
                 Create an invoice by clicking the{' '}
                 <button
                     className="p-0 font-spartanBold hover:border-transparent focus:outline-none focus:ring-0"
-                    onClick={onClick}
+                    onClick={onClickHandler}
                 >
                     New Invoice
                 </button>{' '}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { fetchInvoices, resetSuccess } from '../../state/invoice/invoiceSlice'
 import { ToastContainer, toast } from 'react-toastify'
@@ -10,7 +10,6 @@ import Intro from '../../components/Home/Intro'
 import Content from '../../components/Home/Content'
 
 const Home = () => {
-    const [openModal, setOpenModal] = useState<boolean>(false)
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
@@ -26,16 +25,6 @@ const Home = () => {
         }
     }, [])
 
-    //On click New Invoice btn, open form modal
-    const onClickHandler = () => {
-        setOpenModal(true)
-    }
-
-    //On click modal overlay, closes modal
-    const onCloseHandler = () => {
-        setOpenModal(false)
-    }
-
     return (
         <div>
             {invoiceRedux.loading && <Loader />}
@@ -44,12 +33,8 @@ const Home = () => {
             )}
             {!invoiceRedux.loading && !invoiceRedux.error ? (
                 <>
-                    <Intro
-                        openModal={openModal}
-                        onClick={onClickHandler}
-                        onClose={onCloseHandler}
-                    />
-                    <Content invoice={invoiceRedux} onClick={onClickHandler} />
+                    <Intro />
+                    <Content invoice={invoiceRedux} />
                 </>
             ) : null}
             <ToastContainer />

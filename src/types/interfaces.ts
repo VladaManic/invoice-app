@@ -46,6 +46,7 @@ export type InitialStateObj = {
     errorDelete: string | undefined
     successDelete: boolean
     itemList: number[]
+    openFormModal: boolean
 }
 
 export type ToastifyPropsObj = {
