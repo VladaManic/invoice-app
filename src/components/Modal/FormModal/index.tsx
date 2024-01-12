@@ -11,6 +11,7 @@ import {
 import { format } from 'date-fns'
 import stringGenerator from '../../../utils/stringGenerator'
 
+import Nav from '../FormSections/Nav'
 import FormTitle from '../FormSections/FormTitle'
 import SenderFields from '../FormSections/SenderFields'
 import ClientFields from '../FormSections/ClientFields'
@@ -167,6 +168,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
             >
                 <div className="h-full overflow-y-scroll" id="form-inner">
                     <div className="mr-[10px] h-full">
+                        <Nav />
                         <h2 className="mb-[30px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack">
                             {formTitle}
                         </h2>
