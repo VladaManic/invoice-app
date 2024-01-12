@@ -159,7 +159,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
     return (
         <form onSubmit={handleSubmit(submitData)}>
             <div
-                className="fixed left-0 z-[100] h-screen bg-defaultWhite pb-[110px] pt-[40px] xs:top-[72px] xs:pl-[30px] xs:pr-[6px] min-[525px]:pl-[50px] min-[525px]:pr-[24px] min-[630px]:w-[630px] min-[630px]:rounded-r-2xl md:top-[80px] lg:left-[87px] lg:top-0"
+                className="fixed left-0 z-[100] h-screen bg-defaultWhite pt-[40px] xs:top-[72px] xs:pb-[190px] xs:pl-[30px] xs:pr-[6px] min-[525px]:pl-[50px] min-[525px]:pr-[24px] min-[630px]:w-[630px] min-[630px]:rounded-r-2xl md:top-[80px] lg:left-[87px] lg:top-0 lg:pb-[110px]"
                 id="form-wrapper"
             >
                 <div className="h-full overflow-y-scroll" id="form-inner">
@@ -189,12 +189,12 @@ const FormModal = ({ invoice, onClose }: Props) => {
                         />
                     </div>
                 </div>
-                <div className="fixed bottom-0 left-0 z-[100] flex h-[110px] items-center justify-between bg-defaultBlack bg-defaultWhite pl-[50px] pr-[42px] xs:w-full min-[630px]:w-[630px] min-[630px]:rounded-r-2xl lg:left-[87px]">
+                <div className="fixed bottom-0 left-0 z-[100] flex h-[110px] items-center bg-defaultBlack bg-defaultWhite xs:w-full xs:pl-[5px] xs:pr-[5px] min-[352px]:justify-between sm:pl-[15px] sm:pr-[15px] min-[630px]:w-[630px] min-[630px]:rounded-r-2xl md:pl-[50px] md:pr-[42px] lg:left-[87px]">
                     {pathname.includes('/invoice/') ? (
                         <div></div>
                     ) : (
                         <button
-                            className="rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs"
+                            className="rounded-[50px] pb-[15px] pt-[15px] font-spartanBold text-xs min-[480px]:pl-[22px] min-[480px]:pr-[22px]"
                             onClick={onClose}
                         >
                             Discard
@@ -208,7 +208,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
                         )}
                         <button
                             type="submit"
-                            className="rounded-[50px] bg-packmanUp pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
+                            className="rounded-[50px] bg-packmanUp pb-[15px] pt-[15px] font-spartanBold text-xs text-defaultWhite min-[480px]:pl-[22px] min-[480px]:pr-[22px]"
                             onClick={() => setSubmitType('pending')}
                         >
                             {submitText}
