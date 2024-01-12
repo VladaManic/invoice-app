@@ -20,7 +20,7 @@ const Content = ({
     onClickPaid,
 }: Props) => {
     return (
-        <div className="rounded-lg bg-defaultWhite text-singleGrey shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] xs:mb-[130px] xs:p-[10px] sm:p-[25px] md:mb-0 md:w-[688px] md:p-10 lg:w-[730px]">
+        <div className="rounded-lg bg-defaultWhite text-singleGrey shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] xs:mb-[130px] xs:w-[290px] xs:p-[10px] sm:w-[327px] sm:p-[25px] md:mb-0 md:w-[688px] md:p-10 lg:w-[730px]">
             <SubsectionId invoice={invoice} />
             <SubsectionDate invoice={invoice} />
             <SubsectionItemName invoice={invoice} />
