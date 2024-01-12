@@ -5,15 +5,15 @@ import { InitialStateObj, InvoiceObj } from '../../types/interfaces'
 
 const initialState: InitialStateObj = {
     loading: false,
-    loadingDelete: false,
+    error: '',
     invoices: [],
     filterStatus: null,
     singleInvoice: null,
-    error: '',
+    openFormModal: false,
+    itemList: [],
+    loadingDelete: false,
     errorDelete: '',
     successDelete: false,
-    itemList: [],
-    openFormModal: false,
 }
 
 //Generates pendind, fullfiled and rejcted action types for fetching all invoices
@@ -98,11 +98,8 @@ const invoiceSlice = createSlice({
         setStatus: (state, action) => {
             state.filterStatus = action.payload
         },
-        resetError: (state) => {
-            state.errorDelete = ''
-        },
-        resetSuccess: (state) => {
-            state.successDelete = false
+        setOpenModal: (state, action) => {
+            state.openFormModal = action.payload
         },
         addItem: (state) => {
             //If empty array
@@ -120,8 +117,11 @@ const invoiceSlice = createSlice({
                 (index: number) => index !== action.payload
             )
         },
-        setOpenModal: (state, action) => {
-            state.openFormModal = action.payload
+        resetError: (state) => {
+            state.errorDelete = ''
+        },
+        resetSuccess: (state) => {
+            state.successDelete = false
         },
     },
     //Async reducers
@@ -226,11 +226,11 @@ const invoiceSlice = createSlice({
 
 export const {
     setStatus,
-    resetError,
-    resetSuccess,
+    setOpenModal,
     addItem,
     removeItem,
-    setOpenModal,
+    resetError,
+    resetSuccess,
 } = invoiceSlice.actions
 
 export default invoiceSlice.reducer

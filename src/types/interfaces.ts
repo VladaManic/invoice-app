@@ -38,15 +38,15 @@ export type InvoiceObj = {
 
 export type InitialStateObj = {
     loading: boolean
-    loadingDelete: boolean
+    error: string | undefined
     invoices: [] | InvoiceObj[]
     filterStatus: string | null
     singleInvoice: null | InvoiceObj
-    error: string | undefined
+    openFormModal: boolean
+    itemList: number[]
+    loadingDelete: boolean
     errorDelete: string | undefined
     successDelete: boolean
-    itemList: number[]
-    openFormModal: boolean
 }
 
 export type ToastifyPropsObj = {
