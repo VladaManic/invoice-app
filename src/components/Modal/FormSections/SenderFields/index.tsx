@@ -70,7 +70,7 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                             City
                         </label>
                         {errors.senderCity && (
-                            <span className="block text-xs text-errorRed">
+                            <span className="block hidden text-xs text-errorRed min-[635px]:inline">
                                 {errors.senderCity.message}
                             </span>
                         )}
@@ -99,7 +99,7 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                             Post Code
                         </label>
                         {errors.senderPostcode && (
-                            <span className="block text-xs text-errorRed">
+                            <span className="block hidden text-xs text-errorRed min-[635px]:inline">
                                 {errors.senderPostcode.message}
                             </span>
                         )}
@@ -128,7 +128,7 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                             Country
                         </label>
                         {errors.senderCountry && (
-                            <span className="block text-xs text-errorRed">
+                            <span className="block hidden text-xs text-errorRed min-[635px]:inline">
                                 {errors.senderCountry.message}
                             </span>
                         )}

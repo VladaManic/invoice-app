@@ -86,7 +86,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
     //     console.log(key)
     // })
 
-    //Different submit btns clicked in insert form (draft or pending)
+    //Different submit btns clicked in add form (draft or pending)
     const onClickHandler = (e: React.FormEvent<HTMLButtonElement>) => {
         const type = e.currentTarget.name
         setSubmitType(type)

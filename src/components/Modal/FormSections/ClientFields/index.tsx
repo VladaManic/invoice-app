@@ -137,7 +137,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                             City
                         </label>
                         {errors.clientCity && (
-                            <span className="block text-xs text-errorRed">
+                            <span className="block hidden text-xs text-errorRed min-[635px]:inline">
                                 {errors.clientCity.message}
                             </span>
                         )}
@@ -166,7 +166,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                             Post Code
                         </label>
                         {errors.clientPostcode && (
-                            <span className="block text-xs text-errorRed">
+                            <span className="block hidden text-xs text-errorRed min-[635px]:inline">
                                 {errors.clientPostcode.message}
                             </span>
                         )}
@@ -195,7 +195,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                             Country
                         </label>
                         {errors.clientCountry && (
-                            <span className="block text-xs text-errorRed">
+                            <span className="block hidden text-xs text-errorRed min-[635px]:inline">
                                 {errors.clientCountry.message}
                             </span>
                         )}
