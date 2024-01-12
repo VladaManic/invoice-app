@@ -32,7 +32,7 @@ const ItemList = ({ register, errors, invoice }: Props) => {
                 Item List
             </h3>
             <div>
-                <div className="mb-[8px] flex justify-between font-spartanMedium text-xs text-singleGrey">
+                <div className="mb-[8px] justify-between font-spartanMedium text-xs text-singleGrey xs:hidden min-[525px]:flex">
                     <p className="w-[40%]">Item Name</p>
                     <p className="w-[10%]">Qty.</p>
                     <p className="w-[15%]">Price</p>
@@ -40,7 +40,8 @@ const ItemList = ({ register, errors, invoice }: Props) => {
                     <p className="w-[10%]"></p>
                 </div>
                 {invoice === undefined
-                    ? invoiceRedux.itemList.map((item: number) => (
+                    ? //Insert form
+                      invoiceRedux.itemList.map((item: number) => (
                           <Item
                               key={item}
                               itemIndex={item}
@@ -49,7 +50,8 @@ const ItemList = ({ register, errors, invoice }: Props) => {
                               invoice={invoice}
                           />
                       ))
-                    : invoice.items.map((item: ItemObj, index: number) => (
+                    : //Update form
+                      invoice.items.map((item: ItemObj, index: number) => (
                           <Item
                               key={item.name}
                               itemIndex={index}

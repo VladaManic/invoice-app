@@ -58,10 +58,17 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
     }
 
     return (
-        <div className="mb-[12px] flex justify-between font-spartanMedium text-xs text-singleGrey">
-            <div className="w-[40%]">
+        <div className="mb-[12px] flex flex-wrap justify-between font-spartanMedium text-xs text-singleGrey">
+            <div className="xs:mb-[15px] xs:w-full min-[525px]:mb-0 min-[525px]:w-[40%]">
+                <label
+                    htmlFor={'item-name-' + itemIndex}
+                    className="min-[525px]:hidden"
+                >
+                    Item Name
+                </label>
                 <input
                     type="text"
+                    id={'item-name-' + itemIndex}
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
                         errors.items &&
@@ -73,7 +80,13 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     {...register(`items.${itemIndex}.name`)}
                 />
             </div>
-            <div className="w-[10%]">
+            <div className="xs:mb-[15px] xs:w-[16%] min-[525px]:mb-0 min-[525px]:w-[10%]">
+                <label
+                    htmlFor={'quantity-' + itemIndex}
+                    className="min-[525px]:hidden"
+                >
+                    Qty.
+                </label>
                 <input
                     type="number"
                     id={`quantity-${itemIndex}`}
@@ -89,7 +102,13 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     onChange={onChangeHandler}
                 />
             </div>
-            <div className="w-[15%]">
+            <div className="xs:mb-[15px] xs:w-[26%] min-[525px]:mb-0 min-[525px]:w-[15%]">
+                <label
+                    htmlFor={'price-' + itemIndex}
+                    className="min-[525px]:hidden"
+                >
+                    Price
+                </label>
                 <input
                     type="number"
                     step="0.01"
@@ -106,15 +125,16 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     onChange={onChangeHandler}
                 />
             </div>
-            <div className="flex w-[15%] items-center">
+            <div className="xs:mb-[15px] xs:w-[26%] min-[525px]:mb-0 min-[525px]:flex min-[525px]:w-[15%] min-[525px]:items-center">
+                <label className="min-[525px]:hidden">Total</label>
                 <input
-                    className="w-full bg-transparent focus:outline-none focus:ring-0"
+                    className="w-full bg-transparent focus:outline-none focus:ring-0 xs:mt-[16px] min-[525px]:mt-0"
                     readOnly
                     value={total}
                     {...register(`items.${itemIndex}.total`)}
                 />
             </div>
-            <div className="flex w-[10%] items-center">
+            <div className="xs:mb-[15px] xs:mt-[22px] xs:w-[16%] min-[525px]:mb-0 min-[525px]:mt-0 min-[525px]:flex min-[525px]:w-[10%] min-[525px]:items-center">
                 <button onClick={onClickTrash} className="bg-transparent">
                     <img src={trashIcon} alt="Trash icon" />
                 </button>
