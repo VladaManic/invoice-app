@@ -20,7 +20,7 @@ const Intro = () => {
     }
 
     return (
-        <div className="mb-14 flex items-center justify-between md:w-[672px] lg:w-[730px]">
+        <div className="mb-14 flex items-center justify-between sm:w-[322px] md:w-[672px] lg:w-[730px]">
             <div className="xs:mr-[15px] xs:text-left sm:mr-[70px]">
                 <h1 className="mb-3 text-defaultBlack">Invoices</h1>
                 {invoiceRedux.invoices.length > 0 ? (
