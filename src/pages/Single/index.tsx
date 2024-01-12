@@ -14,7 +14,6 @@ import Content from '../../components/Single/Content'
 const Single = () => {
     //Get URL
     const { pathname } = useLocation()
-    const [openEditModal, setOpenEditModal] = useState<boolean>(false)
     const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
@@ -23,11 +22,6 @@ const Single = () => {
         dispatch(fetchSingleInvoice(pathname.replace('/invoice/', '')))
     }, [])
 
-    //Opening edit form
-    const onClickEdit = () => {
-        setOpenEditModal(true)
-    }
-
     //Opening delete confirmation modal
     const onClickDelete = () => {
         setOpenDeleteModal(true)
@@ -35,7 +29,6 @@ const Single = () => {
 
     //On click modal overlay, closes modal
     const onCloseHandler = () => {
-        setOpenEditModal(false)
         setOpenDeleteModal(false)
     }
 
@@ -55,16 +48,13 @@ const Single = () => {
                     <Nav />
                     <Header
                         invoice={invoiceRedux.singleInvoice}
-                        openEditModal={openEditModal}
                         openDeleteModal={openDeleteModal}
-                        onClickEdit={onClickEdit}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}
                         onClose={onCloseHandler}
                     />
                     <Content
                         invoice={invoiceRedux.singleInvoice}
-                        onClickEdit={onClickEdit}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}
                     />

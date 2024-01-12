@@ -1,23 +1,26 @@
-import { InvoiceObj } from '../../../types/interfaces'
+import { useAppDispatch } from '../../../state/hooks'
+import { setOpenModal } from '../../../state/invoice/invoiceSlice'
 
+import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
     invoice: InvoiceObj
-    onClickEdit: React.MouseEventHandler<HTMLButtonElement>
     onClickDelete: React.MouseEventHandler<HTMLButtonElement>
     onClickPaid: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const ChangeButtons = ({
-    invoice,
-    onClickEdit,
-    onClickDelete,
-    onClickPaid,
-}: Props) => {
+const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
+    const dispatch = useAppDispatch()
+
+    //On click New Invoice btn, open form modal
+    const onClickHandler = () => {
+        dispatch(setOpenModal(true))
+    }
+
     return (
         <div className="flex min-[335px]:justify-between">
             <button
                 className="rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs xs:mr-1 sm:mr-3"
-                onClick={onClickEdit}
+                onClick={onClickHandler}
             >
                 Edit
             </button>
