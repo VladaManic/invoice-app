@@ -16,8 +16,7 @@ import SenderFields from '../FormSections/SenderFields'
 import ClientFields from '../FormSections/ClientFields'
 import DateTerms from '../FormSections/DateTerms'
 import ItemList from '../FormSections/ItemList'
-import BtnDraft from '../FormSections/BtnDraft'
-import BtnCancel from '../FormSections/BtnCancel'
+import SubmitBtns from '../FormSections/SubmitBtns'
 
 import { FormDataObj, InvoiceObj, ItemObj } from '../../../types/interfaces'
 interface Props {
@@ -30,17 +29,15 @@ const FormModal = ({ invoice, onClose }: Props) => {
     const { pathname } = useLocation()
     const dispatch = useAppDispatch()
 
-    let singleInvoice, formTitle, submitText
+    let singleInvoice, formTitle
     //Update form features
     if (pathname.includes('/invoice/')) {
         singleInvoice = invoice
         formTitle = <FormTitle invoice={invoice} />
-        submitText = 'Save changes'
         //Insert form features
     } else {
         singleInvoice = undefined
         formTitle = 'New invoice'
-        submitText = 'Save & Send'
     }
 
     // Define the schema for the static properties
@@ -88,6 +85,12 @@ const FormModal = ({ invoice, onClose }: Props) => {
     // Object.keys(schema.shape).forEach((key) => {
     //     console.log(key)
     // })
+
+    //Different submit btns clicked in insert form (draft or pending)
+    const onClickHandler = (e: React.FormEvent<HTMLButtonElement>) => {
+        const type = e.currentTarget.name
+        setSubmitType(type)
+    }
 
     const submitData = (data: FormDataObj) => {
         const newObj: InvoiceObj = {
@@ -189,32 +192,11 @@ const FormModal = ({ invoice, onClose }: Props) => {
                         />
                     </div>
                 </div>
-                <div className="fixed bottom-0 left-0 z-[100] flex h-[110px] items-center bg-defaultBlack bg-defaultWhite xs:w-full xs:pl-[5px] xs:pr-[5px] min-[352px]:justify-between sm:pl-[15px] sm:pr-[15px] min-[630px]:w-[630px] min-[630px]:rounded-r-2xl md:pl-[50px] md:pr-[42px] lg:left-[87px]">
-                    {pathname.includes('/invoice/') ? (
-                        <div></div>
-                    ) : (
-                        <button
-                            className="rounded-[50px] pb-[15px] pt-[15px] font-spartanBold text-xs min-[480px]:pl-[22px] min-[480px]:pr-[22px]"
-                            onClick={onClose}
-                        >
-                            Discard
-                        </button>
-                    )}
-                    <div>
-                        {pathname.includes('/invoice/') ? (
-                            <BtnCancel onClose={onClose} />
-                        ) : (
-                            <BtnDraft onClick={() => setSubmitType('draft')} />
-                        )}
-                        <button
-                            type="submit"
-                            className="rounded-[50px] bg-packmanUp pb-[15px] pt-[15px] font-spartanBold text-xs text-defaultWhite min-[480px]:pl-[22px] min-[480px]:pr-[22px]"
-                            onClick={() => setSubmitType('pending')}
-                        >
-                            {submitText}
-                        </button>
-                    </div>
-                </div>
+                <SubmitBtns
+                    pathname={pathname}
+                    onClose={onClose}
+                    onClick={onClickHandler}
+                />
             </div>
         </form>
     )
