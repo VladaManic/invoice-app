@@ -24,7 +24,7 @@ const Filter = () => {
     }
 
     return (
-        <div className="xs:mr-[2px] relative flex items-center font-spartanBold text-defaultBlack md:mr-3">
+        <div className="relative flex items-center font-spartanBold text-defaultBlack xs:mr-[2px] md:mr-3">
             <div className="flex items-center">
                 <p className="text-xs max-md:hidden md:block">
                     Filter by status
@@ -49,7 +49,7 @@ const Filter = () => {
                                 value="draft"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    invoiceRedux.status === 'draft' &&
+                                    invoiceRedux.filterStatus === 'draft' &&
                                         'checked-field'
                                 )}
                                 onClick={onClickHandler}
@@ -67,7 +67,7 @@ const Filter = () => {
                                 value="pending"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    invoiceRedux.status === 'pending' &&
+                                    invoiceRedux.filterStatus === 'pending' &&
                                         'checked-field'
                                 )}
                                 onClick={onClickHandler}
@@ -85,7 +85,7 @@ const Filter = () => {
                                 value="paid"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    invoiceRedux.status === 'paid' &&
+                                    invoiceRedux.filterStatus === 'paid' &&
                                         'checked-field'
                                 )}
                                 onClick={onClickHandler}
