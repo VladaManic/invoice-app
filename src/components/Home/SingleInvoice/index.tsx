@@ -28,8 +28,8 @@ const SingleInvoice = ({ invoice }: Props) => {
                         </span>
                     </p>
                     <p className="w-40 text-xs xs:text-right md:text-left">
-                        <span className="text-defaultText">Due&nbsp;</span>
-                        <span className="text-defaultText">
+                        <span className="text-singleGrey">Due&nbsp;</span>
+                        <span className="text-singleGrey">
                             {format(date, 'dd MMM y')}
                         </span>
                     </p>
