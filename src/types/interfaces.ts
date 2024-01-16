@@ -47,6 +47,7 @@ export type InitialStateObj = {
     loadingDelete: boolean
     errorDelete: string | undefined
     successDelete: boolean
+    colorTheme: string
 }
 
 export type ToastifyPropsObj = {

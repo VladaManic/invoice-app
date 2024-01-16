@@ -31,6 +31,7 @@ export default {
         pendingBg: 'rgba(255, 143, 0, 0.1)',
         draftGrey: '#373B53',
         draftBg: 'rgba(55, 59, 83, 0.1)',
+        draftDark: 'rgba(223, 227, 250, 0.1)',
         checkboxViolet: '#DFE3FA',
         deleteRed: '#EC5757',
         singleGrey: '#7E88C3',
@@ -39,6 +40,9 @@ export default {
         draftText: '#888EB0',
         errorRed: 'red',
         gradientGrey: 'rgba(218, 218, 218, 1)',
+        themeDark: '#141625',
+        asideDark: '#1E2139',
+
       }
     },
   },

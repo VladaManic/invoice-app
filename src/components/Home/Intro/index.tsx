@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { setOpenModal } from '../../../state/invoice/invoiceSlice'
+import clsx from 'clsx'
 
 import Modal from '../../Reusable/Modal'
 import FormModal from '../../Modal/FormModal'
@@ -22,7 +23,16 @@ const Intro = () => {
     return (
         <div className="mb-14 flex items-center justify-between sm:w-[322px] md:w-[672px] lg:w-[730px]">
             <div className="xs:mr-[15px] xs:text-left sm:mr-[70px]">
-                <h1 className="mb-3 text-defaultBlack">Invoices</h1>
+                <h1
+                    className={clsx(
+                        'mb-3',
+                        invoiceRedux.colorTheme === 'light'
+                            ? 'text-defaultBlack'
+                            : 'text-defaultWhite'
+                    )}
+                >
+                    Invoices
+                </h1>
                 {invoiceRedux.invoices.length > 0 ? (
                     <>
                         <p className="text-xs max-md:hidden md:block">
@@ -41,7 +51,12 @@ const Intro = () => {
                 <Filter />
                 <div className="flex h-12 items-center rounded-[50px] bg-packmanUp p-2 pr-[16px]">
                     <button
-                        className="mr-4 flex h-[32px] w-[32px] rounded-[50px] p-0 text-packmanUp focus:outline-none focus:ring-0"
+                        className={clsx(
+                            'mr-4 flex h-[32px] w-[32px] rounded-[50px] p-0 text-packmanUp focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? 'bg-lightBg'
+                                : 'bg-defaultWhite'
+                        )}
                         onClick={onClickHandler}
                     >
                         <span className="m-auto font-spartanBold text-xl leading-[37px]">

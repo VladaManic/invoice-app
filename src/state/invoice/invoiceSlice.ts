@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import getDefaultTheme from '../../utils/getDeafultTheme'
+import isStorageSupported from '../../utils/isStorageSupported'
 
 import { InitialStateObj, InvoiceObj } from '../../types/interfaces'
 
@@ -14,6 +16,7 @@ const initialState: InitialStateObj = {
     loadingDelete: false,
     errorDelete: '',
     successDelete: false,
+    colorTheme: getDefaultTheme(),
 }
 
 //Generates pendind, fullfiled and rejcted action types for fetching all invoices
@@ -123,6 +126,18 @@ const invoiceSlice = createSlice({
         resetSuccess: (state) => {
             state.successDelete = false
         },
+        setColorTheme: (state) => {
+            let newValue
+            if (state.colorTheme === 'dark') {
+                newValue = 'light'
+            } else {
+                newValue = 'dark'
+            }
+            state.colorTheme = newValue
+            //Adding value to local storage
+            isStorageSupported('localStorage') &&
+                localStorage.setItem('default-theme', JSON.stringify(newValue))
+        },
     },
     //Async reducers
     extraReducers: (builder) => {
@@ -231,6 +246,7 @@ export const {
     removeItem,
     resetError,
     resetSuccess,
+    setColorTheme,
 } = invoiceSlice.actions
 
 export default invoiceSlice.reducer
