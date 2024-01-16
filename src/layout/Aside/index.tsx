@@ -50,7 +50,7 @@ const Aside = () => {
                         <img src={sunIcon} alt="Sun icon" />
                     )}
                 </button>
-                <div className="flex border border-solid border-[#494E6E] xs:w-[100px] md:h-20 lg:w-full">
+                <div className="flex border-t-[1px] border-solid border-[#494E6E] xs:w-[100px] md:h-20 lg:w-full">
                     <img src={personImg} alt="Person img" className="m-auto" />
                 </div>
             </div>
