@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { useAppSelector } from '../../../../../state/hooks'
 import clsx from 'clsx'
 
 import arrowIcon from '../../../../../assets/img/arrow.svg'
@@ -38,6 +39,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
         defaultPaymentText
     )
     const [selectOpened, setSelectOpened] = useState<boolean>(false)
+    const invoiceRedux = useAppSelector((state) => state.invoice)
 
     //Opening/closing dropdown
     const dropdownHandler = (
@@ -62,12 +64,24 @@ const PaymentTerms = ({ register, invoice }: Props) => {
 
     return (
         <div className="relative xs:w-full min-[525px]:w-[48%]">
-            <label className="font-spartanMedium text-xs text-singleGrey">
+            <label
+                className={clsx(
+                    'font-spartanMedium text-xs',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'text-singleGrey'
+                        : 'text-checkboxViolet'
+                )}
+            >
                 Payment Terms
             </label>
             <button
                 value={selectValue}
-                className="flex w-full items-center justify-between rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent p-[15px] text-right font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0"
+                className={clsx(
+                    'flex w-full items-center justify-between rounded-[5px] border-[1px] border-solid p-[15px] text-right font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'border-checkboxViolet bg-transparent text-defaultBlack'
+                        : 'border-editDark bg-editDark text-defaultWhite'
+                )}
                 onClick={dropdownHandler}
                 {...register('paymentTerms')}
             >
