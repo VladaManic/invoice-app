@@ -28,7 +28,7 @@ const ItemList = ({ register, errors, invoice }: Props) => {
 
     return (
         <div className="pb-[30px]">
-            <h3 className="text-titleDark mb-[12px] font-spartanBold text-[18px] leading-[32px]">
+            <h3 className="mb-[12px] font-spartanBold text-[18px] leading-[32px] text-titleDark">
                 Item List
             </h3>
             <div>
@@ -69,7 +69,12 @@ const ItemList = ({ register, errors, invoice }: Props) => {
                       ))}
             </div>
             <button
-                className="mb-[20px] w-full rounded-[20px] pb-[12px] pt-[12px] font-spartanBold text-xs text-singleGrey hover:border-checkboxViolet hover:bg-checkboxViolet"
+                className={clsx(
+                    'mb-[20px] w-full rounded-[20px] pb-[12px] pt-[12px] font-spartanBold text-xs',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'text-singleGrey hover:border-checkboxViolet hover:bg-checkboxViolet'
+                        : 'bg-editDark text-defaultWhite focus:outline-none focus:ring-0'
+                )}
                 onClick={onClickHandler}
             >
                 + Add New Item

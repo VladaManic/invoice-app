@@ -115,8 +115,13 @@ button:focus-visible {
 }
 
 /* Handle */
-#form-inner::-webkit-scrollbar-thumb {
-    background: #dfe3fa;
+.inner-light::-webkit-scrollbar-thumb {
+    background-color: #dfe3fa;
+    border-radius: 10px;
+}
+
+.inner-dark::-webkit-scrollbar-thumb {
+    background-color: #252945;
     border-radius: 10px;
 }
 

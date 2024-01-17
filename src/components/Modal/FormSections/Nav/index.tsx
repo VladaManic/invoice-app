@@ -1,9 +1,11 @@
-import { useAppDispatch } from '../../../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
 import { setOpenModal } from '../../../../state/invoice/invoiceSlice'
+import clsx from 'clsx'
 
 import arrowLeft from '../../../../assets/img/arrow-left.svg'
 
 const Nav = () => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
     const onClickHandler = () => {
@@ -16,7 +18,16 @@ const Nav = () => {
             onClick={onClickHandler}
         >
             <img src={arrowLeft} alt="Arrow left" className="mr-[30px]" />
-            <div className="text-defaultBlack">Go back</div>
+            <div
+                className={clsx(
+                    'text-defaultBlack',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'text-defaultBlack'
+                        : 'text-defaultWhite'
+                )}
+            >
+                Go back
+            </div>
         </div>
     )
 }

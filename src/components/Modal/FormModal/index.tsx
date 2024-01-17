@@ -172,7 +172,15 @@ const FormModal = ({ invoice, onClose }: Props) => {
                         : 'bg-themeDark'
                 )}
             >
-                <div className="h-full overflow-y-scroll" id="form-inner">
+                <div
+                    className={clsx(
+                        'h-full overflow-y-scroll',
+                        invoiceRedux.colorTheme === 'light'
+                            ? 'inner-light'
+                            : 'inner-dark'
+                    )}
+                    id="form-inner"
+                >
                     <div className="mr-[10px] h-full">
                         <Nav />
                         <h2
