@@ -1,4 +1,5 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
 import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const SenderFields = ({ register, errors, invoice }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     let defaultStreet, defaultCity, defaultPostcode, defaultCountry
     if (invoice !== undefined) {
         defaultStreet = invoice.senderAddress.street
@@ -28,12 +30,18 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                 Bill From
             </h3>
             <div className="mb-[12px]">
-                <div className="flex justify-between text-singleGrey">
+                <div className="flex justify-between">
                     <label
                         htmlFor="street-address"
                         className={clsx(
                             'font-spartanMedium text-xs',
-                            errors.senderAddress && 'text-errorRed'
+                            invoiceRedux.colorTheme === 'light'
+                                ? errors.senderAddress
+                                    ? 'text-errorRed'
+                                    : 'text-singleGrey'
+                                : errors.senderAddress
+                                  ? 'text-errorRed'
+                                  : 'text-checkboxViolet'
                         )}
                     >
                         Street Address
@@ -48,8 +56,14 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                     type="text"
                     id="street-address"
                     className={clsx(
-                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
-                        errors.senderAddress && 'border-errorRed'
+                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
+                        invoiceRedux.colorTheme === 'light'
+                            ? errors.senderAddress
+                                ? 'border-errorRed bg-defaultWhite text-defaultBlack'
+                                : 'border-checkboxViolet bg-defaultWhite text-defaultBlack'
+                            : errors.senderAddress
+                              ? 'bg-editDark border-errorRed text-defaultWhite'
+                              : 'bg-editDark border-editDark text-defaultWhite'
                     )}
                     defaultValue={defaultStreet}
                     {...register('senderAddress')}
@@ -58,12 +72,18 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
 
             <div className="mb-[35px] flex flex-wrap justify-between">
                 <div className="xs:w-[46%] min-[525px]:w-[30%]">
-                    <div className="flex justify-between text-singleGrey">
+                    <div className="flex justify-between">
                         <label
                             htmlFor="city"
                             className={clsx(
                                 'font-spartanMedium text-xs',
-                                errors.senderCity && 'text-errorRed'
+                                invoiceRedux.colorTheme === 'light'
+                                    ? errors.senderCity
+                                        ? 'text-errorRed'
+                                        : 'text-singleGrey'
+                                    : errors.senderCity
+                                      ? 'text-errorRed'
+                                      : 'text-checkboxViolet'
                             )}
                         >
                             City
@@ -78,8 +98,14 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                         type="text"
                         id="city"
                         className={clsx(
-                            'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
-                            errors.senderCity && 'border-errorRed'
+                            'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? errors.senderCity
+                                    ? 'border-errorRed bg-defaultWhite text-defaultBlack'
+                                    : 'border-checkboxViolet bg-defaultWhite text-defaultBlack'
+                                : errors.senderCity
+                                  ? 'bg-editDark border-errorRed text-defaultWhite'
+                                  : 'bg-editDark border-editDark text-defaultWhite'
                         )}
                         defaultValue={defaultCity}
                         {...register('senderCity')}
@@ -87,12 +113,18 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                 </div>
 
                 <div className="max-[525px]:mb-[12px] xs:w-[46%] min-[525px]:w-[30%]">
-                    <div className="flex justify-between text-singleGrey">
+                    <div className="flex justify-between">
                         <label
                             htmlFor="post-code"
                             className={clsx(
                                 'font-spartanMedium text-xs',
-                                errors.senderPostcode && 'text-errorRed'
+                                invoiceRedux.colorTheme === 'light'
+                                    ? errors.senderPostcode
+                                        ? 'text-errorRed'
+                                        : 'text-singleGrey'
+                                    : errors.senderPostcode
+                                      ? 'text-errorRed'
+                                      : 'text-checkboxViolet'
                             )}
                         >
                             Post Code
@@ -107,8 +139,14 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                         type="text"
                         id="post-code"
                         className={clsx(
-                            'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
-                            errors.senderPostcode && 'border-errorRed'
+                            'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? errors.senderPostcode
+                                    ? 'border-errorRed bg-defaultWhite text-defaultBlack'
+                                    : 'border-checkboxViolet bg-defaultWhite text-defaultBlack'
+                                : errors.senderPostcode
+                                  ? 'bg-editDark border-errorRed text-defaultWhite'
+                                  : 'bg-editDark border-editDark text-defaultWhite'
                         )}
                         defaultValue={defaultPostcode}
                         {...register('senderPostcode')}
@@ -116,12 +154,18 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                 </div>
 
                 <div className="xs:w-[100%] min-[525px]:w-[30%]">
-                    <div className="flex justify-between text-singleGrey">
+                    <div className="flex justify-between">
                         <label
                             htmlFor="country"
                             className={clsx(
                                 'font-spartanMedium text-xs',
-                                errors.senderCountry && 'text-errorRed'
+                                invoiceRedux.colorTheme === 'light'
+                                    ? errors.senderCountry
+                                        ? 'text-errorRed'
+                                        : 'text-singleGrey'
+                                    : errors.senderCountry
+                                      ? 'text-errorRed'
+                                      : 'text-checkboxViolet'
                             )}
                         >
                             Country
@@ -136,8 +180,14 @@ const SenderFields = ({ register, errors, invoice }: Props) => {
                         type="text"
                         id="country"
                         className={clsx(
-                            'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
-                            errors.senderCountry && 'border-errorRed'
+                            'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? errors.senderCountry
+                                    ? 'border-errorRed bg-defaultWhite text-defaultBlack'
+                                    : 'border-checkboxViolet bg-defaultWhite text-defaultBlack'
+                                : errors.senderCountry
+                                  ? 'bg-editDark border-errorRed text-defaultWhite'
+                                  : 'bg-editDark border-editDark text-defaultWhite'
                         )}
                         defaultValue={defaultCountry}
                         {...register('senderCountry')}

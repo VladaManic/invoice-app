@@ -14,7 +14,7 @@ const SubsectionItemName = ({ invoice }: Props) => {
             className={clsx(
                 'xs:p-[10px] sm:p-4 md:pb-6',
                 invoiceRedux.colorTheme === 'light'
-                    ? 'bg-tableGrey '
+                    ? 'bg-tableGrey'
                     : 'bg-editDark'
             )}
         >
