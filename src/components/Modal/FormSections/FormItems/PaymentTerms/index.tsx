@@ -93,11 +93,23 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                 />
             </button>
             {selectOpened && (
-                <div className="absolute top-[80px] w-full rounded-[10px] bg-defaultWhite font-spartanBold text-xs text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]">
+                <div
+                    className={clsx(
+                        'absolute top-[80px] w-full overflow-hidden rounded-[10px] font-spartanBold text-xs',
+                        invoiceRedux.colorTheme === 'light'
+                            ? 'text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]'
+                            : 'text-defaultWhite'
+                    )}
+                >
                     <button
                         value="1"
                         name="Net 1 Day"
-                        className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
+                        className={clsx(
+                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp  focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                        )}
                         onClick={onClickDropdown}
                     >
                         Net 1 Day
@@ -105,7 +117,12 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                     <button
                         value="7"
                         name="Net 7 Days"
-                        className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
+                        className={clsx(
+                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                        )}
                         onClick={onClickDropdown}
                     >
                         Net 7 Days
@@ -113,7 +130,12 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                     <button
                         value="14"
                         name="Net 14 Days"
-                        className="border-b-solid w-full rounded-none border-b-[1px] border-b-checkboxViolet pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:border-b-checkboxViolet hover:text-packmanUp"
+                        className={clsx(
+                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                        )}
                         onClick={onClickDropdown}
                     >
                         Net 14 Days
@@ -121,7 +143,12 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                     <button
                         value="30"
                         name="Net 30 Days"
-                        className="w-full rounded-none pb-[15px] pt-[15px] text-left hover:border-defaultWhite hover:text-packmanUp"
+                        className={clsx(
+                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
+                            invoiceRedux.colorTheme === 'light'
+                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                        )}
                         onClick={onClickDropdown}
                     >
                         Net 30 Days
