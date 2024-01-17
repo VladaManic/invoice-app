@@ -2,7 +2,6 @@ import SingleInvoice from '../SingleInvoice'
 import EmptyInvoices from '../EmptyInvoices'
 
 import { InvoiceObj, InitialStateObj } from '../../../types/interfaces'
-
 interface Props {
     invoice: InitialStateObj
 }

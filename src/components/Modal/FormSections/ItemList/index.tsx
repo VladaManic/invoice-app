@@ -5,7 +5,6 @@ import { addItem } from '../../../../state/invoice/invoiceSlice'
 import Item from '../FormItems/Item'
 
 import { FormDataObj, InvoiceObj, ItemObj } from '../../../../types/interfaces'
-
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>

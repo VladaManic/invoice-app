@@ -5,7 +5,6 @@ import PaymentTerms from '../FormItems/PaymentTerms'
 import ProjectDescription from '../FormItems/ProjectDescription'
 
 import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
-
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>

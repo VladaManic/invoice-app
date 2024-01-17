@@ -8,7 +8,6 @@ import StatusBtn from '../../Reusable/StatusBtn'
 import arrowRight from '../../../assets/img/arrow-right.svg'
 
 import { InvoiceObj } from '../../../types/interfaces'
-
 interface Props {
     invoice: InvoiceObj
 }

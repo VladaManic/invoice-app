@@ -9,7 +9,6 @@ import DeleteConfirmationModal from '../../Modal/DeleteConfirmationModal'
 import FormModal from '../../Modal/FormModal'
 
 import { InvoiceObj } from '../../../types/interfaces'
-
 interface Props {
     invoice: InvoiceObj
     openDeleteModal: boolean

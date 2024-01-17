@@ -8,7 +8,6 @@ import SubsectionAmountDue from '../SubsectionAmountDue'
 import ChangeButtons from '../ChangeButtons'
 
 import { InvoiceObj } from '../../../types/interfaces'
-
 interface Props {
     invoice: InvoiceObj
     onClickDelete: React.MouseEventHandler<HTMLButtonElement>

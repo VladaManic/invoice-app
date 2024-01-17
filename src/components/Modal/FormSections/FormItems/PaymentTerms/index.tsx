@@ -5,7 +5,6 @@ import clsx from 'clsx'
 import arrowIcon from '../../../../../assets/img/arrow.svg'
 
 import { FormDataObj, InvoiceObj } from '../../../../../types/interfaces'
-
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>

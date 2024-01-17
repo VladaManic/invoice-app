@@ -2,7 +2,6 @@ import { useAppSelector } from '../../../state/hooks'
 import clsx from 'clsx'
 
 import { InvoiceObj, ItemObj } from '../../../types/interfaces'
-
 interface Props {
     invoice: InvoiceObj
 }

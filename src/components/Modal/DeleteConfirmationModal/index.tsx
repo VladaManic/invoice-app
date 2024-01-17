@@ -12,7 +12,6 @@ import { TOASTIFY_PARAMS } from '../../../constants/toastifyConstant'
 import LoaderSmall from '../../../components/Reusable/LoaderSmall'
 
 import { InvoiceObj } from '../../../types/interfaces'
-
 interface Props {
     invoice: InvoiceObj
     onClose: React.MouseEventHandler<HTMLButtonElement>

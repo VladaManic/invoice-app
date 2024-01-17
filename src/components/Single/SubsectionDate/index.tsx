@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import { format } from 'date-fns'
 
 import { InvoiceObj } from '../../../types/interfaces'
-
 interface Props {
     invoice: InvoiceObj
 }
