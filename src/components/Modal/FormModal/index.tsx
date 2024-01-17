@@ -3,12 +3,13 @@ import { useLocation } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useAppDispatch } from '../../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import {
     createInvoice,
     updateInvoice,
 } from '../../../state/invoice/invoiceSlice'
 import { format } from 'date-fns'
+import clsx from 'clsx'
 import stringGenerator from '../../../utils/stringGenerator'
 
 import Nav from '../FormSections/Nav'
@@ -28,6 +29,7 @@ interface Props {
 const FormModal = ({ invoice, onClose }: Props) => {
     const [submitType, setSubmitType] = useState('pending')
     const { pathname } = useLocation()
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
     let singleInvoice, formTitle
@@ -163,13 +165,24 @@ const FormModal = ({ invoice, onClose }: Props) => {
     return (
         <form onSubmit={handleSubmit(submitData)}>
             <div
-                className="fixed left-0 z-[100] h-screen bg-defaultWhite pt-[40px] xs:top-[72px] xs:pb-[190px] xs:pl-[30px] xs:pr-[6px] min-[525px]:pl-[50px] min-[525px]:pr-[24px] min-[630px]:w-[630px] min-[630px]:rounded-r-2xl md:top-[80px] lg:left-[87px] lg:top-0 lg:pb-[110px]"
-                id="form-wrapper"
+                className={clsx(
+                    'fixed left-0 z-[100] h-screen pt-[40px] xs:top-[72px] xs:pb-[190px] xs:pl-[30px] xs:pr-[6px] min-[525px]:pl-[50px] min-[525px]:pr-[24px] min-[630px]:w-[630px] min-[630px]:rounded-r-2xl md:top-[80px] lg:left-[87px] lg:top-0 lg:pb-[110px]',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'modalLight'
+                        : 'bg-themeDark'
+                )}
             >
                 <div className="h-full overflow-y-scroll" id="form-inner">
                     <div className="mr-[10px] h-full">
                         <Nav />
-                        <h2 className="mb-[30px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack">
+                        <h2
+                            className={clsx(
+                                'mb-[30px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack',
+                                invoiceRedux.colorTheme === 'light'
+                                    ? 'text-defaultBlack'
+                                    : 'text-defaultWhite'
+                            )}
+                        >
                             {formTitle}
                         </h2>
                         <SenderFields

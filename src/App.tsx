@@ -12,9 +12,9 @@ function App() {
     const invoiceRedux = useAppSelector((state) => state.invoice)
 
     useLayoutEffect(() => {
-        invoiceRedux.colorTheme === 'dark'
-            ? setBodyColor('#141625')
-            : setBodyColor('#f8f8f8')
+        invoiceRedux.colorTheme === 'light'
+            ? setBodyColor('#f8f8f8')
+            : setBodyColor('#141625')
     }, [invoiceRedux.colorTheme])
 
     return (

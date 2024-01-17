@@ -120,7 +120,7 @@ button:focus-visible {
     border-radius: 10px;
 }
 
-#form-wrapper {
+.modalLight {
     background: linear-gradient(
         180deg,
         rgba(255, 255, 255, 1) 0%,
