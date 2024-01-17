@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppDispatch } from '../../../../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../../state/hooks'
 import { removeItem } from '../../../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
@@ -15,7 +15,6 @@ interface Props {
 }
 
 const Item = ({ itemIndex, register, errors, invoice }: Props) => {
-    const dispatch = useAppDispatch()
     let defaultName, defaultQuantity, defaultPrice, defaultTotal
     if (invoice !== undefined) {
         defaultName = invoice.items[itemIndex].name
@@ -31,6 +30,8 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
     const [total, setTotal] = useState<string | number | readonly string[]>(
         defaultTotal
     )
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const dispatch = useAppDispatch()
 
     //Calculating total from price and quantity
     const onChangeHandler = () => {
@@ -70,11 +71,18 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     type="text"
                     id={'item-name-' + itemIndex}
                     className={clsx(
-                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
-                        errors.items &&
-                            errors.items[itemIndex] &&
-                            errors.items[itemIndex]!.name &&
-                            'border-errorRed'
+                        'ml-[1px] h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs active:border-packmanUp',
+                        invoiceRedux.colorTheme === 'light'
+                            ? errors.items &&
+                              errors.items[itemIndex] &&
+                              errors.items[itemIndex]!.name
+                                ? 'border-errorRed bg-transparent text-defaultBlack'
+                                : 'border-checkboxViolet bg-transparent text-defaultBlack'
+                            : errors.items &&
+                                errors.items[itemIndex] &&
+                                errors.items[itemIndex]!.name
+                              ? 'bg-editDark border-errorRed text-defaultWhite'
+                              : 'bg-editDark border-editDark text-defaultWhite'
                     )}
                     defaultValue={defaultName}
                     {...register(`items.${itemIndex}.name`)}
@@ -91,11 +99,18 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     type="number"
                     id={`quantity-${itemIndex}`}
                     className={clsx(
-                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
-                        errors.items &&
-                            errors.items[itemIndex] &&
-                            errors.items[itemIndex]!.quantity &&
-                            'border-errorRed'
+                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                        invoiceRedux.colorTheme === 'light'
+                            ? errors.items &&
+                              errors.items[itemIndex] &&
+                              errors.items[itemIndex]!.quantity
+                                ? 'border-errorRed bg-transparent text-defaultBlack'
+                                : 'border-checkboxViolet bg-transparent text-defaultBlack'
+                            : errors.items &&
+                                errors.items[itemIndex] &&
+                                errors.items[itemIndex]!.quantity
+                              ? 'bg-editDark border-errorRed text-defaultWhite'
+                              : 'bg-editDark border-editDark text-defaultWhite'
                     )}
                     defaultValue={defaultQuantity}
                     {...register(`items.${itemIndex}.quantity`)}
@@ -114,11 +129,18 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     step="0.01"
                     id={`price-${itemIndex}`}
                     className={clsx(
-                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack',
-                        errors.items &&
-                            errors.items[itemIndex] &&
-                            errors.items[itemIndex]!.price &&
-                            'border-errorRed'
+                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                        invoiceRedux.colorTheme === 'light'
+                            ? errors.items &&
+                              errors.items[itemIndex] &&
+                              errors.items[itemIndex]!.price
+                                ? 'border-errorRed bg-transparent text-defaultBlack'
+                                : 'border-checkboxViolet bg-transparent text-defaultBlack'
+                            : errors.items &&
+                                errors.items[itemIndex] &&
+                                errors.items[itemIndex]!.price
+                              ? 'bg-editDark border-errorRed text-defaultWhite'
+                              : 'bg-editDark border-editDark text-defaultWhite'
                     )}
                     defaultValue={defaultPrice}
                     {...register(`items.${itemIndex}.price`)}
@@ -128,7 +150,12 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
             <div className="xs:mb-[15px] xs:w-[26%] min-[525px]:mb-0 min-[525px]:flex min-[525px]:w-[15%] min-[525px]:items-center">
                 <label className="min-[525px]:hidden">Total</label>
                 <input
-                    className="w-full bg-transparent focus:outline-none focus:ring-0 xs:mt-[16px] min-[525px]:mt-0"
+                    className={clsx(
+                        'w-full bg-transparent font-spartanBold focus:outline-none focus:ring-0 xs:mt-[16px] min-[525px]:mt-0',
+                        invoiceRedux.colorTheme === 'light'
+                            ? 'text-draftText'
+                            : 'text-defaultWhite'
+                    )}
                     readOnly
                     value={total}
                     {...register(`items.${itemIndex}.total`)}

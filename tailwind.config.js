@@ -43,6 +43,7 @@ export default {
         themeDark: '#141625',
         asideDark: '#1E2139',
         editDark: '#252945',
+        titleDark: '#777F98',
       }
     },
   },

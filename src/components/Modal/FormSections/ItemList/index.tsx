@@ -1,6 +1,7 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
 import { addItem } from '../../../../state/invoice/invoiceSlice'
+import clsx from 'clsx'
 
 import Item from '../FormItems/Item'
 
@@ -27,11 +28,18 @@ const ItemList = ({ register, errors, invoice }: Props) => {
 
     return (
         <div className="pb-[30px]">
-            <h3 className="mb-[12px] font-spartanBold text-[18px] leading-[32px]">
+            <h3 className="text-titleDark mb-[12px] font-spartanBold text-[18px] leading-[32px]">
                 Item List
             </h3>
             <div>
-                <div className="mb-[8px] justify-between font-spartanMedium text-xs text-singleGrey xs:hidden min-[525px]:flex">
+                <div
+                    className={clsx(
+                        'mb-[8px] justify-between font-spartanMedium text-xs xs:hidden min-[525px]:flex',
+                        invoiceRedux.colorTheme === 'light'
+                            ? 'text-singleGrey'
+                            : 'text-checkboxViolet'
+                    )}
+                >
                     <p className="w-[40%]">Item Name</p>
                     <p className="w-[10%]">Qty.</p>
                     <p className="w-[15%]">Price</p>
