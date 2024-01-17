@@ -1,5 +1,6 @@
-import { useAppDispatch } from '../../../state/hooks'
+import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { setOpenModal } from '../../../state/invoice/invoiceSlice'
+import clsx from 'clsx'
 
 import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
     //On click New Invoice btn, open form modal
@@ -17,9 +19,14 @@ const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
     }
 
     return (
-        <div className="flex min-[335px]:justify-between">
+        <div className="flex min-[335px]:justify-between md:justify-end">
             <button
-                className="rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs xs:mr-1 sm:mr-3"
+                className={clsx(
+                    'rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs xs:mr-1 sm:mr-3',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'bg-tableGrey'
+                        : 'bg-editDark'
+                )}
                 onClick={onClickHandler}
             >
                 Edit

@@ -1,3 +1,6 @@
+import { useAppSelector } from '../../../state/hooks'
+import clsx from 'clsx'
+
 import { InvoiceObj, ItemObj } from '../../../types/interfaces'
 
 interface Props {
@@ -5,11 +8,26 @@ interface Props {
 }
 
 const SubsectionItemName = ({ invoice }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+
     return (
-        <div className="bg-tableGrey xs:p-[10px] sm:p-4 md:pb-6">
+        <div
+            className={clsx(
+                'xs:p-[10px] sm:p-4 md:pb-6',
+                invoiceRedux.colorTheme === 'light'
+                    ? 'bg-tableGrey '
+                    : 'bg-editDark'
+            )}
+        >
             <div className="max-md:hidden md:block">
                 <table className="w-full border-separate border-spacing-[20px]">
-                    <thead>
+                    <thead
+                        className={clsx(
+                            invoiceRedux.colorTheme === 'light'
+                                ? 'text-defaultText'
+                                : 'text-checkboxViolet'
+                        )}
+                    >
                         <tr>
                             <th className="w-[50%] text-left text-[11px] leading-[18px]">
                                 Item Name
@@ -28,19 +46,47 @@ const SubsectionItemName = ({ invoice }: Props) => {
                     <tbody>
                         {invoice.items.map((singleItem: ItemObj) => (
                             <tr key={singleItem.name}>
-                                <td className="w-[50%] text-left font-spartanBold text-xs text-defaultBlack">
+                                <td
+                                    className={clsx(
+                                        'w-[50%] text-left font-spartanBold text-xs text-defaultBlack',
+                                        invoiceRedux.colorTheme === 'light'
+                                            ? 'text-defaultBlack'
+                                            : 'text-defaultWhite'
+                                    )}
+                                >
                                     {singleItem.name}
                                 </td>
-                                <td className="w-[10%] font-spartanBold text-xs">
+                                <td
+                                    className={clsx(
+                                        'w-[10%] font-spartanBold text-xs',
+                                        invoiceRedux.colorTheme === 'light'
+                                            ? 'text-singleGrey'
+                                            : 'text-checkboxViolet'
+                                    )}
+                                >
                                     {singleItem.quantity}
                                 </td>
-                                <td className="w-[20%] text-right font-spartanBold text-xs">
+                                <td
+                                    className={clsx(
+                                        'w-[20%] text-right font-spartanBold text-xs',
+                                        invoiceRedux.colorTheme === 'light'
+                                            ? 'text-singleGrey'
+                                            : 'text-checkboxViolet'
+                                    )}
+                                >
                                     <span>£</span>{' '}
                                     {parseFloat(
                                         singleItem.price.toString()
                                     ).toFixed(2)}
                                 </td>
-                                <td className="w-[20%] text-right font-spartanBold text-xs text-defaultBlack">
+                                <td
+                                    className={clsx(
+                                        'w-[20%] text-right font-spartanBold text-xs text-defaultBlack',
+                                        invoiceRedux.colorTheme === 'light'
+                                            ? 'text-defaultBlack'
+                                            : 'text-defaultWhite'
+                                    )}
+                                >
                                     <span>£</span>{' '}
                                     {parseFloat(
                                         singleItem.total.toString()

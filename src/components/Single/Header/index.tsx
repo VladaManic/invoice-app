@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { setOpenModal } from '../../../state/invoice/invoiceSlice'
+import clsx from 'clsx'
 
 import Modal from '../../Reusable/Modal'
 import StatusBtn from '../../Reusable/StatusBtn'
@@ -33,9 +34,25 @@ const Header = ({
     }
 
     return (
-        <div className="mb-4 flex items-center justify-between rounded-lg bg-defaultWhite p-4 pl-8 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] md:w-[688px] lg:w-[730px]">
+        <div
+            className={clsx(
+                'mb-4 flex items-center justify-between rounded-lg p-4 pl-8 shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] md:w-[688px] lg:w-[730px]',
+                invoiceRedux.colorTheme === 'light'
+                    ? 'bg-defaultWhite'
+                    : 'bg-asideDark'
+            )}
+        >
             <div className="flex items-center justify-between xs:w-full md:w-auto">
-                <p className="mr-5 text-xs">Status</p>
+                <p
+                    className={clsx(
+                        'mr-5 text-xs',
+                        invoiceRedux.colorTheme === 'light'
+                            ? 'text-defaultText'
+                            : 'text-checkboxViolet'
+                    )}
+                >
+                    Status
+                </p>
                 <StatusBtn invoice={invoice} />
             </div>
             <div className="w-[320px] max-md:hidden md:block">

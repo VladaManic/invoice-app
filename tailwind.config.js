@@ -42,7 +42,7 @@ export default {
         gradientGrey: 'rgba(218, 218, 218, 1)',
         themeDark: '#141625',
         asideDark: '#1E2139',
-
+        editDark: '#252945',
       }
     },
   },

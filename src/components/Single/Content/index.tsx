@@ -1,3 +1,6 @@
+import { useAppSelector } from '../../../state/hooks'
+import clsx from 'clsx'
+
 import SubsectionId from '../SubsectionId'
 import SubsectionDate from '../SubsectionDate'
 import SubsectionItemName from '../SubsectionItemName'
@@ -13,8 +16,17 @@ interface Props {
 }
 
 const Content = ({ invoice, onClickDelete, onClickPaid }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+
     return (
-        <div className="rounded-lg bg-defaultWhite text-singleGrey shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] xs:mb-[130px] xs:w-[290px] xs:p-[10px] sm:w-[322px] sm:p-[25px] md:mb-0 md:w-[688px] md:p-10 lg:w-[730px]">
+        <div
+            className={clsx(
+                'rounded-lg text-singleGrey shadow-[0_10px_10px_-10px_rgba(0,0,0,0.1)] xs:mb-[130px] xs:w-[290px] xs:p-[10px] sm:w-[322px] sm:p-[25px] md:mb-0 md:w-[688px] md:p-10 lg:w-[730px]',
+                invoiceRedux.colorTheme === 'light'
+                    ? 'bg-defaultWhite'
+                    : 'bg-asideDark'
+            )}
+        >
             <SubsectionId invoice={invoice} />
             <SubsectionDate invoice={invoice} />
             <SubsectionItemName invoice={invoice} />
