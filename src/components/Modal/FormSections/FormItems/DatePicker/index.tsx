@@ -1,4 +1,5 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { useAppSelector } from '../../../../../state/hooks'
 import clsx from 'clsx'
 
 import { FormDataObj } from '../../../../../types/interfaces'
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const DatePicker = ({ register, errors }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+
     return (
         <div className="xs:w-full min-[525px]:w-[48%]">
             <div className="flex justify-between text-singleGrey">
@@ -15,7 +18,13 @@ const DatePicker = ({ register, errors }: Props) => {
                     htmlFor="invoice-date"
                     className={clsx(
                         'font-spartanMedium text-xs',
-                        errors!.paymentDue && 'text-errorRed'
+                        invoiceRedux.colorTheme === 'light'
+                            ? errors.paymentDue
+                                ? 'text-errorRed'
+                                : 'text-singleGrey'
+                            : errors.paymentDue
+                              ? 'text-errorRed'
+                              : 'text-checkboxViolet'
                     )}
                 >
                     Invoice Date
