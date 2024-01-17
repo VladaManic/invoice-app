@@ -1,4 +1,5 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { useAppSelector } from '../../../../../state/hooks'
 import clsx from 'clsx'
 
 import { FormDataObj, InvoiceObj } from '../../../../../types/interfaces'
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const ProjectDescription = ({ register, errors, invoice }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
     let defaultDescription
     if (invoice !== undefined) {
         defaultDescription = invoice.description
@@ -18,12 +20,18 @@ const ProjectDescription = ({ register, errors, invoice }: Props) => {
 
     return (
         <div className="mb-[32px]">
-            <div className="flex justify-between text-singleGrey">
+            <div className="flex justify-between">
                 <label
                     htmlFor="project-description"
                     className={clsx(
                         'font-spartanMedium text-xs',
-                        errors.description && 'text-errorRed'
+                        invoiceRedux.colorTheme === 'light'
+                            ? errors.description
+                                ? 'text-errorRed'
+                                : 'text-singleGrey'
+                            : errors.description
+                              ? 'text-errorRed'
+                              : 'text-checkboxViolet'
                     )}
                 >
                     Project Description
@@ -38,8 +46,14 @@ const ProjectDescription = ({ register, errors, invoice }: Props) => {
                 type="text"
                 id="project-description"
                 className={clsx(
-                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid border-checkboxViolet bg-transparent pl-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
-                    errors.description && 'border-errorRed'
+                    'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
+                    invoiceRedux.colorTheme === 'light'
+                        ? errors.description
+                            ? 'border-errorRed bg-transparent text-defaultBlack'
+                            : 'border-checkboxViolet bg-transparent text-defaultBlack'
+                        : errors.description
+                          ? 'bg-editDark border-errorRed text-defaultWhite'
+                          : 'bg-editDark border-editDark text-defaultWhite'
                 )}
                 defaultValue={defaultDescription}
                 {...register('description')}
