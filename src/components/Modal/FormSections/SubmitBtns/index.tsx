@@ -1,5 +1,5 @@
-import BtnDraft from '../BtnDraft'
-import BtnCancel from '../BtnCancel'
+import BtnDraft from '../FormItems/BtnDraft'
+import BtnCancel from '../FormItems/BtnCancel'
 
 interface Props {
     pathname: string

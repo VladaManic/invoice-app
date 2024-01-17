@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppDispatch } from '../../../../state/hooks'
-import { removeItem } from '../../../../state/invoice/invoiceSlice'
+import { useAppDispatch } from '../../../../../state/hooks'
+import { removeItem } from '../../../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
-import trashIcon from '../../../../assets/img/trash.svg'
+import trashIcon from '../../../../../assets/img/trash.svg'
 
-import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../../types/interfaces'
 interface Props {
     itemIndex: number
     register: UseFormRegister<FormDataObj>
