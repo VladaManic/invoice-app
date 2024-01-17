@@ -8,6 +8,7 @@ import {
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { TOASTIFY_PARAMS } from '../../../constants/toastifyConstant'
+import clsx from 'clsx'
 
 import LoaderSmall from '../../../components/Reusable/LoaderSmall'
 
@@ -46,17 +47,42 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
     }
 
     return (
-        <div className="fixed left-[50%] top-[50%] z-[100] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-defaultWhite p-[40px] xs:h-[230px] xs:w-[332px] md:h-[249px] md:w-[480px]">
-            <h2 className="mb-[15px] font-spartanBold text-defaultBlack xs:text-[20px] xs:leading-[32px] md:text-[24px] md:leading-[32px]">
+        <div
+            className={clsx(
+                'fixed left-[50%] top-[50%] z-[100] -translate-x-1/2 -translate-y-1/2 rounded-lg p-[40px] xs:h-[230px] xs:w-[332px] md:h-[249px] md:w-[480px]',
+                invoiceRedux.colorTheme === 'light'
+                    ? 'bg-defaultWhite'
+                    : 'bg-asideDark'
+            )}
+        >
+            <h2
+                className={clsx(
+                    'mb-[15px] font-spartanBold text-defaultBlack xs:text-[20px] xs:leading-[32px] md:text-[24px] md:leading-[32px]',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'text-defaultBlack'
+                        : 'text-defaultWhite'
+                )}
+            >
                 Confirm Deletion
             </h2>
-            <p className="mb-[15px] text-[12px] leading-[22px]">
+            <p
+                className={clsx(
+                    'mb-[15px] text-[12px] leading-[22px]',
+                    invoiceRedux.colorTheme === 'light'
+                        ? 'text-singleGrey'
+                        : 'text-checkboxViolet'
+                )}
+            >
                 Are you sure you want to delete invoice {invoice.id}? This
                 action cannot be undone.
             </p>
             <div className="text-right">
                 <button
-                    className="mr-3 rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs"
+                    className={clsx(
+                        'mr-3 rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs',
+                        invoiceRedux.colorTheme === 'dark' &&
+                            'bg-editDark text-defaultWhite'
+                    )}
                     onClick={onClose}
                 >
                     Cancel
