@@ -1,3 +1,5 @@
+import { useAppSelector } from '../../../state/hooks'
+
 import SingleInvoice from '../SingleInvoice'
 import EmptyInvoices from '../EmptyInvoices'
 
@@ -7,6 +9,8 @@ interface Props {
 }
 
 const Content = ({ invoice }: Props) => {
+    const invoiceRedux = useAppSelector((state) => state.invoice)
+
     return (
         <>
             {invoice.invoices.length !== 0 ? (
@@ -15,6 +19,7 @@ const Content = ({ invoice }: Props) => {
                         <SingleInvoice
                             key={singleInvoice.id}
                             invoice={singleInvoice}
+                            colorTheme={invoiceRedux.colorTheme}
                         />
                     ))}
                 </div>

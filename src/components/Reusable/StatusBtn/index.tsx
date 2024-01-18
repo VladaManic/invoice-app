@@ -1,31 +1,31 @@
-import { useAppSelector } from '../../../state/hooks'
 import clsx from 'clsx'
 
 import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
     invoice: InvoiceObj
+    colorTheme: string
 }
 
-const StatusBtn = ({ invoice }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+const StatusBtn = ({ invoice, colorTheme }: Props) => {
+    const status = invoice !== undefined && invoice.status
 
     return (
         <>
-            {invoice.status === 'pending' ? (
+            {status === 'pending' ? (
                 <div className="flex h-10 w-28 rounded-md bg-pendingBg text-pendingOrange">
                     <p className="m-auto flex items-center">
                         <span className="-ml-2 text-4xl">&#x2022;</span>
                         <span className="font-spartanBold text-xs capitalize">
-                            {invoice.status}
+                            {status}
                         </span>
                     </p>
                 </div>
-            ) : invoice.status === 'paid' ? (
+            ) : status === 'paid' ? (
                 <div className="flex h-10 w-28 rounded-md bg-paidBg text-paidGreen">
                     <p className="m-auto flex items-center">
                         <span className="-ml-2 text-4xl">&#x2022;</span>
                         <span className="font-spartanBold text-xs capitalize">
-                            {invoice.status}
+                            {status}
                         </span>
                     </p>
                 </div>
@@ -33,7 +33,7 @@ const StatusBtn = ({ invoice }: Props) => {
                 <div
                     className={clsx(
                         'flex h-10 w-28 rounded-md',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'bg-draftBg text-draftGrey'
                             : 'bg-draftDark text-checkboxViolet'
                     )}
@@ -41,7 +41,7 @@ const StatusBtn = ({ invoice }: Props) => {
                     <p className="m-auto flex items-center">
                         <span className="-ml-2 text-4xl">&#x2022;</span>
                         <span className="font-spartanBold text-xs capitalize">
-                            {invoice.status}
+                            {status}
                         </span>
                     </p>
                 </div>
