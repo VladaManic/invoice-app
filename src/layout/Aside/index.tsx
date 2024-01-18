@@ -2,9 +2,10 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { setColorTheme } from '../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
+import SunIcon from '../../components/Aside/SunIcon'
+import MoonIcon from '../../components/Aside/MoonIcon'
+
 import packmanIcon from '../../assets/img/packman.svg'
-import moonIcon from '../../assets/img/moon.svg'
-import sunIcon from '../../assets/img/sun.svg'
 import personImg from '../../assets/img/person.png'
 
 const Aside = () => {
@@ -36,6 +37,7 @@ const Aside = () => {
             </div>
             <div className="flex xs:flex-row lg:flex-col">
                 <button
+                    id="theme-switcher"
                     className={clsx(
                         'ml-auto mr-auto block bg-asideBg lg:mb-10',
                         invoiceRedux.colorTheme === 'light'
@@ -45,9 +47,9 @@ const Aside = () => {
                     onClick={onClickHandler}
                 >
                     {invoiceRedux.colorTheme === 'dark' ? (
-                        <img src={moonIcon} alt="Moon icon" />
+                        <MoonIcon />
                     ) : (
-                        <img src={sunIcon} alt="Sun icon" />
+                        <SunIcon />
                     )}
                 </button>
                 <div className="flex border-t-[1px] border-solid border-[#494E6E] xs:w-[100px] md:h-20 lg:w-full">
