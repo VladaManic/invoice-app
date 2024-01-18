@@ -52,7 +52,10 @@ const Header = ({
                 >
                     Status
                 </p>
-                <StatusBtn invoice={invoice} />
+                <StatusBtn
+                    invoice={invoice}
+                    colorTheme={invoiceRedux.colorTheme}
+                />
             </div>
             <div className="w-[320px] max-md:hidden md:block">
                 <ChangeButtons
