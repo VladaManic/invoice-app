@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 const meta: Meta<typeof EditBtn> = {
     component: EditBtn,
     title: 'Edit Button',
+    tags: ['autodocs'],
     decorators: [
         (Story) => (
             <Provider store={store}>
