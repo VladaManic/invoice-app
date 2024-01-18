@@ -1,14 +1,13 @@
-import { useAppSelector } from '../../../state/hooks'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
 import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
     invoice: InvoiceObj
+    colorTheme: string
 }
 
-const SubsectionDate = ({ invoice }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+const SubsectionDate = ({ invoice, colorTheme }: Props) => {
     const dateCreated = new Date(invoice.createdAt)
     const datePayment = new Date(invoice.paymentDue)
 
@@ -19,7 +18,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                     <p
                         className={clsx(
                             'mb-3 font-spartanMedium text-xs',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultText'
                                 : 'text-checkboxViolet'
                         )}
@@ -29,7 +28,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                     <p
                         className={clsx(
                             'mb-8 font-spartanBold text-defaultBlack',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultBlack'
                                 : 'text-defaultWhite'
                         )}
@@ -39,7 +38,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                     <p
                         className={clsx(
                             'mb-3 font-spartanMedium text-xs',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultText'
                                 : 'text-checkboxViolet'
                         )}
@@ -49,7 +48,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                     <p
                         className={clsx(
                             'font-spartanBold text-defaultBlack',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultBlack'
                                 : 'text-defaultWhite'
                         )}
@@ -61,7 +60,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                     <p
                         className={clsx(
                             'mb-[12px] font-spartanMedium text-xs',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultText'
                                 : 'text-checkboxViolet'
                         )}
@@ -71,7 +70,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                     <p
                         className={clsx(
                             'mb-2 font-spartanBold text-defaultBlack',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultBlack'
                                 : 'text-defaultWhite'
                         )}
@@ -80,7 +79,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                     </p>
                     <div
                         className={clsx(
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultText'
                                 : 'text-checkboxViolet'
                         )}
@@ -104,7 +103,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                 <p
                     className={clsx(
                         'mb-[12px] font-spartanMedium text-xs',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-defaultText'
                             : 'text-checkboxViolet'
                     )}
@@ -114,7 +113,7 @@ const SubsectionDate = ({ invoice }: Props) => {
                 <p
                     className={clsx(
                         'font-spartanBold text-defaultBlack',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-defaultBlack'
                             : 'text-defaultWhite'
                     )}

@@ -1,21 +1,19 @@
 import { InvoiceObj } from '../../../types/interfaces'
-import { useAppSelector } from '../../../state/hooks'
 import clsx from 'clsx'
 
 interface Props {
     invoice: InvoiceObj
+    colorTheme: string
 }
 
-const SubsectionId = ({ invoice }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
-
+const SubsectionId = ({ invoice, colorTheme }: Props) => {
     return (
         <div className="mb-5 flex justify-between xs:flex-col md:flex-row">
             <div className="text-left xs:mb-[30px] md:mb-0">
                 <p className="mb-3 font-spartanBold text-base">
                     <span
                         className={clsx(
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultText'
                                 : 'text-draftText'
                         )}
@@ -24,7 +22,7 @@ const SubsectionId = ({ invoice }: Props) => {
                     </span>
                     <span
                         className={clsx(
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'text-defaultBlack'
                                 : 'text-defaultWhite'
                         )}
@@ -35,7 +33,7 @@ const SubsectionId = ({ invoice }: Props) => {
                 <p
                     className={clsx(
                         'font-spartanMedium text-xs',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-defaultText'
                             : 'text-checkboxViolet'
                     )}
@@ -46,7 +44,7 @@ const SubsectionId = ({ invoice }: Props) => {
             <div
                 className={clsx(
                     'xs:text-left md:text-right',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'text-defaultText'
                         : 'text-checkboxViolet'
                 )}

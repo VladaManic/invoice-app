@@ -6,7 +6,11 @@ import Modal from '../../Reusable/Modal'
 import FormModal from '../../Modal/FormModal'
 import Filter from '../Filter'
 
-const Intro = () => {
+interface Props {
+    colorTheme: string
+}
+
+const Intro = ({ colorTheme }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
@@ -26,7 +30,7 @@ const Intro = () => {
                 <h1
                     className={clsx(
                         'mb-3',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-defaultBlack'
                             : 'text-defaultWhite'
                     )}
@@ -48,12 +52,12 @@ const Intro = () => {
                 )}
             </div>
             <div className="flex">
-                <Filter />
+                <Filter colorTheme={colorTheme} />
                 <div className="flex h-12 items-center rounded-[50px] bg-packmanUp p-2 pr-[16px]">
                     <button
                         className={clsx(
                             'mr-4 flex h-[32px] w-[32px] rounded-[50px] p-0 text-packmanUp focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'bg-lightBg'
                                 : 'bg-defaultWhite'
                         )}

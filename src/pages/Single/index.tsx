@@ -10,6 +10,7 @@ import Loader from '../../components/Reusable/Loader'
 import Nav from '../../components/Single/Nav'
 import Header from '../../components/Single/Header'
 import Content from '../../components/Single/Content'
+import Footer from '../../components/Single/Footer'
 
 const Single = () => {
     //Get URL
@@ -54,6 +55,10 @@ const Single = () => {
                         onClose={onCloseHandler}
                     />
                     <Content
+                        invoice={invoiceRedux.singleInvoice}
+                        colorTheme={invoiceRedux.colorTheme}
+                    />
+                    <Footer
                         invoice={invoiceRedux.singleInvoice}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}

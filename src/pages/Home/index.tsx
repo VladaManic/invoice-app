@@ -33,7 +33,7 @@ const Home = () => {
             )}
             {!invoiceRedux.loading && !invoiceRedux.error ? (
                 <>
-                    <Intro />
+                    <Intro colorTheme={invoiceRedux.colorTheme} />
                     <Content invoice={invoiceRedux} />
                 </>
             ) : null}

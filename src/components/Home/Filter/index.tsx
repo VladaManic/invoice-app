@@ -8,7 +8,11 @@ import clsx from 'clsx'
 
 import arrowIcon from '../../../assets/img/arrow.svg'
 
-const Filter = () => {
+interface Props {
+    colorTheme: string
+}
+
+const Filter = ({ colorTheme }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
     //Using custom hook for opening/closing dropdown
@@ -29,7 +33,7 @@ const Filter = () => {
                 <p
                     className={clsx(
                         'text-xs max-md:hidden md:block',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-defaultBlack'
                             : 'text-defaultWhite'
                     )}
@@ -39,7 +43,7 @@ const Filter = () => {
                 <p
                     className={clsx(
                         'text-xs max-md:block md:hidden',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-defaultBlack'
                             : 'text-defaultWhite'
                     )}
@@ -49,9 +53,7 @@ const Filter = () => {
                 <button
                     className={clsx(
                         'p-3',
-                        invoiceRedux.colorTheme === 'light'
-                            ? 'bg-lightBg'
-                            : 'bg-themeDark'
+                        colorTheme === 'light' ? 'bg-lightBg' : 'bg-themeDark'
                     )}
                     onClick={() => setOpened((curr: boolean) => !curr)}
                 >
@@ -67,7 +69,7 @@ const Filter = () => {
                     <div
                         className={clsx(
                             'absolute left-[-40px] top-[50px] h-[128px] w-[192px] p-[30px] shadow-[0_10px_20px_0_rgba(0,0,0,0.25)]',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'bg-defaultWhite'
                                 : 'bg-asideDark'
                         )}
@@ -79,7 +81,7 @@ const Filter = () => {
                                     'mr-1 h-4 w-4 rounded-[3px] p-0',
                                     invoiceRedux.filterStatus === 'draft' &&
                                         'checked-field',
-                                    invoiceRedux.colorTheme === 'light'
+                                    colorTheme === 'light'
                                         ? 'bg-checkboxViolet '
                                         : 'bg-themeDark'
                                 )}
@@ -88,7 +90,7 @@ const Filter = () => {
                             <button
                                 className={clsx(
                                     'rounded-none pb-[1px] pl-[3px] pr-[3px] pt-[1px] text-xs hover:border-transparent',
-                                    invoiceRedux.colorTheme === 'light'
+                                    colorTheme === 'light'
                                         ? 'text-defaultBlack'
                                         : 'bg-asideDark text-defaultWhite'
                                 )}
@@ -105,7 +107,7 @@ const Filter = () => {
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
                                     invoiceRedux.filterStatus === 'pending' &&
                                         'checked-field',
-                                    invoiceRedux.colorTheme === 'light'
+                                    colorTheme === 'light'
                                         ? 'bg-checkboxViolet '
                                         : 'bg-themeDark'
                                 )}
@@ -114,7 +116,7 @@ const Filter = () => {
                             <button
                                 className={clsx(
                                     'rounded-none pb-[1px] pl-[3px] pr-[3px] pt-[1px] text-xs hover:border-transparent',
-                                    invoiceRedux.colorTheme === 'light'
+                                    colorTheme === 'light'
                                         ? 'text-defaultBlack'
                                         : 'bg-asideDark text-defaultWhite'
                                 )}
@@ -131,7 +133,7 @@ const Filter = () => {
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
                                     invoiceRedux.filterStatus === 'paid' &&
                                         'checked-field',
-                                    invoiceRedux.colorTheme === 'light'
+                                    colorTheme === 'light'
                                         ? 'bg-checkboxViolet '
                                         : 'bg-themeDark'
                                 )}
@@ -140,7 +142,7 @@ const Filter = () => {
                             <button
                                 className={clsx(
                                     'rounded-none pb-[1px] pl-[3px] pr-[3px] pt-[1px] text-xs hover:border-transparent',
-                                    invoiceRedux.colorTheme === 'light'
+                                    colorTheme === 'light'
                                         ? 'text-defaultBlack'
                                         : 'bg-asideDark text-defaultWhite'
                                 )}
