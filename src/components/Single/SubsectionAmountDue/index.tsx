@@ -18,7 +18,9 @@ const SubsectionAmountDue = ({ invoice, colorTheme }: Props) => {
                 Amount Due
             </p>
             <p className="font-spartanBold leading-[32px] tracking-[-0.42px] text-defaultWhite xs:text-[20px] md:text-[24px]">
-                <span>£</span> {parseFloat(invoice.total.toString()).toFixed(2)}
+                <span>£</span>{' '}
+                {invoice !== undefined &&
+                    parseFloat(invoice.total.toString()).toFixed(2)}
             </p>
         </div>
     )

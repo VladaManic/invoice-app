@@ -8,8 +8,8 @@ interface Props {
 }
 
 const SubsectionDate = ({ invoice, colorTheme }: Props) => {
-    const dateCreated = new Date(invoice.createdAt)
-    const datePayment = new Date(invoice.paymentDue)
+    const dateCreated = invoice !== undefined && new Date(invoice.createdAt)
+    const datePayment = invoice !== undefined && new Date(invoice.paymentDue)
 
     return (
         <div className="mb-10 flex xs:flex-col md:flex-row">
@@ -33,7 +33,8 @@ const SubsectionDate = ({ invoice, colorTheme }: Props) => {
                                 : 'text-defaultWhite'
                         )}
                     >
-                        {format(dateCreated, 'dd MMM y')}
+                        {dateCreated !== false &&
+                            format(dateCreated, 'dd MMM y')}
                     </p>
                     <p
                         className={clsx(
@@ -53,7 +54,8 @@ const SubsectionDate = ({ invoice, colorTheme }: Props) => {
                                 : 'text-defaultWhite'
                         )}
                     >
-                        {format(datePayment, 'dd MMM y')}
+                        {datePayment !== false &&
+                            format(datePayment, 'dd MMM y')}
                     </p>
                 </div>
                 <div className="w-[50%] text-left">
@@ -75,7 +77,7 @@ const SubsectionDate = ({ invoice, colorTheme }: Props) => {
                                 : 'text-defaultWhite'
                         )}
                     >
-                        {invoice.clientName}
+                        {invoice !== undefined && invoice.clientName}
                     </p>
                     <div
                         className={clsx(
@@ -85,16 +87,20 @@ const SubsectionDate = ({ invoice, colorTheme }: Props) => {
                         )}
                     >
                         <p className="text-[11px] leading-[18px]">
-                            {invoice.clientAddress.street}
+                            {invoice !== undefined &&
+                                invoice.clientAddress.street}
                         </p>
                         <p className="text-[11px] leading-[18px]">
-                            {invoice.clientAddress.city}
+                            {invoice !== undefined &&
+                                invoice.clientAddress.city}
                         </p>
                         <p className="text-[11px] leading-[18px]">
-                            {invoice.clientAddress.postCode}
+                            {invoice !== undefined &&
+                                invoice.clientAddress.postCode}
                         </p>
                         <p className="text-[11px] leading-[18px]">
-                            {invoice.clientAddress.country}
+                            {invoice !== undefined &&
+                                invoice.clientAddress.country}
                         </p>
                     </div>
                 </div>
@@ -118,7 +124,7 @@ const SubsectionDate = ({ invoice, colorTheme }: Props) => {
                             : 'text-defaultWhite'
                     )}
                 >
-                    {invoice.clientEmail}
+                    {invoice !== undefined && invoice.clientEmail}
                 </p>
             </div>
         </div>

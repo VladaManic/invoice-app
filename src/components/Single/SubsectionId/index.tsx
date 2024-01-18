@@ -27,7 +27,7 @@ const SubsectionId = ({ invoice, colorTheme }: Props) => {
                                 : 'text-defaultWhite'
                         )}
                     >
-                        {invoice.id}
+                        {invoice !== undefined && invoice.id}
                     </span>
                 </p>
                 <p
@@ -38,7 +38,7 @@ const SubsectionId = ({ invoice, colorTheme }: Props) => {
                             : 'text-checkboxViolet'
                     )}
                 >
-                    {invoice.description}
+                    {invoice !== undefined && invoice.description}
                 </p>
             </div>
             <div
@@ -50,16 +50,16 @@ const SubsectionId = ({ invoice, colorTheme }: Props) => {
                 )}
             >
                 <p className="text-[11px] leading-[18px]">
-                    {invoice.senderAddress.street}
+                    {invoice !== undefined && invoice.senderAddress.street}
                 </p>
                 <p className="text-[11px] leading-[18px]">
-                    {invoice.senderAddress.city}
+                    {invoice !== undefined && invoice.senderAddress.city}
                 </p>
                 <p className="text-[11px] leading-[18px]">
-                    {invoice.senderAddress.postCode}
+                    {invoice !== undefined && invoice.senderAddress.postCode}
                 </p>
                 <p className="text-[11px] leading-[18px]">
-                    {invoice.senderAddress.country}
+                    {invoice !== undefined && invoice.senderAddress.country}
                 </p>
             </div>
         </div>

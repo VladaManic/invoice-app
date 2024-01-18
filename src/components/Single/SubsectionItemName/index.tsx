@@ -39,67 +39,93 @@ const SubsectionItemName = ({ invoice, colorTheme }: Props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {invoice.items.map((singleItem: ItemObj) => (
-                            <tr key={singleItem.name}>
-                                <td
+                        {invoice !== undefined &&
+                            invoice.items.map((singleItem: ItemObj) => (
+                                <tr key={singleItem.name}>
+                                    <td
+                                        className={clsx(
+                                            'w-[50%] text-left font-spartanBold text-xs text-defaultBlack',
+                                            colorTheme === 'light'
+                                                ? 'text-defaultBlack'
+                                                : 'text-defaultWhite'
+                                        )}
+                                    >
+                                        {singleItem.name}
+                                    </td>
+                                    <td
+                                        className={clsx(
+                                            'w-[10%] font-spartanBold text-xs',
+                                            colorTheme === 'light'
+                                                ? 'text-singleGrey'
+                                                : 'text-checkboxViolet'
+                                        )}
+                                    >
+                                        {singleItem.quantity}
+                                    </td>
+                                    <td
+                                        className={clsx(
+                                            'w-[20%] text-right font-spartanBold text-xs',
+                                            colorTheme === 'light'
+                                                ? 'text-singleGrey'
+                                                : 'text-checkboxViolet'
+                                        )}
+                                    >
+                                        <span>£</span>{' '}
+                                        {parseFloat(
+                                            singleItem.price.toString()
+                                        ).toFixed(2)}
+                                    </td>
+                                    <td
+                                        className={clsx(
+                                            'w-[20%] text-right font-spartanBold text-xs text-defaultBlack',
+                                            colorTheme === 'light'
+                                                ? 'text-defaultBlack'
+                                                : 'text-defaultWhite'
+                                        )}
+                                    >
+                                        <span>£</span>{' '}
+                                        {parseFloat(
+                                            singleItem.total.toString()
+                                        ).toFixed(2)}
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+            <div className="w-full max-md:block md:hidden">
+                {invoice !== undefined &&
+                    invoice.items.map((singleItem: ItemObj) => (
+                        <div
+                            key={singleItem.name}
+                            className="mb-[10px] flex w-full items-center justify-between"
+                        >
+                            <div className="text-left">
+                                <p
                                     className={clsx(
-                                        'w-[50%] text-left font-spartanBold text-xs text-defaultBlack',
+                                        'font-spartanBold text-xs',
                                         colorTheme === 'light'
                                             ? 'text-defaultBlack'
                                             : 'text-defaultWhite'
                                     )}
                                 >
                                     {singleItem.name}
-                                </td>
-                                <td
+                                </p>
+                                <p
                                     className={clsx(
-                                        'w-[10%] font-spartanBold text-xs',
+                                        'font-spartanBold text-xs',
                                         colorTheme === 'light'
                                             ? 'text-singleGrey'
-                                            : 'text-checkboxViolet'
+                                            : 'text-draftText'
                                     )}
                                 >
-                                    {singleItem.quantity}
-                                </td>
-                                <td
-                                    className={clsx(
-                                        'w-[20%] text-right font-spartanBold text-xs',
-                                        colorTheme === 'light'
-                                            ? 'text-singleGrey'
-                                            : 'text-checkboxViolet'
-                                    )}
-                                >
-                                    <span>£</span>{' '}
+                                    {singleItem.quantity} x <span>£</span>{' '}
                                     {parseFloat(
                                         singleItem.price.toString()
                                     ).toFixed(2)}
-                                </td>
-                                <td
-                                    className={clsx(
-                                        'w-[20%] text-right font-spartanBold text-xs text-defaultBlack',
-                                        colorTheme === 'light'
-                                            ? 'text-defaultBlack'
-                                            : 'text-defaultWhite'
-                                    )}
-                                >
-                                    <span>£</span>{' '}
-                                    {parseFloat(
-                                        singleItem.total.toString()
-                                    ).toFixed(2)}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
-            </div>
-            <div className="w-full max-md:block md:hidden">
-                {invoice.items.map((singleItem: ItemObj) => (
-                    <div
-                        key={singleItem.name}
-                        className="mb-[10px] flex w-full items-center justify-between"
-                    >
-                        <div className="text-left">
+                                </p>
+                            </div>
                             <p
                                 className={clsx(
                                     'font-spartanBold text-xs',
@@ -108,35 +134,13 @@ const SubsectionItemName = ({ invoice, colorTheme }: Props) => {
                                         : 'text-defaultWhite'
                                 )}
                             >
-                                {singleItem.name}
-                            </p>
-                            <p
-                                className={clsx(
-                                    'font-spartanBold text-xs',
-                                    colorTheme === 'light'
-                                        ? 'text-singleGrey'
-                                        : 'text-draftText'
-                                )}
-                            >
-                                {singleItem.quantity} x <span>£</span>{' '}
+                                <span>£</span>{' '}
                                 {parseFloat(
-                                    singleItem.price.toString()
+                                    singleItem.total.toString()
                                 ).toFixed(2)}
                             </p>
                         </div>
-                        <p
-                            className={clsx(
-                                'font-spartanBold text-xs',
-                                colorTheme === 'light'
-                                    ? 'text-defaultBlack'
-                                    : 'text-defaultWhite'
-                            )}
-                        >
-                            <span>£</span>{' '}
-                            {parseFloat(singleItem.total.toString()).toFixed(2)}
-                        </p>
-                    </div>
-                ))}
+                    ))}
             </div>
         </div>
     )
