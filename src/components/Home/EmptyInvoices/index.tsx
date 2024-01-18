@@ -1,11 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../../../state/hooks'
+import { useAppDispatch } from '../../../state/hooks'
 import { setOpenModal } from '../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
 import emptyIcon from '../../../assets/img/empty.png'
 
-const EmptyInvoices = () => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+interface Props {
+    colorTheme: string
+}
+
+const EmptyInvoices = ({ colorTheme }: Props) => {
     const dispatch = useAppDispatch()
 
     //On click New Invoice btn, open form modal
@@ -25,7 +28,7 @@ const EmptyInvoices = () => {
             <h1
                 className={clsx(
                     'mb-[30px] text-[20px] leading-[22px]',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'text-defaultBlack'
                         : 'text-defaultWhite'
                 )}
@@ -38,7 +41,7 @@ const EmptyInvoices = () => {
                 <button
                     className={clsx(
                         'p-0 font-spartanBold hover:border-transparent focus:outline-none focus:ring-0',
-                        invoiceRedux.colorTheme === 'dark' && 'bg-themeDark'
+                        colorTheme === 'dark' && 'bg-themeDark'
                     )}
                     onClick={onClickHandler}
                 >

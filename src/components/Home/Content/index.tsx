@@ -24,7 +24,7 @@ const Content = ({ invoice }: Props) => {
                     ))}
                 </div>
             ) : (
-                <EmptyInvoices />
+                <EmptyInvoices colorTheme={invoiceRedux.colorTheme} />
             )}
         </>
     )

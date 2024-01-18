@@ -46,10 +46,11 @@ const Single = () => {
             )}
             {!invoiceRedux.loading && invoiceRedux.singleInvoice !== null ? (
                 <>
-                    <Nav />
+                    <Nav colorTheme={invoiceRedux.colorTheme} />
                     <Header
                         invoice={invoiceRedux.singleInvoice}
                         openDeleteModal={openDeleteModal}
+                        colorTheme={invoiceRedux.colorTheme}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}
                         onClose={onCloseHandler}
@@ -60,6 +61,7 @@ const Single = () => {
                     />
                     <Footer
                         invoice={invoiceRedux.singleInvoice}
+                        colorTheme={invoiceRedux.colorTheme}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}
                     />
