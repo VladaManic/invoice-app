@@ -24,8 +24,8 @@ const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
                 className={clsx(
                     'rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs xs:mr-1 sm:mr-3',
                     invoiceRedux.colorTheme === 'light'
-                        ? 'bg-tableGrey'
-                        : 'bg-editDark'
+                        ? 'bg-tableGrey text-singleGrey'
+                        : 'bg-editDark text-defaultWhite'
                 )}
                 onClick={onClickHandler}
             >

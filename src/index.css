@@ -47,6 +47,10 @@ body {
     min-height: 100vh;
     font-family: 'Spartan Medium', 'sans-serif';
     background-color: var(--bodyColor);
+
+    @media (max-width: 335px) {
+        min-width: 305px;
+    }
 }
 
 h1 {

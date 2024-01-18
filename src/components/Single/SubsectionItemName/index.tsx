@@ -104,17 +104,38 @@ const SubsectionItemName = ({ invoice }: Props) => {
                         className="mb-[10px] flex w-full items-center justify-between"
                     >
                         <div className="text-left">
-                            <p className="font-spartanBold text-xs text-defaultBlack">
+                            <p
+                                className={clsx(
+                                    'font-spartanBold text-xs',
+                                    invoiceRedux.colorTheme === 'light'
+                                        ? 'text-defaultBlack'
+                                        : 'text-defaultWhite'
+                                )}
+                            >
                                 {singleItem.name}
                             </p>
-                            <p className="font-spartanBold text-xs">
+                            <p
+                                className={clsx(
+                                    'font-spartanBold text-xs',
+                                    invoiceRedux.colorTheme === 'light'
+                                        ? 'text-singleGrey'
+                                        : 'text-draftText'
+                                )}
+                            >
                                 {singleItem.quantity} x <span>£</span>{' '}
                                 {parseFloat(
                                     singleItem.price.toString()
                                 ).toFixed(2)}
                             </p>
                         </div>
-                        <p className="font-spartanBold text-xs text-defaultBlack">
+                        <p
+                            className={clsx(
+                                'font-spartanBold text-xs',
+                                invoiceRedux.colorTheme === 'light'
+                                    ? 'text-defaultBlack'
+                                    : 'text-defaultWhite'
+                            )}
+                        >
                             <span>£</span>{' '}
                             {parseFloat(singleItem.total.toString()).toFixed(2)}
                         </p>
