@@ -76,7 +76,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     type="text"
                     id={'item-name-' + itemIndex}
                     className={clsx(
-                        'ml-[1px] h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs active:border-packmanUp',
+                        'ml-[1px] h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs outline-none focus:border-packmanUp',
                         invoiceRedux.colorTheme === 'light'
                             ? errors.items &&
                               errors.items[itemIndex] &&
@@ -111,7 +111,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     step="1"
                     id={`quantity-${itemIndex}`}
                     className={clsx(
-                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack outline-none focus:border-packmanUp',
                         invoiceRedux.colorTheme === 'light'
                             ? errors.items &&
                               errors.items[itemIndex] &&
@@ -146,7 +146,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     min="0"
                     id={`price-${itemIndex}`}
                     className={clsx(
-                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack',
+                        'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack outline-none focus:border-packmanUp',
                         invoiceRedux.colorTheme === 'light'
                             ? errors.items &&
                               errors.items[itemIndex] &&
@@ -177,7 +177,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                 </label>
                 <input
                     className={clsx(
-                        'w-full bg-transparent font-spartanBold focus:outline-none focus:ring-0 xs:mt-[16px] min-[525px]:mt-0',
+                        'w-full bg-transparent font-spartanBold outline-none focus:border-packmanUp focus:outline-none focus:ring-0 xs:mt-[16px] min-[525px]:mt-0',
                         invoiceRedux.colorTheme === 'light'
                             ? 'text-draftText'
                             : 'text-defaultWhite'
