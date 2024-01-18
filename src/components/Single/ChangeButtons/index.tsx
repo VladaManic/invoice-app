@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import { setOpenModal } from '../../../state/invoice/invoiceSlice'
-import clsx from 'clsx'
+import { useAppSelector } from '../../../state/hooks'
+
+import EditBtn from '../EditBtn'
 
 import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
@@ -11,26 +11,10 @@ interface Props {
 
 const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
-    const dispatch = useAppDispatch()
-
-    //On click New Invoice btn, open form modal
-    const onClickHandler = () => {
-        dispatch(setOpenModal(true))
-    }
 
     return (
         <div className="flex min-[335px]:justify-between md:justify-end">
-            <button
-                className={clsx(
-                    'rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs xs:mr-1 sm:mr-3',
-                    invoiceRedux.colorTheme === 'light'
-                        ? 'bg-tableGrey text-singleGrey'
-                        : 'bg-editDark text-defaultWhite'
-                )}
-                onClick={onClickHandler}
-            >
-                Edit
-            </button>
+            <EditBtn colorTheme={invoiceRedux.colorTheme} />
             <button
                 className="rounded-[50px] bg-deleteRed pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite xs:mr-1 sm:mr-3"
                 onClick={onClickDelete}
