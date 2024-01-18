@@ -1,8 +1,8 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 
-import DatePicker from '../FormItems/DatePicker'
-import PaymentTerms from '../FormItems/PaymentTerms'
-import ProjectDescription from '../FormItems/ProjectDescription'
+import DatePicker from '../../FormItems/DatePicker'
+import PaymentTerms from '../../FormItems/PaymentTerms'
+import ProjectDescription from '../../FormItems/ProjectDescription'
 
 import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 interface Props {

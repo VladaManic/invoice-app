@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
-import BtnDraft from '../FormItems/BtnDraft'
-import BtnCancel from '../FormItems/BtnCancel'
+import BtnDraft from '../../FormItems/BtnDraft'
+import BtnCancel from '../../FormItems/BtnCancel'
 
 interface Props {
     pathname: string

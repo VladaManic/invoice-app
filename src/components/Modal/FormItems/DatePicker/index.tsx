@@ -1,8 +1,8 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppSelector } from '../../../../../state/hooks'
+import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
-import { FormDataObj } from '../../../../../types/interfaces'
+import { FormDataObj } from '../../../../types/interfaces'
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>

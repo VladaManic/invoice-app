@@ -1,8 +1,8 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppSelector } from '../../../../../state/hooks'
+import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
-import { FormDataObj, InvoiceObj } from '../../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
@@ -52,8 +52,8 @@ const ProjectDescription = ({ register, errors, invoice }: Props) => {
                             ? 'border-errorRed bg-transparent text-defaultBlack'
                             : 'border-checkboxViolet bg-transparent text-defaultBlack'
                         : errors.description
-                          ? 'bg-editDark border-errorRed text-defaultWhite'
-                          : 'bg-editDark border-editDark text-defaultWhite'
+                          ? 'border-errorRed bg-editDark text-defaultWhite'
+                          : 'border-editDark bg-editDark text-defaultWhite'
                 )}
                 defaultValue={defaultDescription}
                 {...register('description')}

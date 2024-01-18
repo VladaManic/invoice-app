@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
 import { addItem } from '../../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
-import Item from '../FormItems/Item'
+import Item from '../../FormItems/Item'
 
 import { FormDataObj, InvoiceObj, ItemObj } from '../../../../types/interfaces'
 interface Props {

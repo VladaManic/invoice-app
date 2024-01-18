@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppSelector } from '../../../../../state/hooks'
+import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
-import arrowIcon from '../../../../../assets/img/arrow.svg'
+import arrowIcon from '../../../../assets/img/arrow.svg'
 
-import { FormDataObj, InvoiceObj } from '../../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
@@ -108,7 +108,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp  focus:outline-none focus:ring-0',
                             invoiceRedux.colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}
                         onClick={onClickDropdown}
                     >
@@ -121,7 +121,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
                             invoiceRedux.colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}
                         onClick={onClickDropdown}
                     >
@@ -134,7 +134,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
                             invoiceRedux.colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}
                         onClick={onClickDropdown}
                     >
@@ -147,7 +147,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
                             invoiceRedux.colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'bg-editDark hover:border-editDark border-b-defaultBlack hover:border-b-defaultBlack'
+                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}
                         onClick={onClickDropdown}
                     >
