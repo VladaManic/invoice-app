@@ -182,7 +182,7 @@ const FormModal = ({ invoice, onClose }: Props) => {
                     id="form-inner"
                 >
                     <div className="mr-[10px] h-full">
-                        <Nav />
+                        <Nav colorTheme={invoiceRedux.colorTheme} />
                         <h2
                             className={clsx(
                                 'mb-[30px] font-spartanBold text-[24px] leading-[32px] text-defaultBlack',
@@ -197,26 +197,31 @@ const FormModal = ({ invoice, onClose }: Props) => {
                             register={register}
                             errors={errors}
                             invoice={singleInvoice}
+                            colorTheme={invoiceRedux.colorTheme}
                         />
                         <ClientFields
                             register={register}
                             errors={errors}
                             invoice={singleInvoice}
+                            colorTheme={invoiceRedux.colorTheme}
                         />
                         <DateTerms
                             register={register}
                             errors={errors}
                             invoice={singleInvoice}
+                            colorTheme={invoiceRedux.colorTheme}
                         />
                         <ItemList
                             register={register}
                             errors={errors}
                             invoice={singleInvoice}
+                            colorTheme={invoiceRedux.colorTheme}
                         />
                     </div>
                 </div>
                 <SubmitBtns
                     pathname={pathname}
+                    colorTheme={invoiceRedux.colorTheme}
                     onClose={onClose}
                     onClick={onClickHandler}
                 />

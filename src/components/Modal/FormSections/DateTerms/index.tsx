@@ -9,23 +9,30 @@ interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
+    colorTheme: string
 }
 
-const DateTerms = ({ register, errors, invoice }: Props) => {
+const DateTerms = ({ register, errors, invoice, colorTheme }: Props) => {
     return (
         <>
             <div className="mb-[20px] flex flex-wrap justify-between">
-                <DatePicker register={register} errors={errors} />
+                <DatePicker
+                    register={register}
+                    errors={errors}
+                    colorTheme={colorTheme}
+                />
                 <PaymentTerms
                     register={register}
                     errors={errors}
                     invoice={invoice}
+                    colorTheme={colorTheme}
                 />
             </div>
             <ProjectDescription
                 register={register}
                 errors={errors}
                 invoice={invoice}
+                colorTheme={colorTheme}
             />
         </>
     )

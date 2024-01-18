@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
 import arrowIcon from '../../../../assets/img/arrow.svg'
@@ -10,9 +9,10 @@ interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
+    colorTheme: string
 }
 
-const PaymentTerms = ({ register, invoice }: Props) => {
+const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
     let defaultPaymentTerms, defaultPaymentText
     if (invoice !== undefined) {
         defaultPaymentTerms = invoice.paymentTerms
@@ -39,7 +39,6 @@ const PaymentTerms = ({ register, invoice }: Props) => {
         defaultPaymentText
     )
     const [selectOpened, setSelectOpened] = useState<boolean>(false)
-    const invoiceRedux = useAppSelector((state) => state.invoice)
 
     //Opening/closing dropdown
     const dropdownHandler = (
@@ -67,7 +66,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
             <label
                 className={clsx(
                     'font-spartanMedium text-xs',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'text-singleGrey'
                         : 'text-checkboxViolet'
                 )}
@@ -78,7 +77,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                 value={selectValue}
                 className={clsx(
                     'flex w-full items-center justify-between rounded-[5px] border-[1px] border-solid p-[15px] text-right font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'border-checkboxViolet bg-transparent text-defaultBlack'
                         : 'border-editDark bg-editDark text-defaultWhite'
                 )}
@@ -96,7 +95,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                 <div
                     className={clsx(
                         'absolute top-[80px] w-full overflow-hidden rounded-[10px] font-spartanBold text-xs',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]'
                             : 'text-defaultWhite'
                     )}
@@ -106,7 +105,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                         name="Net 1 Day"
                         className={clsx(
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp  focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
                                 : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}
@@ -119,7 +118,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                         name="Net 7 Days"
                         className={clsx(
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
                                 : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}
@@ -132,7 +131,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                         name="Net 14 Days"
                         className={clsx(
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
                                 : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}
@@ -145,7 +144,7 @@ const PaymentTerms = ({ register, invoice }: Props) => {
                         name="Net 30 Days"
                         className={clsx(
                             'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
                                 : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
                         )}

@@ -1,11 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
+import { useAppDispatch } from '../../../../state/hooks'
 import { setOpenModal } from '../../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
 import arrowLeft from '../../../../assets/img/arrow-left.svg'
 
-const Nav = () => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+interface Props {
+    colorTheme: string
+}
+
+const Nav = ({ colorTheme }: Props) => {
     const dispatch = useAppDispatch()
 
     const onClickHandler = () => {
@@ -21,7 +24,7 @@ const Nav = () => {
             <div
                 className={clsx(
                     'text-defaultBlack',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'text-defaultBlack'
                         : 'text-defaultWhite'
                 )}

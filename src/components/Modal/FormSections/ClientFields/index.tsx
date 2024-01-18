@@ -1,5 +1,4 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
 import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
@@ -7,10 +6,10 @@ interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
+    colorTheme: string
 }
 
-const ClientFields = ({ register, errors, invoice }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+const ClientFields = ({ register, errors, invoice, colorTheme }: Props) => {
     let defaultName,
         defaultEmail,
         defaultStreet,
@@ -44,7 +43,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                         htmlFor="clients-name"
                         className={clsx(
                             'font-spartanMedium text-xs',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? errors.clientName
                                     ? 'text-errorRed'
                                     : 'text-singleGrey'
@@ -66,13 +65,13 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                     id="clients-name"
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? errors.clientName
                                 ? 'border-errorRed bg-defaultWhite text-defaultBlack'
                                 : 'border-checkboxViolet bg-defaultWhite text-defaultBlack'
                             : errors.clientName
-                              ? 'bg-editDark border-errorRed text-defaultWhite'
-                              : 'bg-editDark border-editDark text-defaultWhite'
+                              ? 'border-errorRed bg-editDark text-defaultWhite'
+                              : 'border-editDark bg-editDark text-defaultWhite'
                     )}
                     defaultValue={defaultName}
                     {...register('clientName')}
@@ -85,7 +84,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                         htmlFor="clients-email"
                         className={clsx(
                             'font-spartanMedium text-xs',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? errors.clientEmail
                                     ? 'text-errorRed'
                                     : 'text-singleGrey'
@@ -107,13 +106,13 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                     id="clients-email"
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? errors.clientEmail
                                 ? 'border-errorRed bg-defaultWhite text-defaultBlack'
                                 : 'border-checkboxViolet bg-defaultWhite text-defaultBlack'
                             : errors.clientEmail
-                              ? 'bg-editDark border-errorRed text-defaultWhite'
-                              : 'bg-editDark border-editDark text-defaultWhite'
+                              ? 'border-errorRed bg-editDark text-defaultWhite'
+                              : 'border-editDark bg-editDark text-defaultWhite'
                     )}
                     defaultValue={defaultEmail}
                     {...register('clientEmail')}
@@ -126,7 +125,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                         htmlFor="street-address-from"
                         className={clsx(
                             'font-spartanMedium text-xs',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? errors.clientAddress
                                     ? 'text-errorRed'
                                     : 'text-singleGrey'
@@ -148,13 +147,13 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                     id="street-address-from"
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? errors.clientAddress
                                 ? 'border-errorRed bg-transparent text-defaultBlack'
                                 : 'border-checkboxViolet bg-transparent text-defaultBlack'
                             : errors.clientAddress
-                              ? 'bg-editDark border-errorRed text-defaultWhite'
-                              : 'bg-editDark border-editDark text-defaultWhite'
+                              ? 'border-errorRed bg-editDark text-defaultWhite'
+                              : 'border-editDark bg-editDark text-defaultWhite'
                     )}
                     defaultValue={defaultStreet}
                     {...register('clientAddress')}
@@ -168,7 +167,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                             htmlFor="city-from"
                             className={clsx(
                                 'font-spartanMedium text-xs',
-                                invoiceRedux.colorTheme === 'light'
+                                colorTheme === 'light'
                                     ? errors.clientCity
                                         ? 'text-errorRed'
                                         : 'text-singleGrey'
@@ -190,13 +189,13 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                         id="city-from"
                         className={clsx(
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? errors.clientCity
                                     ? 'border-errorRed bg-transparent text-defaultBlack'
                                     : 'border-checkboxViolet bg-transparent text-defaultBlack'
                                 : errors.clientCity
-                                  ? 'bg-editDark border-errorRed text-defaultWhite'
-                                  : 'bg-editDark border-editDark text-defaultWhite'
+                                  ? 'border-errorRed bg-editDark text-defaultWhite'
+                                  : 'border-editDark bg-editDark text-defaultWhite'
                         )}
                         defaultValue={defaultCity}
                         {...register('clientCity')}
@@ -209,7 +208,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                             htmlFor="post-code-from"
                             className={clsx(
                                 'font-spartanMedium text-xs',
-                                invoiceRedux.colorTheme === 'light'
+                                colorTheme === 'light'
                                     ? errors.clientPostcode
                                         ? 'text-errorRed'
                                         : 'text-singleGrey'
@@ -231,13 +230,13 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                         id="post-code-from"
                         className={clsx(
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? errors.clientPostcode
                                     ? 'border-errorRed bg-transparent text-defaultBlack'
                                     : 'border-checkboxViolet bg-transparent text-defaultBlack'
                                 : errors.clientPostcode
-                                  ? 'bg-editDark border-errorRed text-defaultWhite'
-                                  : 'bg-editDark border-editDark text-defaultWhite'
+                                  ? 'border-errorRed bg-editDark text-defaultWhite'
+                                  : 'border-editDark bg-editDark text-defaultWhite'
                         )}
                         defaultValue={defaultPostcode}
                         {...register('clientPostcode')}
@@ -250,7 +249,7 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                             htmlFor="country-from"
                             className={clsx(
                                 'font-spartanMedium text-xs',
-                                invoiceRedux.colorTheme === 'light'
+                                colorTheme === 'light'
                                     ? errors.clientCountry
                                         ? 'text-errorRed'
                                         : 'text-singleGrey'
@@ -272,13 +271,13 @@ const ClientFields = ({ register, errors, invoice }: Props) => {
                         id="country-from"
                         className={clsx(
                             'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
-                            invoiceRedux.colorTheme === 'light'
+                            colorTheme === 'light'
                                 ? errors.clientCountry
                                     ? 'border-errorRed bg-transparent text-defaultBlack'
                                     : 'border-checkboxViolet bg-transparent text-defaultBlack'
                                 : errors.clientCountry
-                                  ? 'bg-editDark border-errorRed text-defaultWhite'
-                                  : 'bg-editDark border-editDark text-defaultWhite'
+                                  ? 'border-errorRed bg-editDark text-defaultWhite'
+                                  : 'border-editDark bg-editDark text-defaultWhite'
                         )}
                         defaultValue={defaultCountry}
                         {...register('clientCountry')}

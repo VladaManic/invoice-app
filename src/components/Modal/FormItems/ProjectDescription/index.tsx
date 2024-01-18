@@ -1,5 +1,4 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppSelector } from '../../../../state/hooks'
 import clsx from 'clsx'
 
 import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
@@ -7,10 +6,15 @@ interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
+    colorTheme: string
 }
 
-const ProjectDescription = ({ register, errors, invoice }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+const ProjectDescription = ({
+    register,
+    errors,
+    invoice,
+    colorTheme,
+}: Props) => {
     let defaultDescription
     if (invoice !== undefined) {
         defaultDescription = invoice.description
@@ -25,7 +29,7 @@ const ProjectDescription = ({ register, errors, invoice }: Props) => {
                     htmlFor="project-description"
                     className={clsx(
                         'font-spartanMedium text-xs',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? errors.description
                                 ? 'text-errorRed'
                                 : 'text-singleGrey'
@@ -47,7 +51,7 @@ const ProjectDescription = ({ register, errors, invoice }: Props) => {
                 id="project-description"
                 className={clsx(
                     'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? errors.description
                             ? 'border-errorRed bg-transparent text-defaultBlack'
                             : 'border-checkboxViolet bg-transparent text-defaultBlack'

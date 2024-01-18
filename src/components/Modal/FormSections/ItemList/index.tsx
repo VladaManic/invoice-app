@@ -10,9 +10,10 @@ interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
+    colorTheme: string
 }
 
-const ItemList = ({ register, errors, invoice }: Props) => {
+const ItemList = ({ register, errors, invoice, colorTheme }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
@@ -35,7 +36,7 @@ const ItemList = ({ register, errors, invoice }: Props) => {
                 <div
                     className={clsx(
                         'mb-[8px] justify-between font-spartanMedium text-xs xs:hidden min-[525px]:flex',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-singleGrey'
                             : 'text-checkboxViolet'
                     )}
@@ -55,6 +56,7 @@ const ItemList = ({ register, errors, invoice }: Props) => {
                               register={register}
                               errors={errors}
                               invoice={invoice}
+                              colorTheme={colorTheme}
                           />
                       ))
                     : //Update form
@@ -65,13 +67,14 @@ const ItemList = ({ register, errors, invoice }: Props) => {
                               register={register}
                               errors={errors}
                               invoice={invoice}
+                              colorTheme={colorTheme}
                           />
                       ))}
             </div>
             <button
                 className={clsx(
                     'mb-[20px] w-full rounded-[20px] pb-[12px] pt-[12px] font-spartanBold text-xs',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'text-singleGrey hover:border-checkboxViolet hover:bg-checkboxViolet'
                         : 'bg-editDark text-defaultWhite focus:outline-none focus:ring-0'
                 )}

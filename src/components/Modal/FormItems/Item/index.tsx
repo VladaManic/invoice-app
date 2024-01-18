@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
+import { useAppDispatch } from '../../../../state/hooks'
 import { removeItem } from '../../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
@@ -12,9 +12,10 @@ interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
+    colorTheme: string
 }
 
-const Item = ({ itemIndex, register, errors, invoice }: Props) => {
+const Item = ({ itemIndex, register, errors, invoice, colorTheme }: Props) => {
     let defaultName, defaultQuantity, defaultPrice, defaultTotal
     if (invoice !== undefined) {
         defaultName = invoice.items[itemIndex].name
@@ -30,7 +31,6 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
     const [total, setTotal] = useState<string | number | readonly string[]>(
         defaultTotal
     )
-    const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
     //Calculating total from price and quantity
@@ -65,7 +65,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     htmlFor={'item-name-' + itemIndex}
                     className={clsx(
                         'min-[525px]:hidden',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-singleGrey'
                             : 'text-checkboxViolet'
                     )}
@@ -77,7 +77,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     id={'item-name-' + itemIndex}
                     className={clsx(
                         'ml-[1px] h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs outline-none focus:border-packmanUp',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? errors.items &&
                               errors.items[itemIndex] &&
                               errors.items[itemIndex]!.name
@@ -98,7 +98,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     htmlFor={'quantity-' + itemIndex}
                     className={clsx(
                         'min-[525px]:hidden',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-singleGrey'
                             : 'text-checkboxViolet'
                     )}
@@ -112,7 +112,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     id={`quantity-${itemIndex}`}
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack outline-none focus:border-packmanUp',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? errors.items &&
                               errors.items[itemIndex] &&
                               errors.items[itemIndex]!.quantity
@@ -134,7 +134,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     htmlFor={'price-' + itemIndex}
                     className={clsx(
                         'min-[525px]:hidden',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-singleGrey'
                             : 'text-checkboxViolet'
                     )}
@@ -147,7 +147,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                     id={`price-${itemIndex}`}
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs text-defaultBlack outline-none focus:border-packmanUp',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? errors.items &&
                               errors.items[itemIndex] &&
                               errors.items[itemIndex]!.price
@@ -168,7 +168,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                 <label
                     className={clsx(
                         'min-[525px]:hidden',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-singleGrey'
                             : 'text-checkboxViolet'
                     )}
@@ -178,7 +178,7 @@ const Item = ({ itemIndex, register, errors, invoice }: Props) => {
                 <input
                     className={clsx(
                         'w-full bg-transparent font-spartanBold outline-none focus:border-packmanUp focus:outline-none focus:ring-0 xs:mt-[16px] min-[525px]:mt-0',
-                        invoiceRedux.colorTheme === 'light'
+                        colorTheme === 'light'
                             ? 'text-draftText'
                             : 'text-defaultWhite'
                     )}
