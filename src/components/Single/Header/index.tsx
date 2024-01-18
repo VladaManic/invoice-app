@@ -65,13 +65,18 @@ const Header = ({
                 <Modal onClose={onClose}>
                     <DeleteConfirmationModal
                         invoice={invoice}
+                        colorTheme={colorTheme}
                         onClose={onClose}
                     />
                 </Modal>
             )}
             {invoiceRedux.openFormModal && (
                 <Modal onClose={onCloseHandler}>
-                    <FormModal invoice={invoice} onClose={onCloseHandler} />
+                    <FormModal
+                        invoice={invoice}
+                        colorTheme={colorTheme}
+                        onClose={onCloseHandler}
+                    />
                 </Modal>
             )}
         </div>

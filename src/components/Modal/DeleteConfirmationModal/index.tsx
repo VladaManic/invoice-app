@@ -15,10 +15,11 @@ import LoaderSmall from '../../../components/Reusable/LoaderSmall'
 import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
     invoice: InvoiceObj
+    colorTheme: string
     onClose: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
+const DeleteConfirmationModal = ({ invoice, colorTheme, onClose }: Props) => {
     const navigate = useNavigate()
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
@@ -50,15 +51,13 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
         <div
             className={clsx(
                 'fixed left-[50%] top-[50%] z-[100] -translate-x-1/2 -translate-y-1/2 rounded-lg p-[40px] xs:h-[230px] xs:w-[332px] md:h-[249px] md:w-[480px]',
-                invoiceRedux.colorTheme === 'light'
-                    ? 'bg-defaultWhite'
-                    : 'bg-asideDark'
+                colorTheme === 'light' ? 'bg-defaultWhite' : 'bg-asideDark'
             )}
         >
             <h2
                 className={clsx(
                     'mb-[15px] font-spartanBold text-defaultBlack xs:text-[20px] xs:leading-[32px] md:text-[24px] md:leading-[32px]',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'text-defaultBlack'
                         : 'text-defaultWhite'
                 )}
@@ -68,7 +67,7 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
             <p
                 className={clsx(
                     'mb-[15px] text-[12px] leading-[22px]',
-                    invoiceRedux.colorTheme === 'light'
+                    colorTheme === 'light'
                         ? 'text-singleGrey'
                         : 'text-checkboxViolet'
                 )}
@@ -80,8 +79,7 @@ const DeleteConfirmationModal = ({ invoice, onClose }: Props) => {
                 <button
                     className={clsx(
                         'mr-3 rounded-[50px] pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs',
-                        invoiceRedux.colorTheme === 'dark' &&
-                            'bg-editDark text-defaultWhite'
+                        colorTheme === 'dark' && 'bg-editDark text-defaultWhite'
                     )}
                     onClick={onClose}
                 >

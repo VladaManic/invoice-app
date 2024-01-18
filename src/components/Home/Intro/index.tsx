@@ -77,7 +77,11 @@ const Intro = ({ colorTheme }: Props) => {
             </div>
             {invoiceRedux.openFormModal && (
                 <Modal onClose={onCloseHandler}>
-                    <FormModal invoice={undefined} onClose={onCloseHandler} />
+                    <FormModal
+                        invoice={undefined}
+                        colorTheme={colorTheme}
+                        onClose={onCloseHandler}
+                    />
                 </Modal>
             )}
         </div>
