@@ -62,7 +62,7 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
     }
 
     return (
-        <div className="relative xs:w-full min-[525px]:w-[48%]">
+        <div className="relative mt-[-8px] xs:w-full min-[525px]:w-[48%]">
             <label
                 className={clsx(
                     'font-spartanMedium text-xs',

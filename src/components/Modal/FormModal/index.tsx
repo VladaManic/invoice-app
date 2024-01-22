@@ -11,6 +11,7 @@ import {
 import { format } from 'date-fns'
 import clsx from 'clsx'
 import stringGenerator from '../../../utils/stringGenerator'
+import reformatDate from '../../../utils/reformatDate'
 
 import Nav from '../FormSections/Nav'
 import FormTitle from '../FormSections/FormTitle'
@@ -99,7 +100,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
         const newObj: InvoiceObj = {
             id: '0',
             createdAt: '0',
-            paymentDue: data.paymentDue,
+            paymentDue: reformatDate(data.paymentDue),
             description: data.description,
             paymentTerms: data.paymentTerms,
             clientName: data.clientName,
