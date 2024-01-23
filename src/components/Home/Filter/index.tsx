@@ -21,6 +21,7 @@ const Filter = ({ colorTheme }: Props) => {
     const dropdownRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
+        //Click outside dropdown, closes it
         const clickOutsideHandler = (e: MouseEvent | TouchEvent) => {
             if (
                 dropdownRef.current !== null &&
@@ -29,16 +30,15 @@ const Filter = ({ colorTheme }: Props) => {
                 setOpened(false)
             }
         }
-
         document.addEventListener('mousedown', clickOutsideHandler)
         document.addEventListener('touchstart', clickOutsideHandler)
-
         return () => {
             document.removeEventListener('mousedown', clickOutsideHandler)
             document.removeEventListener('touchstart', clickOutsideHandler)
         }
     }, [])
 
+    //Clicking on dropdown status to filter
     const onClickHandler = (
         e:
             | React.MouseEvent<HTMLButtonElement>

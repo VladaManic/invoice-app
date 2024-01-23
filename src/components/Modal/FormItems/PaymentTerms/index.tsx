@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 
@@ -39,6 +39,25 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
         defaultPaymentText
     )
     const [selectOpened, setSelectOpened] = useState<boolean>(false)
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        //Click outside dropdown, closes it
+        const clickOutsideHandler = (e: MouseEvent | TouchEvent) => {
+            if (
+                dropdownRef.current !== null &&
+                !dropdownRef.current!.contains(e.target as Node)
+            ) {
+                setSelectOpened(false)
+            }
+        }
+        document.addEventListener('mousedown', clickOutsideHandler)
+        document.addEventListener('touchstart', clickOutsideHandler)
+        return () => {
+            document.removeEventListener('mousedown', clickOutsideHandler)
+            document.removeEventListener('touchstart', clickOutsideHandler)
+        }
+    }, [])
 
     //Opening/closing dropdown
     const dropdownHandler = (
@@ -73,87 +92,89 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
             >
                 Payment Terms
             </label>
-            <button
-                value={selectValue}
-                className={clsx(
-                    'flex w-full items-center justify-between rounded-[5px] border-[1px] border-solid p-[15px] text-right font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
-                    colorTheme === 'light'
-                        ? 'border-checkboxViolet bg-transparent text-defaultBlack'
-                        : 'border-editDark bg-editDark text-defaultWhite'
-                )}
-                onClick={dropdownHandler}
-                {...register('paymentTerms')}
-            >
-                <p>{selectText}</p>
-                <img
-                    src={arrowIcon}
-                    alt="Arrow down"
-                    className={clsx(selectOpened && 'rotate-180')}
-                />
-            </button>
-            {selectOpened && (
-                <div
+            <div ref={dropdownRef}>
+                <button
+                    value={selectValue}
                     className={clsx(
-                        'absolute top-[80px] w-full overflow-hidden rounded-[10px] font-spartanBold text-xs',
+                        'flex w-full items-center justify-between rounded-[5px] border-[1px] border-solid p-[15px] text-right font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
                         colorTheme === 'light'
-                            ? 'text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]'
-                            : 'text-defaultWhite'
+                            ? 'border-checkboxViolet bg-transparent text-defaultBlack'
+                            : 'border-editDark bg-editDark text-defaultWhite'
                     )}
+                    onClick={dropdownHandler}
+                    {...register('paymentTerms')}
                 >
-                    <button
-                        value="1"
-                        name="Net 1 Day"
+                    <p>{selectText}</p>
+                    <img
+                        src={arrowIcon}
+                        alt="Arrow down"
+                        className={clsx(selectOpened && 'rotate-180')}
+                    />
+                </button>
+                {selectOpened && (
+                    <div
                         className={clsx(
-                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp  focus:outline-none focus:ring-0',
+                            'absolute top-[80px] w-full overflow-hidden rounded-[10px] font-spartanBold text-xs',
                             colorTheme === 'light'
-                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
+                                ? 'text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]'
+                                : 'text-defaultWhite'
                         )}
-                        onClick={onClickDropdown}
                     >
-                        Net 1 Day
-                    </button>
-                    <button
-                        value="7"
-                        name="Net 7 Days"
-                        className={clsx(
-                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
-                            colorTheme === 'light'
-                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
-                        )}
-                        onClick={onClickDropdown}
-                    >
-                        Net 7 Days
-                    </button>
-                    <button
-                        value="14"
-                        name="Net 14 Days"
-                        className={clsx(
-                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
-                            colorTheme === 'light'
-                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
-                        )}
-                        onClick={onClickDropdown}
-                    >
-                        Net 14 Days
-                    </button>
-                    <button
-                        value="30"
-                        name="Net 30 Days"
-                        className={clsx(
-                            'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
-                            colorTheme === 'light'
-                                ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
-                                : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
-                        )}
-                        onClick={onClickDropdown}
-                    >
-                        Net 30 Days
-                    </button>
-                </div>
-            )}
+                        <button
+                            value="1"
+                            name="Net 1 Day"
+                            className={clsx(
+                                'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp  focus:outline-none focus:ring-0',
+                                colorTheme === 'light'
+                                    ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                    : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
+                            )}
+                            onClick={onClickDropdown}
+                        >
+                            Net 1 Day
+                        </button>
+                        <button
+                            value="7"
+                            name="Net 7 Days"
+                            className={clsx(
+                                'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
+                                colorTheme === 'light'
+                                    ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                    : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
+                            )}
+                            onClick={onClickDropdown}
+                        >
+                            Net 7 Days
+                        </button>
+                        <button
+                            value="14"
+                            name="Net 14 Days"
+                            className={clsx(
+                                'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
+                                colorTheme === 'light'
+                                    ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                    : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
+                            )}
+                            onClick={onClickDropdown}
+                        >
+                            Net 14 Days
+                        </button>
+                        <button
+                            value="30"
+                            name="Net 30 Days"
+                            className={clsx(
+                                'border-b-solid w-full rounded-none border-b-[1px] pb-[15px] pt-[15px] text-left hover:text-packmanUp focus:outline-none focus:ring-0',
+                                colorTheme === 'light'
+                                    ? 'border-b-checkboxViolet hover:border-defaultWhite hover:border-b-checkboxViolet'
+                                    : 'border-b-defaultBlack bg-editDark hover:border-editDark hover:border-b-defaultBlack'
+                            )}
+                            onClick={onClickDropdown}
+                        >
+                            Net 30 Days
+                        </button>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
