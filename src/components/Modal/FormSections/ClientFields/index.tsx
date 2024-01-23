@@ -16,6 +16,7 @@ const ClientFields = ({ register, errors, invoice, colorTheme }: Props) => {
         defaultCity,
         defaultPostcode,
         defaultCountry
+    //Edit form values
     if (invoice !== undefined) {
         defaultName = invoice.clientName
         defaultEmail = invoice.clientEmail
@@ -23,6 +24,7 @@ const ClientFields = ({ register, errors, invoice, colorTheme }: Props) => {
         defaultCity = invoice.clientAddress.city
         defaultPostcode = invoice.clientAddress.postCode
         defaultCountry = invoice.clientAddress.country
+        //Add form values
     } else {
         defaultName = ''
         defaultEmail = ''

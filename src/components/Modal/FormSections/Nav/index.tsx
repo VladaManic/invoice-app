@@ -11,6 +11,7 @@ interface Props {
 const Nav = ({ colorTheme }: Props) => {
     const dispatch = useAppDispatch()
 
+    //Closing modal on 'Go back' nav text
     const onClickHandler = () => {
         dispatch(setOpenModal(false))
     }

@@ -16,8 +16,10 @@ const ProjectDescription = ({
     colorTheme,
 }: Props) => {
     let defaultDescription
+    //Edit form value
     if (invoice !== undefined) {
         defaultDescription = invoice.description
+        //Add form value
     } else {
         defaultDescription = ''
     }

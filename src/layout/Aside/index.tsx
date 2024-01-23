@@ -12,6 +12,7 @@ const Aside = () => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
+    //On click btn, change theme
     const onClickHandler = () => {
         dispatch(setColorTheme())
     }

@@ -38,6 +38,7 @@ const DeleteConfirmationModal = ({ invoice, colorTheme, onClose }: Props) => {
         }
     }, [invoiceRedux.errorDelete, invoiceRedux.successDelete])
 
+    //Confirmation delete click
     const onClickHandler = (
         e:
             | React.MouseEvent<HTMLButtonElement>

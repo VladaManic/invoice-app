@@ -14,6 +14,7 @@ interface Props {
 
 const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
     let defaultPaymentTerms, defaultPaymentText
+    //Edit form values
     if (invoice !== undefined) {
         defaultPaymentTerms = invoice.paymentTerms
         switch (invoice.paymentTerms.toString()) {
@@ -30,6 +31,7 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
                 defaultPaymentText = 'Net 30 days'
                 break
         }
+        //Add form values
     } else {
         defaultPaymentTerms = '1'
         defaultPaymentText = 'Net 1 day'

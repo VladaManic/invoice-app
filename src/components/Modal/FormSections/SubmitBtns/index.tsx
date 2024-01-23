@@ -12,10 +12,10 @@ interface Props {
 
 const SubmitBtns = ({ pathname, colorTheme, onClose, onClick }: Props) => {
     let submitText
-    //Update form features
+    //Edit form value
     if (pathname.includes('/invoice/')) {
         submitText = 'Save changes'
-        //Insert form features
+        //Add form value
     } else {
         submitText = 'Save & Send'
     }

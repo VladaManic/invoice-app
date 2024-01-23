@@ -11,11 +11,13 @@ interface Props {
 
 const SenderFields = ({ register, errors, invoice, colorTheme }: Props) => {
     let defaultStreet, defaultCity, defaultPostcode, defaultCountry
+    //Edit form values
     if (invoice !== undefined) {
         defaultStreet = invoice.senderAddress.street
         defaultCity = invoice.senderAddress.city
         defaultPostcode = invoice.senderAddress.postCode
         defaultCountry = invoice.senderAddress.country
+        //Add form values
     } else {
         defaultStreet = ''
         defaultCity = ''

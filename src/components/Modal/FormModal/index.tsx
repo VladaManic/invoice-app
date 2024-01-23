@@ -34,11 +34,11 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
     const dispatch = useAppDispatch()
 
     let singleInvoice, formTitle
-    //Update form features
+    //Edit form values
     if (pathname.includes('/invoice/')) {
         singleInvoice = invoice
         formTitle = <FormTitle invoice={invoice} />
-        //Insert form features
+        //Add form values
     } else {
         singleInvoice = undefined
         formTitle = 'New invoice'

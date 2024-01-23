@@ -20,7 +20,7 @@ const Home = () => {
                 'You successfully deleted the invoice!',
                 TOASTIFY_PARAMS
             )
-            //After showing the success message for deleting invoice, reseting the success to false for new potencial delete
+            //After showing the success message for deleting invoice, reseting the success to false for new potential delete
             dispatch(resetSuccess())
         }
     }, [])
