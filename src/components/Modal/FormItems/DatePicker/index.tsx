@@ -82,7 +82,7 @@ const DatePicker = ({ register, errors, invoice, colorTheme }: Props) => {
                 <div
                     id="datepicker"
                     className={clsx(
-                        'mt-[10px] flex w-full rounded-[5px]',
+                        'z-50 mt-[10px] flex w-full rounded-[5px]',
                         datepickerOpened ? 'absolute block' : 'hidden',
                         colorTheme === 'light'
                             ? 'light-theme bg-defaultWhite text-defaultBlack shadow-[0_10px_20px_0_rgba(223,227,250,0.9)]'

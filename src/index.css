@@ -191,6 +191,10 @@ input[type='number'] {
     .ui-icon {
         display: none;
     }
+
+    @media (max-width: 525px) {
+        left: 50px;
+    }
 }
 
 .ui-datepicker-next {
@@ -204,6 +208,10 @@ input[type='number'] {
 
     .ui-icon {
         display: none;
+    }
+
+    @media (max-width: 525px) {
+        right: 50px;
     }
 }
 
@@ -219,6 +227,18 @@ input[type='number'] {
     td {
         padding: 7px;
         text-align: center;
+
+        @media (max-width: 585px) {
+            padding: 4px;
+        }
+
+        @media (max-width: 525px) {
+            padding: 10px;
+        }
+
+        @media (max-width: 380px) {
+            padding: 7px;
+        }
     }
 }
 
@@ -255,3 +275,4 @@ input[type='number'] {
         }
     }
 }
+/* End datepicker style */
