@@ -3,18 +3,21 @@ import { useEffect, useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import datepickerSettup from '../../../../utils/datepickerSettup'
 import clsx from 'clsx'
+import { format } from 'date-fns'
 
 import datepickerIcon from '../../../../assets/img/datepicker.svg'
 
-import { FormDataObj } from '../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 interface Props {
     register: UseFormRegister<FormDataObj>
     errors: FieldErrors<FormDataObj>
+    invoice: InvoiceObj | undefined
     colorTheme: string
 }
 
-const DatePicker = ({ register, errors, colorTheme }: Props) => {
+const DatePicker = ({ register, errors, invoice, colorTheme }: Props) => {
     const [datepickerOpened, setDatepickerOpened] = useState<boolean>(false)
+    const datePayment = invoice !== undefined && new Date(invoice.paymentDue)
 
     useEffect(() => {
         datepickerSettup()
@@ -51,10 +54,15 @@ const DatePicker = ({ register, errors, colorTheme }: Props) => {
             <div id="datepicker-wrap" className="relative">
                 <input
                     type="text"
+                    defaultValue={
+                        datePayment !== false
+                            ? format(datePayment, 'dd MMM y')
+                            : ''
+                    }
                     readOnly
                     id="datapicker-val"
                     className={clsx(
-                        'flex w-full cursor-pointer items-center rounded-[5px] border-[1px] border-solid p-[15px] font-spartanBold text-xs text-defaultBlack focus:border-packmanUp focus:outline-none focus:ring-0',
+                        'flex w-full cursor-pointer items-center rounded-[5px] border-[1px] border-solid p-[15px] font-spartanBold text-xs text-defaultBlack hover:border-packmanUp focus:border-packmanUp focus:outline-none focus:ring-0',
                         colorTheme === 'light'
                             ? !datepickerOpened
                                 ? 'border-checkboxViolet bg-transparent text-titleDark'

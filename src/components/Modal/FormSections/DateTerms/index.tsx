@@ -19,6 +19,7 @@ const DateTerms = ({ register, errors, invoice, colorTheme }: Props) => {
                 <DatePicker
                     register={register}
                     errors={errors}
+                    invoice={invoice}
                     colorTheme={colorTheme}
                 />
                 <PaymentTerms

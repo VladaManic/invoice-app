@@ -143,6 +143,7 @@ const Item = ({ itemIndex, register, errors, invoice, colorTheme }: Props) => {
                 </label>
                 <input
                     type="number"
+                    step="0.01"
                     min="0"
                     id={`price-${itemIndex}`}
                     className={clsx(

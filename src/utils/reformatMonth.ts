@@ -1,5 +1,4 @@
 const reformatMonth = (month: string) => {
-    console.log(month)
     let newMonth
     switch (month) {
         case 'Jan':
