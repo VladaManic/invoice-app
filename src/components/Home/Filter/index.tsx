@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import {
     setStatus,
@@ -17,6 +18,26 @@ const Filter = ({ colorTheme }: Props) => {
     const dispatch = useAppDispatch()
     //Using custom hook for opening/closing dropdown
     const { opened, setOpened } = useAccordion(false)
+    const dropdownRef = useRef<HTMLDivElement | null>(null)
+
+    useEffect(() => {
+        const clickOutsideHandler = (e: MouseEvent | TouchEvent) => {
+            if (
+                dropdownRef.current !== null &&
+                !dropdownRef.current!.contains(e.target as Node)
+            ) {
+                setOpened(false)
+            }
+        }
+
+        document.addEventListener('mousedown', clickOutsideHandler)
+        document.addEventListener('touchstart', clickOutsideHandler)
+
+        return () => {
+            document.removeEventListener('mousedown', clickOutsideHandler)
+            document.removeEventListener('touchstart', clickOutsideHandler)
+        }
+    }, [])
 
     const onClickHandler = (
         e:
@@ -28,7 +49,10 @@ const Filter = ({ colorTheme }: Props) => {
     }
 
     return (
-        <div className="relative flex items-center font-spartanBold text-defaultBlack xs:mr-[2px] md:mr-3">
+        <div
+            ref={dropdownRef}
+            className="relative flex items-center font-spartanBold text-defaultBlack xs:mr-[2px] md:mr-3"
+        >
             <div className="flex items-center">
                 <p
                     className={clsx(
