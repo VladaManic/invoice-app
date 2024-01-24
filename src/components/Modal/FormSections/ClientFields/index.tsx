@@ -104,7 +104,7 @@ const ClientFields = ({ register, errors, invoice, colorTheme }: Props) => {
                     )}
                 </div>
                 <input
-                    type="email"
+                    type="text"
                     id="clients-email"
                     className={clsx(
                         'h-[48px] w-full rounded-[5px] border-[1px] border-solid pl-[15px] font-spartanBold text-xs focus:border-packmanUp focus:outline-none focus:ring-0',

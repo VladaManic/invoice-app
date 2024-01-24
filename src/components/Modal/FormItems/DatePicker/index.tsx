@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import datepickerSettup from '../../../../utils/datepickerSettup'
 import clsx from 'clsx'
@@ -16,27 +16,10 @@ interface Props {
 
 const DatePicker = ({ register, errors, invoice, colorTheme }: Props) => {
     const [datepickerOpened, setDatepickerOpened] = useState<boolean>(false)
-    const dropdownRef = useRef<HTMLDivElement | null>(null)
     const datePayment = invoice !== undefined && new Date(invoice.paymentDue)
 
     useEffect(() => {
         datepickerSettup()
-
-        //Click outside dropdown, closes it
-        const clickOutsideHandler = (e: MouseEvent | TouchEvent) => {
-            if (
-                dropdownRef.current !== null &&
-                !dropdownRef.current!.contains(e.target as Node)
-            ) {
-                setDatepickerOpened(false)
-            }
-        }
-        document.addEventListener('mousedown', clickOutsideHandler)
-        document.addEventListener('touchstart', clickOutsideHandler)
-        return () => {
-            document.removeEventListener('mousedown', clickOutsideHandler)
-            document.removeEventListener('touchstart', clickOutsideHandler)
-        }
     }, [])
 
     //Opening/closing dropdown
@@ -68,10 +51,10 @@ const DatePicker = ({ register, errors, invoice, colorTheme }: Props) => {
                     </span>
                 )}
             </div>
-            <div ref={dropdownRef} id="datepicker-wrap" className="relative">
+            <div id="datepicker-wrap" className="relative">
                 <input
                     type="text"
-                    value={
+                    defaultValue={
                         datePayment !== false
                             ? format(datePayment, 'dd MMM y')
                             : ''

@@ -51,7 +51,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
         senderPostcode: z.string().min(1, { message: "can't be empty" }),
         senderCountry: z.string().min(1, { message: "can't be empty" }),
         clientName: z.string().min(1, { message: "can't be empty" }),
-        clientEmail: z.string().email(),
+        clientEmail: z.string().min(1, { message: "can't be empty" }), //.email(),
         clientAddress: z.string().min(1, { message: "can't be empty" }),
         clientCity: z.string().min(1, { message: "can't be empty" }),
         clientPostcode: z.string().min(1, { message: "can't be empty" }),
