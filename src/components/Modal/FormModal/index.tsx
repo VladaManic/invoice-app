@@ -97,6 +97,11 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
     }
 
     const submitData = (data: FormDataObj) => {
+        let total: number = 0
+        data.items.forEach((item: ItemObj) => {
+            item.total = item.quantity * item.price
+            total = total + item.total
+        })
         const newObj: InvoiceObj = {
             id: '0',
             createdAt: '0',
@@ -119,7 +124,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
                 country: data.clientCountry,
             },
             items: data.items,
-            total: 0,
+            total: total,
         }
         //If Home page (add form)
         if (!pathname.includes('/invoice/')) {
@@ -129,14 +134,8 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
             const id = letterPart + numberPart
             const now = new Date()
             const currentTime = format(now, 'y-MM-dd')
-            let total: number = 0
-            data.items.forEach((item: ItemObj) => {
-                item.total = item.quantity * item.price
-                total = total + item.total
-            })
             newObj.id = id
             newObj.createdAt = currentTime
-            newObj.total = total
             if (submitType === 'pending') {
                 newObj.status = 'pending'
             } else {
@@ -146,15 +145,9 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
             //If single pade (edit form)
         } else {
             console.log(data)
-            let total: number = 0
-            data.items.forEach((item: ItemObj) => {
-                item.total = item.quantity * item.price
-                total = total + item.total
-            })
             newObj.id = invoice!.id
             newObj.createdAt = invoice!.createdAt
             newObj.status = invoice!.status
-            newObj.total = total
             dispatch(updateInvoice(newObj))
         }
     }
