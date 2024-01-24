@@ -36,7 +36,9 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
         defaultPaymentTerms = '1'
         defaultPaymentText = 'Net 1 day'
     }
-    const [selectValue, setSelectValue] = useState<string>(defaultPaymentTerms)
+    const [selectValue, setSelectValue] = useState<string | number>(
+        defaultPaymentTerms
+    )
     const [selectText, setSelectText] = useState<string | undefined>(
         defaultPaymentText
     )
