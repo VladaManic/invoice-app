@@ -26,7 +26,7 @@ export type InvoiceObj = {
     createdAt: string
     paymentDue: string
     description: string
-    paymentTerms: string
+    paymentTerms: number
     clientName: string
     clientEmail: string
     status: string

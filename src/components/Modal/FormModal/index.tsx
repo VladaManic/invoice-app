@@ -102,7 +102,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
             createdAt: '0',
             paymentDue: reformatDate(data.paymentDue),
             description: data.description,
-            paymentTerms: data.paymentTerms,
+            paymentTerms: parseInt(data.paymentTerms),
             clientName: data.clientName,
             clientEmail: data.clientEmail,
             status: 'pending',
