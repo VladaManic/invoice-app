@@ -22,7 +22,7 @@ const reformatMonth = (month: string) => {
         case 'Jul':
             newMonth = '07'
             break
-        case 'aug':
+        case 'Aug':
             newMonth = '08'
             break
         case 'Sep':

@@ -71,7 +71,7 @@ const DatePicker = ({ register, errors, invoice, colorTheme }: Props) => {
             <div ref={dropdownRef} id="datepicker-wrap" className="relative">
                 <input
                     type="text"
-                    defaultValue={
+                    value={
                         datePayment !== false
                             ? format(datePayment, 'dd MMM y')
                             : ''
