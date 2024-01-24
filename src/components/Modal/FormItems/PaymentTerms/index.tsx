@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import clsx from 'clsx'
 
@@ -43,25 +43,6 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
         defaultPaymentText
     )
     const [selectOpened, setSelectOpened] = useState<boolean>(false)
-    const dropdownRef = useRef<HTMLDivElement | null>(null)
-
-    useEffect(() => {
-        //Click outside dropdown, closes it
-        const clickOutsideHandler = (e: MouseEvent | TouchEvent) => {
-            if (
-                dropdownRef.current !== null &&
-                !dropdownRef.current!.contains(e.target as Node)
-            ) {
-                setSelectOpened(false)
-            }
-        }
-        document.addEventListener('mousedown', clickOutsideHandler)
-        document.addEventListener('touchstart', clickOutsideHandler)
-        return () => {
-            document.removeEventListener('mousedown', clickOutsideHandler)
-            document.removeEventListener('touchstart', clickOutsideHandler)
-        }
-    }, [])
 
     //Opening/closing dropdown
     const dropdownHandler = (
@@ -96,7 +77,7 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
             >
                 Payment Terms
             </label>
-            <div ref={dropdownRef}>
+            <div>
                 <button
                     value={selectValue}
                     className={clsx(
