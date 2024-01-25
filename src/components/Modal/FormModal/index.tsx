@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '../../../state/hooks'
 import {
+    addItem,
     createInvoice,
     updateInvoice,
 } from '../../../state/invoice/invoiceSlice'
@@ -90,6 +91,16 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
     // Object.keys(schema.shape).forEach((key) => {
     //     console.log(key)
     // })
+
+    useEffect(() => {
+        //Edit form
+        if (invoice !== undefined) {
+            //Setting value for list items depending on single invoice items list
+            Array.from({ length: invoice.items.length }, () =>
+                dispatch(addItem())
+            )
+        }
+    }, [])
 
     //Different submit btns clicked in add form (draft or pending)
     const onClickHandler = (e: React.FormEvent<HTMLButtonElement>) => {

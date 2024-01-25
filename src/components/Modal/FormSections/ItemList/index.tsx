@@ -9,7 +9,7 @@ import clsx from 'clsx'
 
 import Item from '../../FormItems/Item'
 
-import { FormDataObj, InvoiceObj, ItemObj } from '../../../../types/interfaces'
+import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 interface Props {
     register: UseFormRegister<FormDataObj>
     unregister: UseFormUnregister<FormDataObj>
@@ -27,6 +27,8 @@ const ItemList = ({
 }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
+
+    console.log(invoiceRedux.itemList)
 
     //Adding new item
     const onClickHandler = (
@@ -58,31 +60,17 @@ const ItemList = ({
                     <p className="w-[15%]">Total</p>
                     <p className="w-[10%]"></p>
                 </div>
-                {invoice === undefined
-                    ? //Add form
-                      invoiceRedux.itemList.map((item: number) => (
-                          <Item
-                              key={item}
-                              itemIndex={item}
-                              register={register}
-                              unregister={unregister}
-                              errors={errors}
-                              invoice={invoice}
-                              colorTheme={colorTheme}
-                          />
-                      ))
-                    : //Edit form
-                      invoice.items.map((item: ItemObj, index: number) => (
-                          <Item
-                              key={item.name}
-                              itemIndex={index}
-                              register={register}
-                              unregister={unregister}
-                              errors={errors}
-                              invoice={invoice}
-                              colorTheme={colorTheme}
-                          />
-                      ))}
+                {invoiceRedux.itemList.map((item: number) => (
+                    <Item
+                        key={item}
+                        itemIndex={item}
+                        register={register}
+                        unregister={unregister}
+                        errors={errors}
+                        invoice={invoice}
+                        colorTheme={colorTheme}
+                    />
+                ))}
             </div>
             <button
                 className={clsx(

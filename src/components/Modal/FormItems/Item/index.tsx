@@ -31,10 +31,22 @@ const Item = ({
     let defaultName, defaultQuantity, defaultPrice, defaultTotal
     //Edit form values
     if (invoice !== undefined) {
-        defaultName = invoice.items[itemIndex].name
-        defaultQuantity = invoice.items[itemIndex].quantity
-        defaultPrice = invoice.items[itemIndex].price
-        defaultTotal = invoice.items[itemIndex].total
+        defaultName =
+            invoice.items[itemIndex] !== undefined
+                ? invoice.items[itemIndex].name
+                : ''
+        defaultQuantity =
+            invoice.items[itemIndex] !== undefined
+                ? invoice.items[itemIndex].quantity
+                : ''
+        defaultPrice =
+            invoice.items[itemIndex] !== undefined
+                ? invoice.items[itemIndex].price
+                : ''
+        defaultTotal =
+            invoice.items[itemIndex] !== undefined
+                ? invoice.items[itemIndex].total
+                : '0.00'
         //Add form values
     } else {
         defaultName = ''

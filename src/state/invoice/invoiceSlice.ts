@@ -224,6 +224,7 @@ const invoiceSlice = createSlice({
         builder.addCase(updateInvoice.fulfilled, (state, action) => {
             state.loading = false
             state.singleInvoice = action.payload
+            state.itemList = []
             state.error = ''
         })
         builder.addCase(updateInvoice.rejected, (state, action) => {
