@@ -93,11 +93,13 @@ const ItemList = ({
                     - An item must be added
                 </span>
             )}
-            {errors.items && errors.items.root!.message === 'Required' && (
-                <span className="block text-xs text-errorRed">
-                    - An item must be added
-                </span>
-            )}
+            {errors.items &&
+                errors.items!.root &&
+                errors.items.root!.message === 'Required' && (
+                    <span className="block text-xs text-errorRed">
+                        - An item must be added
+                    </span>
+                )}
         </div>
     )
 }
