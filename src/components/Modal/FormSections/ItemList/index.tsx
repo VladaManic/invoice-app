@@ -28,7 +28,7 @@ const ItemList = ({
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
-    console.log(invoiceRedux.itemList)
+    //console.log(invoiceRedux.itemList)
 
     //Adding new item
     const onClickHandler = (
