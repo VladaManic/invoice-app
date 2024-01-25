@@ -1,5 +1,9 @@
 import { useState } from 'react'
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import {
+    FieldErrors,
+    UseFormRegister,
+    UseFormUnregister,
+} from 'react-hook-form'
 import { useAppDispatch } from '../../../../state/hooks'
 import { removeItem } from '../../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
@@ -10,12 +14,20 @@ import { FormDataObj, InvoiceObj } from '../../../../types/interfaces'
 interface Props {
     itemIndex: number
     register: UseFormRegister<FormDataObj>
+    unregister: UseFormUnregister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
     colorTheme: string
 }
 
-const Item = ({ itemIndex, register, errors, invoice, colorTheme }: Props) => {
+const Item = ({
+    itemIndex,
+    unregister,
+    register,
+    errors,
+    invoice,
+    colorTheme,
+}: Props) => {
     let defaultName, defaultQuantity, defaultPrice, defaultTotal
     //Edit form values
     if (invoice !== undefined) {
@@ -58,6 +70,7 @@ const Item = ({ itemIndex, register, errors, invoice, colorTheme }: Props) => {
     ) => {
         e.preventDefault()
         dispatch(removeItem(itemIndex))
+        unregister('items')
     }
 
     return (

@@ -79,6 +79,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
 
     const {
         register,
+        unregister,
         handleSubmit,
         formState: { errors },
     } = useForm<FormDataObj>({
@@ -203,6 +204,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
                         />
                         <ItemList
                             register={register}
+                            unregister={unregister}
                             errors={errors}
                             invoice={singleInvoice}
                             colorTheme={colorTheme}

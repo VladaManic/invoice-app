@@ -1,4 +1,8 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import {
+    FieldErrors,
+    UseFormRegister,
+    UseFormUnregister,
+} from 'react-hook-form'
 import { useAppDispatch, useAppSelector } from '../../../../state/hooks'
 import { addItem } from '../../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
@@ -8,12 +12,19 @@ import Item from '../../FormItems/Item'
 import { FormDataObj, InvoiceObj, ItemObj } from '../../../../types/interfaces'
 interface Props {
     register: UseFormRegister<FormDataObj>
+    unregister: UseFormUnregister<FormDataObj>
     errors: FieldErrors<FormDataObj>
     invoice: InvoiceObj | undefined
     colorTheme: string
 }
 
-const ItemList = ({ register, errors, invoice, colorTheme }: Props) => {
+const ItemList = ({
+    register,
+    unregister,
+    errors,
+    invoice,
+    colorTheme,
+}: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
 
@@ -54,6 +65,7 @@ const ItemList = ({ register, errors, invoice, colorTheme }: Props) => {
                               key={item}
                               itemIndex={item}
                               register={register}
+                              unregister={unregister}
                               errors={errors}
                               invoice={invoice}
                               colorTheme={colorTheme}
@@ -65,6 +77,7 @@ const ItemList = ({ register, errors, invoice, colorTheme }: Props) => {
                               key={item.name}
                               itemIndex={index}
                               register={register}
+                              unregister={unregister}
                               errors={errors}
                               invoice={invoice}
                               colorTheme={colorTheme}
