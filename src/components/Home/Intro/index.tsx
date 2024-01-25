@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import { setOpenModal } from '../../../state/invoice/invoiceSlice'
+import {
+    setOpenModal,
+    removeAllItems,
+} from '../../../state/invoice/invoiceSlice'
 import clsx from 'clsx'
 
 import Modal from '../../Reusable/Modal'
@@ -19,9 +22,11 @@ const Intro = ({ colorTheme }: Props) => {
         dispatch(setOpenModal(true))
     }
 
-    //On click modal overlay, closes modal
+    //On click, close modal
     const onCloseHandler = () => {
         dispatch(setOpenModal(false))
+        //Remove all item list fields
+        dispatch(removeAllItems())
     }
 
     return (

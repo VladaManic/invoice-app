@@ -104,6 +104,7 @@ const invoiceSlice = createSlice({
         setOpenModal: (state, action) => {
             state.openFormModal = action.payload
         },
+        //Add new item in form item list
         addItem: (state) => {
             //If empty array
             if (state.itemList[state.itemList.length - 1] === undefined) {
@@ -115,10 +116,15 @@ const invoiceSlice = createSlice({
                 )
             }
         },
+        //Remove one item from form item list
         removeItem: (state, action) => {
             state.itemList = state.itemList.filter(
                 (index: number) => index !== action.payload
             )
+        },
+        //Remove all items from form item list
+        removeAllItems: (state) => {
+            state.itemList = []
         },
         resetError: (state) => {
             state.errorDelete = ''
@@ -245,6 +251,7 @@ export const {
     setOpenModal,
     addItem,
     removeItem,
+    removeAllItems,
     resetError,
     resetSuccess,
     setColorTheme,

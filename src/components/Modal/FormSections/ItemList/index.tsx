@@ -59,7 +59,7 @@ const ItemList = ({
                     <p className="w-[10%]"></p>
                 </div>
                 {invoice === undefined
-                    ? //Insert form
+                    ? //Add form
                       invoiceRedux.itemList.map((item: number) => (
                           <Item
                               key={item}
@@ -71,7 +71,7 @@ const ItemList = ({
                               colorTheme={colorTheme}
                           />
                       ))
-                    : //Update form
+                    : //Edit form
                       invoice.items.map((item: ItemObj, index: number) => (
                           <Item
                               key={item.name}
