@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 import getDefaultTheme from '../../utils/getDeafultTheme'
 import isStorageSupported from '../../utils/isStorageSupported'
+import resetArray from '../../utils/resetArray'
 
 import { InitialStateObj, InvoiceObj } from '../../types/interfaces'
-
 const initialState: InitialStateObj = {
     loading: false,
     error: '',
@@ -118,9 +118,10 @@ const invoiceSlice = createSlice({
         },
         //Remove one item from form item list
         removeItem: (state, action) => {
-            state.itemList = state.itemList.filter(
+            const newArray = state.itemList.filter(
                 (index: number) => index !== action.payload
             )
+            state.itemList = resetArray(newArray)
         },
         //Remove all items from form item list
         removeAllItems: (state) => {

@@ -138,9 +138,9 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
             items: data.items,
             total: total,
         }
+        console.log(data)
         //If Home page (add form)
         if (!pathname.includes('/invoice/')) {
-            console.log(data)
             const letterPart = stringGenerator(2, 'letters')
             const numberPart = stringGenerator(4, 'numbers')
             const id = letterPart + numberPart
@@ -156,7 +156,6 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
             dispatch(createInvoice(newObj))
             //If single pade (edit form)
         } else {
-            console.log(data)
             newObj.id = invoice!.id
             newObj.createdAt = invoice!.createdAt
             newObj.status = invoice!.status
