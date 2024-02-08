@@ -10,11 +10,11 @@ interface Props {
 }
 
 const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
 
     return (
         <div className="flex min-[335px]:justify-between md:justify-end">
-            <EditBtn colorTheme={invoiceRedux.colorTheme} />
+            <EditBtn colorTheme={themeRedux.colorTheme} />
             <button
                 className="rounded-[50px] bg-deleteRed pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite xs:mr-1 sm:mr-3"
                 onClick={onClickDelete}

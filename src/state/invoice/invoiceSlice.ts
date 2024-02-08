@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import getDefaultTheme from '../../utils/getDeafultTheme'
-import isStorageSupported from '../../utils/isStorageSupported'
 import resetArray from '../../utils/resetArray'
 
 import { InitialStateObj, InvoiceObj } from '../../types/interfaces'
@@ -16,17 +14,16 @@ const initialState: InitialStateObj = {
     loadingDelete: false,
     errorDelete: '',
     successDelete: false,
-    colorTheme: getDefaultTheme(),
 }
 
-//Generates pendind, fullfiled and rejcted action types for fetching all invoices
+//Generates pending, fullfiled and rejected action types for fetching all invoices
 export const fetchInvoices = createAsyncThunk('invoice/fetchInvoices', () => {
     return axios
         .get('http://localhost:3004/invoices')
         .then((response) => response.data)
 })
 
-//Filtering by invoice status (pendind, fullfiled and rejcted action types)
+//Filtering by invoice status (pending, fullfiled and rejected action types)
 export const fetchInvoicesByStatus = createAsyncThunk(
     'invoice/fetcInvoicesByStatus',
     (invoiceStatus: string) => {
@@ -46,7 +43,7 @@ export const createInvoice = createAsyncThunk(
     }
 )
 
-//Fetching single invoice (pendind, fullfiled and rejcted action types)
+//Fetching single invoice (pending, fullfiled and rejected action types)
 export const fetchSingleInvoice = createAsyncThunk(
     'invoice/fetchSingleInvoice',
     (singleInvoiceId: string) => {
@@ -132,18 +129,6 @@ const invoiceSlice = createSlice({
         },
         resetSuccess: (state) => {
             state.successDelete = false
-        },
-        setColorTheme: (state) => {
-            let newValue
-            if (state.colorTheme === 'dark') {
-                newValue = 'light'
-            } else {
-                newValue = 'dark'
-            }
-            state.colorTheme = newValue
-            //Adding value to local storage
-            isStorageSupported('localStorage') &&
-                localStorage.setItem('default-theme', JSON.stringify(newValue))
         },
     },
     //Async reducers
@@ -256,7 +241,6 @@ export const {
     removeAllItems,
     resetError,
     resetSuccess,
-    setColorTheme,
 } = invoiceSlice.actions
 
 export default invoiceSlice.reducer

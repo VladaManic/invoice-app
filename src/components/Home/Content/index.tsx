@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Content = ({ invoice }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
 
     return (
         <>
@@ -19,12 +19,12 @@ const Content = ({ invoice }: Props) => {
                         <SingleInvoice
                             key={singleInvoice.id}
                             invoice={singleInvoice}
-                            colorTheme={invoiceRedux.colorTheme}
+                            colorTheme={themeRedux.colorTheme}
                         />
                     ))}
                 </div>
             ) : (
-                <EmptyInvoices colorTheme={invoiceRedux.colorTheme} />
+                <EmptyInvoices colorTheme={themeRedux.colorTheme} />
             )}
         </>
     )

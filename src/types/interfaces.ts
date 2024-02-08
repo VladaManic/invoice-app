@@ -47,6 +47,9 @@ export type InitialStateObj = {
     loadingDelete: boolean
     errorDelete: string | undefined
     successDelete: boolean
+}
+
+export type ThemeInitialStateObj = {
     colorTheme: string
 }
 

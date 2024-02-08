@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
-import { setColorTheme } from '../../state/invoice/invoiceSlice'
+import { setColorTheme } from '../../state/theme/themeSlice'
 import clsx from 'clsx'
 
 import SunIcon from '../../components/Aside/SunIcon'
@@ -10,6 +10,7 @@ import personImg from '../../assets/img/person.png'
 
 const Aside = () => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
 
     //On click btn, change theme
@@ -22,7 +23,7 @@ const Aside = () => {
             className={clsx(
                 'left-0 top-0 z-[101] flex justify-between overflow-hidden xs:w-full lg:fixed lg:h-screen lg:w-[96px] lg:flex-col lg:rounded-r-2xl',
                 invoiceRedux.openFormModal ? 'xs:fixed' : 'xs:absolute',
-                invoiceRedux.colorTheme === 'light'
+                themeRedux.colorTheme === 'light'
                     ? 'bg-asideBg'
                     : 'bg-asideDark'
             )}
@@ -41,13 +42,13 @@ const Aside = () => {
                     id="theme-switcher"
                     className={clsx(
                         'ml-auto mr-auto block bg-asideBg lg:mb-10',
-                        invoiceRedux.colorTheme === 'light'
+                        themeRedux.colorTheme === 'light'
                             ? 'bg-asideBg'
                             : 'bg-asideDark'
                     )}
                     onClick={onClickHandler}
                 >
-                    {invoiceRedux.colorTheme === 'dark' ? (
+                    {themeRedux.colorTheme === 'dark' ? (
                         <MoonIcon />
                     ) : (
                         <SunIcon />

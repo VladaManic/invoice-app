@@ -11,6 +11,7 @@ import Content from '../../components/Home/Content'
 
 const Home = () => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -33,7 +34,7 @@ const Home = () => {
             )}
             {!invoiceRedux.loading && !invoiceRedux.error ? (
                 <>
-                    <Intro colorTheme={invoiceRedux.colorTheme} />
+                    <Intro colorTheme={themeRedux.colorTheme} />
                     <Content invoice={invoiceRedux} />
                 </>
             ) : null}

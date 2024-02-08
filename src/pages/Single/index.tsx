@@ -17,6 +17,7 @@ const Single = () => {
     const { pathname } = useLocation()
     const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
     const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -46,22 +47,22 @@ const Single = () => {
             )}
             {!invoiceRedux.loading && invoiceRedux.singleInvoice !== null ? (
                 <>
-                    <Nav colorTheme={invoiceRedux.colorTheme} />
+                    <Nav colorTheme={themeRedux.colorTheme} />
                     <Header
                         invoice={invoiceRedux.singleInvoice}
                         openDeleteModal={openDeleteModal}
-                        colorTheme={invoiceRedux.colorTheme}
+                        colorTheme={themeRedux.colorTheme}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}
                         onClose={onCloseHandler}
                     />
                     <Content
                         invoice={invoiceRedux.singleInvoice}
-                        colorTheme={invoiceRedux.colorTheme}
+                        colorTheme={themeRedux.colorTheme}
                     />
                     <Footer
                         invoice={invoiceRedux.singleInvoice}
-                        colorTheme={invoiceRedux.colorTheme}
+                        colorTheme={themeRedux.colorTheme}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}
                     />

@@ -9,13 +9,13 @@ import setBodyColor from './utils/setBodyColor'
 
 function App() {
     //localStorage.clear()
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
 
     useLayoutEffect(() => {
-        invoiceRedux.colorTheme === 'light'
+        themeRedux.colorTheme === 'light'
             ? setBodyColor('#f8f8f8')
             : setBodyColor('#141625')
-    }, [invoiceRedux.colorTheme])
+    }, [themeRedux.colorTheme])
 
     return (
         <div id="app-wrap">
