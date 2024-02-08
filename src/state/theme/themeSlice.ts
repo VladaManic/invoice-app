@@ -4,6 +4,7 @@ import getDefaultTheme from '../../utils/getDeafultTheme'
 
 import { ThemeInitialStateObj } from '../../types/interfaces'
 const initialState: ThemeInitialStateObj = {
+    filterStatus: null,
     colorTheme: getDefaultTheme(),
 }
 
@@ -12,6 +13,9 @@ const themeSlice = createSlice({
     initialState,
     //Sync reducers list
     reducers: {
+        setStatus: (state, action) => {
+            state.filterStatus = action.payload
+        },
         setColorTheme: (state) => {
             let newValue
             if (state.colorTheme === 'dark') {
@@ -27,6 +31,6 @@ const themeSlice = createSlice({
     },
 })
 
-export const { setColorTheme } = themeSlice.actions
+export const { setStatus, setColorTheme } = themeSlice.actions
 
 export default themeSlice.reducer

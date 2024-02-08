@@ -7,7 +7,6 @@ const initialState: InitialStateObj = {
     loading: false,
     error: '',
     invoices: [],
-    filterStatus: null,
     singleInvoice: null,
     openFormModal: false,
     itemList: [],
@@ -95,9 +94,6 @@ const invoiceSlice = createSlice({
     initialState,
     //Sync reducers list
     reducers: {
-        setStatus: (state, action) => {
-            state.filterStatus = action.payload
-        },
         setOpenModal: (state, action) => {
             state.openFormModal = action.payload
         },
@@ -234,7 +230,6 @@ const invoiceSlice = createSlice({
 })
 
 export const {
-    setStatus,
     setOpenModal,
     addItem,
     removeItem,

@@ -1,9 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import {
-    setStatus,
-    fetchInvoicesByStatus,
-} from '../../../state/invoice/invoiceSlice'
+import { fetchInvoicesByStatus } from '../../../state/invoice/invoiceSlice'
+import { setStatus } from '../../../state/theme/themeSlice'
 import useAccordion from '../../../hooks/useAccordion'
 import clsx from 'clsx'
 
@@ -14,7 +12,7 @@ interface Props {
 }
 
 const Filter = ({ colorTheme }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
     //Using custom hook for opening/closing dropdown
     const { opened, setOpened } = useAccordion(false)
@@ -103,7 +101,7 @@ const Filter = ({ colorTheme }: Props) => {
                                 value="draft"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] p-0',
-                                    invoiceRedux.filterStatus === 'draft' &&
+                                    themeRedux.filterStatus === 'draft' &&
                                         'checked-field',
                                     colorTheme === 'light'
                                         ? 'bg-checkboxViolet '
@@ -129,7 +127,7 @@ const Filter = ({ colorTheme }: Props) => {
                                 value="pending"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    invoiceRedux.filterStatus === 'pending' &&
+                                    themeRedux.filterStatus === 'pending' &&
                                         'checked-field',
                                     colorTheme === 'light'
                                         ? 'bg-checkboxViolet '
@@ -155,7 +153,7 @@ const Filter = ({ colorTheme }: Props) => {
                                 value="paid"
                                 className={clsx(
                                     'mr-1 h-4 w-4 rounded-[3px] bg-checkboxViolet p-0',
-                                    invoiceRedux.filterStatus === 'paid' &&
+                                    themeRedux.filterStatus === 'paid' &&
                                         'checked-field',
                                     colorTheme === 'light'
                                         ? 'bg-checkboxViolet '

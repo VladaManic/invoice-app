@@ -40,7 +40,6 @@ export type InitialStateObj = {
     loading: boolean
     error: string | undefined
     invoices: [] | InvoiceObj[]
-    filterStatus: string | null
     singleInvoice: null | InvoiceObj
     openFormModal: boolean
     itemList: number[]
@@ -50,6 +49,7 @@ export type InitialStateObj = {
 }
 
 export type ThemeInitialStateObj = {
+    filterStatus: string | null
     colorTheme: string
 }
 
