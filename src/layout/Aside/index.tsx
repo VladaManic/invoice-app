@@ -9,7 +9,6 @@ import packmanIcon from '../../assets/img/packman.svg'
 import personImg from '../../assets/img/person.png'
 
 const Aside = () => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
     const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
 
@@ -22,7 +21,7 @@ const Aside = () => {
         <div
             className={clsx(
                 'left-0 top-0 z-[101] flex justify-between overflow-hidden xs:w-full lg:fixed lg:h-screen lg:w-[96px] lg:flex-col lg:rounded-r-2xl',
-                invoiceRedux.openFormModal ? 'xs:fixed' : 'xs:absolute',
+                themeRedux.openFormModal ? 'xs:fixed' : 'xs:absolute',
                 themeRedux.colorTheme === 'light'
                     ? 'bg-asideBg'
                     : 'bg-asideDark'

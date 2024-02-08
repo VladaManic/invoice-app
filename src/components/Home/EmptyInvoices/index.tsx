@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../state/hooks'
-import { setOpenModal } from '../../../state/invoice/invoiceSlice'
+import { setOpenModal } from '../../../state/theme/themeSlice'
 import clsx from 'clsx'
 
 import emptyIcon from '../../../assets/img/empty.png'

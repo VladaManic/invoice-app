@@ -5,6 +5,7 @@ import getDefaultTheme from '../../utils/getDeafultTheme'
 import { ThemeInitialStateObj } from '../../types/interfaces'
 const initialState: ThemeInitialStateObj = {
     filterStatus: null,
+    openFormModal: false,
     colorTheme: getDefaultTheme(),
 }
 
@@ -15,6 +16,9 @@ const themeSlice = createSlice({
     reducers: {
         setStatus: (state, action) => {
             state.filterStatus = action.payload
+        },
+        setOpenModal: (state, action) => {
+            state.openFormModal = action.payload
         },
         setColorTheme: (state) => {
             let newValue
@@ -31,6 +35,6 @@ const themeSlice = createSlice({
     },
 })
 
-export const { setStatus, setColorTheme } = themeSlice.actions
+export const { setStatus, setOpenModal, setColorTheme } = themeSlice.actions
 
 export default themeSlice.reducer

@@ -1,8 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import {
-    setOpenModal,
-    removeAllItems,
-} from '../../../state/invoice/invoiceSlice'
+import { removeAllItems } from '../../../state/invoice/invoiceSlice'
+import { setOpenModal } from '../../../state/theme/themeSlice'
 import clsx from 'clsx'
 
 import Modal from '../../Reusable/Modal'
@@ -29,7 +27,7 @@ const Header = ({
     onClickPaid,
     onClose,
 }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
 
     //Closing form modal
@@ -75,7 +73,7 @@ const Header = ({
                     />
                 </Modal>
             )}
-            {invoiceRedux.openFormModal && (
+            {themeRedux.openFormModal && (
                 <Modal onClose={onCloseHandler}>
                     <FormModal
                         invoice={invoice}

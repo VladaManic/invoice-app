@@ -1,8 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import {
-    setOpenModal,
-    removeAllItems,
-} from '../../../state/invoice/invoiceSlice'
+import { removeAllItems } from '../../../state/invoice/invoiceSlice'
+import { setOpenModal } from '../../../state/theme/themeSlice'
 import clsx from 'clsx'
 
 import Modal from '../../Reusable/Modal'
@@ -15,6 +13,7 @@ interface Props {
 
 const Intro = ({ colorTheme }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
+    const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
 
     //On click New Invoice btn, open form modal
@@ -80,7 +79,7 @@ const Intro = ({ colorTheme }: Props) => {
                     </p>
                 </div>
             </div>
-            {invoiceRedux.openFormModal && (
+            {themeRedux.openFormModal && (
                 <Modal onClose={onCloseHandler}>
                     <FormModal
                         invoice={undefined}
