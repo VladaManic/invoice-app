@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../../state/hooks'
+import { orderBy } from 'lodash'
 
 import SingleInvoice from '../SingleInvoice'
 import EmptyInvoices from '../EmptyInvoices'
@@ -10,12 +11,13 @@ interface Props {
 
 const Content = ({ invoice }: Props) => {
     const themeRedux = useAppSelector((state) => state.theme)
+    const invoicesSorted = orderBy(invoice.invoices, ['createdAt'], ['desc'])
 
     return (
         <>
             {invoice.invoices.length !== 0 ? (
                 <div>
-                    {invoice.invoices.map((singleInvoice: InvoiceObj) => (
+                    {invoicesSorted.map((singleInvoice: InvoiceObj) => (
                         <SingleInvoice
                             key={singleInvoice.id}
                             invoice={singleInvoice}
