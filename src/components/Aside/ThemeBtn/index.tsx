@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { setColorTheme } from '../../../state/theme/themeSlice'
 import clsx from 'clsx'
 
-import SunIcon from '../SunIcon'
-import MoonIcon from '../MoonIcon'
+import SunIcon from '../../Icons/SunIcon'
+import MoonIcon from '../../Icons/MoonIcon'
 
 const ThemeBtn = () => {
     const themeRedux = useAppSelector((state) => state.theme)
