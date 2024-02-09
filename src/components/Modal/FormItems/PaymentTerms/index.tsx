@@ -51,7 +51,7 @@ const PaymentTerms = ({ register, invoice, colorTheme }: Props) => {
             | React.TouchEvent<HTMLButtonElement>
     ) => {
         e.preventDefault()
-        setSelectOpened(!selectOpened)
+        setSelectOpened((current) => !current)
     }
 
     //Selecting options in dropdown

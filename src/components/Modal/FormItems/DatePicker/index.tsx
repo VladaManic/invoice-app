@@ -24,7 +24,7 @@ const DatePicker = ({ register, errors, invoice, colorTheme }: Props) => {
 
     //Opening/closing dropdown
     const onClickHandler = () => {
-        setDatepickerOpened(!datepickerOpened)
+        setDatepickerOpened((current) => !current)
     }
 
     return (
