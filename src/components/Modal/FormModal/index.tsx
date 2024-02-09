@@ -11,6 +11,7 @@ import {
 } from '../../../state/invoice/invoiceSlice'
 import { format } from 'date-fns'
 import clsx from 'clsx'
+
 import stringGenerator from '../../../utils/stringGenerator'
 import reformatDate from '../../../utils/reformatDate'
 

@@ -1,11 +1,12 @@
 import { useLayoutEffect } from 'react'
 import { useAppSelector } from './state/hooks'
 
+import setBodyColor from './utils/setBodyColor'
+
 import Aside from './layout/Aside'
 import Main from './layout/Main'
 
 import './App.css'
-import setBodyColor from './utils/setBodyColor'
 
 function App() {
     //localStorage.clear()

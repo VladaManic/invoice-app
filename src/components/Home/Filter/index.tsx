@@ -2,8 +2,9 @@ import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
 import { fetchInvoicesByStatus } from '../../../state/invoice/invoiceSlice'
 import { setStatus } from '../../../state/theme/themeSlice'
-import useAccordion from '../../../hooks/useAccordion'
 import clsx from 'clsx'
+
+import useAccordion from '../../../hooks/useAccordion'
 
 import arrowIcon from '../../../assets/img/arrow.svg'
 

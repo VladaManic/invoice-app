@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import datepickerSettup from '../../../../utils/datepickerSettup'
 import clsx from 'clsx'
 import { format } from 'date-fns'
+
+import datepickerSettup from '../../../../utils/datepickerSettup'
 
 import datepickerIcon from '../../../../assets/img/datepicker.svg'
 
