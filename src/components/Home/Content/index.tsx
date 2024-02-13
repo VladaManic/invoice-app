@@ -4,18 +4,18 @@ import { orderBy } from 'lodash'
 import SingleInvoice from '../SingleInvoice'
 import EmptyInvoices from '../EmptyInvoices'
 
-import { InvoiceObj, InitialStateObj } from '../../../types/interfaces'
+import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
-    invoice: InitialStateObj
+    invoice: InvoiceObj[]
 }
 
 const Content = ({ invoice }: Props) => {
     const themeRedux = useAppSelector((state) => state.theme)
-    const invoicesSorted = orderBy(invoice.invoices, ['createdAt'], ['desc'])
+    const invoicesSorted = orderBy(invoice, ['createdAt'], ['desc'])
 
     return (
         <>
-            {invoice.invoices.length !== 0 ? (
+            {invoice.length !== 0 ? (
                 <div>
                     {invoicesSorted.map((singleInvoice: InvoiceObj) => (
                         <SingleInvoice
