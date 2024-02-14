@@ -9,9 +9,10 @@ import Filter from '../Filter'
 
 interface Props {
     colorTheme: string
+    onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Intro = ({ colorTheme }: Props) => {
+const Intro = ({ colorTheme, onClick }: Props) => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
@@ -56,7 +57,7 @@ const Intro = ({ colorTheme }: Props) => {
                 )}
             </div>
             <div className="flex">
-                <Filter colorTheme={colorTheme} />
+                <Filter colorTheme={colorTheme} onClick={onClick} />
                 <div className="flex h-12 items-center rounded-[50px] bg-packmanUp p-2 pr-[16px]">
                     <button
                         className={clsx(

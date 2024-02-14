@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { fetchInvoices, resetSuccess } from '../../state/invoice/invoiceSlice'
+import { setStatus } from '../../state/theme/themeSlice'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -12,6 +13,7 @@ import Intro from '../../components/Home/Intro'
 import Content from '../../components/Home/Content'
 
 const Home = () => {
+    const [invoicesFilter, setInvoicesFilter] = useState<string>('all')
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
@@ -29,9 +31,19 @@ const Home = () => {
 
     //Tanstack query call for caching fetched data
     const { isError, isLoading, data } = useQuery({
-        queryKey: ['AllInvoices'],
-        queryFn: () => dispatch(fetchInvoices()),
+        queryKey: ['AllInvoices: ' + invoicesFilter],
+        queryFn: () => dispatch(fetchInvoices(invoicesFilter)),
     })
+
+    //Clicking on dropdown status to filter
+    const onClickHandler = (
+        e:
+            | React.MouseEvent<HTMLButtonElement>
+            | React.TouchEvent<HTMLButtonElement>
+    ) => {
+        dispatch(setStatus(e.currentTarget.value))
+        setInvoicesFilter(e.currentTarget.value)
+    }
 
     return (
         <div>
@@ -39,7 +51,10 @@ const Home = () => {
             {!isLoading && isError && <h2>Error: {isError}</h2>}
             {!isLoading && !isError ? (
                 <>
-                    <Intro colorTheme={themeRedux.colorTheme} />
+                    <Intro
+                        colorTheme={themeRedux.colorTheme}
+                        onClick={onClickHandler}
+                    />
                     <Content invoice={data!.payload} />
                 </>
             ) : null}

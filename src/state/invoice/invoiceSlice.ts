@@ -14,20 +14,20 @@ const initialState: InitialStateObj = {
     successDelete: false,
 }
 
-//Generates pending, fullfiled and rejected action types for fetching all invoices
-export const fetchInvoices = createAsyncThunk('invoice/fetchInvoices', () => {
-    return axios
-        .get('http://localhost:3004/invoices')
-        .then((response) => response.data)
-})
-
-//Filtering by invoice status (pending, fullfiled and rejected action types)
-export const fetchInvoicesByStatus = createAsyncThunk(
-    'invoice/fetcInvoicesByStatus',
+export const fetchInvoices = createAsyncThunk(
+    'invoice/fetchInvoices',
     (invoiceStatus: string) => {
-        return axios
-            .get('http://localhost:3004/invoices?status=' + invoiceStatus)
-            .then((response) => response.data)
+        //Generates pending, fullfiled and rejected action types for fetching all invoices
+        if (invoiceStatus === 'all') {
+            return axios
+                .get('http://localhost:3004/invoices')
+                .then((response) => response.data)
+            //Filtering by invoice status (pending, fullfiled and rejected action types)
+        } else {
+            return axios
+                .get('http://localhost:3004/invoices?status=' + invoiceStatus)
+                .then((response) => response.data)
+        }
     }
 )
 
@@ -125,7 +125,7 @@ const invoiceSlice = createSlice({
     },
     //Async reducers
     extraReducers: (builder) => {
-        //Fetching all invoices
+        //Fetching all or filtered invoices
         builder.addCase(fetchInvoices.pending, (state) => {
             state.loading = true
         })
@@ -135,20 +135,6 @@ const invoiceSlice = createSlice({
             state.error = ''
         })
         builder.addCase(fetchInvoices.rejected, (state, action) => {
-            state.loading = false
-            state.invoices = []
-            state.error = action.error.message
-        })
-        //Fetching invoices filtered by status
-        builder.addCase(fetchInvoicesByStatus.pending, (state) => {
-            state.loading = true
-        })
-        builder.addCase(fetchInvoicesByStatus.fulfilled, (state, action) => {
-            state.loading = false
-            state.invoices = action.payload
-            state.error = ''
-        })
-        builder.addCase(fetchInvoicesByStatus.rejected, (state, action) => {
             state.loading = false
             state.invoices = []
             state.error = action.error.message

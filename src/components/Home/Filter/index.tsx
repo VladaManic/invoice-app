@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import { fetchInvoicesByStatus } from '../../../state/invoice/invoiceSlice'
-import { setStatus } from '../../../state/theme/themeSlice'
+import { useAppSelector } from '../../../state/hooks'
 import clsx from 'clsx'
 
 import useAccordion from '../../../hooks/useAccordion'
@@ -10,11 +8,11 @@ import arrowIcon from '../../../assets/img/arrow.svg'
 
 interface Props {
     colorTheme: string
+    onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Filter = ({ colorTheme }: Props) => {
+const Filter = ({ colorTheme, onClick }: Props) => {
     const themeRedux = useAppSelector((state) => state.theme)
-    const dispatch = useAppDispatch()
     //Using custom hook for opening/closing dropdown
     const { opened, setOpened } = useAccordion(false)
     const dropdownRef = useRef<HTMLDivElement | null>(null)
@@ -36,16 +34,6 @@ const Filter = ({ colorTheme }: Props) => {
             document.removeEventListener('touchstart', clickOutsideHandler)
         }
     }, [])
-
-    //Clicking on dropdown status to filter
-    const onClickHandler = (
-        e:
-            | React.MouseEvent<HTMLButtonElement>
-            | React.TouchEvent<HTMLButtonElement>
-    ) => {
-        dispatch(setStatus(e.currentTarget.value))
-        dispatch(fetchInvoicesByStatus(e.currentTarget.value))
-    }
 
     return (
         <div
@@ -108,7 +96,7 @@ const Filter = ({ colorTheme }: Props) => {
                                         ? 'bg-checkboxViolet '
                                         : 'bg-themeDark'
                                 )}
-                                onClick={onClickHandler}
+                                onClick={onClick}
                             ></button>
                             <button
                                 className={clsx(
@@ -117,7 +105,7 @@ const Filter = ({ colorTheme }: Props) => {
                                         ? 'text-defaultBlack'
                                         : 'bg-asideDark text-defaultWhite'
                                 )}
-                                onClick={onClickHandler}
+                                onClick={onClick}
                                 value="draft"
                             >
                                 Draft
@@ -134,7 +122,7 @@ const Filter = ({ colorTheme }: Props) => {
                                         ? 'bg-checkboxViolet '
                                         : 'bg-themeDark'
                                 )}
-                                onClick={onClickHandler}
+                                onClick={onClick}
                             ></button>
                             <button
                                 className={clsx(
@@ -143,7 +131,7 @@ const Filter = ({ colorTheme }: Props) => {
                                         ? 'text-defaultBlack'
                                         : 'bg-asideDark text-defaultWhite'
                                 )}
-                                onClick={onClickHandler}
+                                onClick={onClick}
                                 value="pending"
                             >
                                 Pending
@@ -160,7 +148,7 @@ const Filter = ({ colorTheme }: Props) => {
                                         ? 'bg-checkboxViolet '
                                         : 'bg-themeDark'
                                 )}
-                                onClick={onClickHandler}
+                                onClick={onClick}
                             ></button>
                             <button
                                 className={clsx(
@@ -169,7 +157,7 @@ const Filter = ({ colorTheme }: Props) => {
                                         ? 'text-defaultBlack'
                                         : 'bg-asideDark text-defaultWhite'
                                 )}
-                                onClick={onClickHandler}
+                                onClick={onClick}
                                 value="paid"
                             >
                                 Paid
