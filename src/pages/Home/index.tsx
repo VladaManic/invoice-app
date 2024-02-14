@@ -31,7 +31,7 @@ const Home = () => {
 
     //Tanstack query call for caching fetched data
     const { isError, isLoading, data } = useQuery({
-        queryKey: ['AllInvoices: ' + invoicesFilter],
+        queryKey: ['Invoices: ' + invoicesFilter],
         queryFn: () => dispatch(fetchInvoices(invoicesFilter)),
     })
 
