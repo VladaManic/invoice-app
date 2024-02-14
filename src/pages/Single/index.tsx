@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import {
@@ -14,18 +15,23 @@ import Content from '../../components/Single/Content'
 import Footer from '../../components/Single/Footer'
 
 const Single = () => {
-    //Get URL
-    const { pathname } = useLocation()
     const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false)
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
+    //Get URL
+    const { pathname } = useLocation()
+    const invoiceName = pathname.replace('/invoice/', '')
 
     useEffect(() => {
-        dispatch(fetchSingleInvoice(pathname.replace('/invoice/', '')))
         //Reset filter status
         dispatch(setStatus(null))
     }, [])
+
+    const { isError, isLoading, data } = useQuery({
+        queryKey: ['Single invoices ' + invoiceName],
+        queryFn: () => dispatch(fetchSingleInvoice(invoiceName)),
+    })
 
     //Opening delete confirmation modal
     const onClickDelete = () => {
@@ -44,15 +50,13 @@ const Single = () => {
 
     return (
         <div>
-            {invoiceRedux.loading && <Loader />}
-            {!invoiceRedux.loading && invoiceRedux.error && (
-                <h2>Error: {invoiceRedux.error}</h2>
-            )}
-            {!invoiceRedux.loading && invoiceRedux.singleInvoice !== null ? (
+            {isLoading && <Loader />}
+            {!isLoading && isError && <h2>Error: {isError}</h2>}
+            {!isLoading ? (
                 <>
                     <Nav colorTheme={themeRedux.colorTheme} />
                     <Header
-                        invoice={invoiceRedux.singleInvoice}
+                        invoice={data!.payload}
                         openDeleteModal={openDeleteModal}
                         colorTheme={themeRedux.colorTheme}
                         onClickDelete={onClickDelete}
@@ -60,11 +64,11 @@ const Single = () => {
                         onClose={onCloseHandler}
                     />
                     <Content
-                        invoice={invoiceRedux.singleInvoice}
+                        invoice={data!.payload}
                         colorTheme={themeRedux.colorTheme}
                     />
                     <Footer
-                        invoice={invoiceRedux.singleInvoice}
+                        invoice={data!.payload}
                         colorTheme={themeRedux.colorTheme}
                         onClickDelete={onClickDelete}
                         onClickPaid={onClickPaid}
