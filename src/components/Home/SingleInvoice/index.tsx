@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { format } from 'date-fns'
 import clsx from 'clsx'
 
+import InvoiceId from '../InvoiceItems/InvoiceId'
 import StatusBtn from '../../Reusable/StatusBtn'
 
 import arrowRight from '../../../assets/img/arrow-right.svg'
@@ -28,19 +29,7 @@ const SingleInvoice = ({ invoice, colorTheme }: Props) => {
                 )}
             >
                 <div className="flex max-md:justify-between xs:mb-[20px] xs:w-full md:mb-0 md:w-1/3">
-                    <p className="w-28 text-left text-xs text-defaultText">
-                        #
-                        <span
-                            className={clsx(
-                                'font-spartanBold',
-                                colorTheme === 'light'
-                                    ? 'text-defaultBlack'
-                                    : 'text-defaultWhite'
-                            )}
-                        >
-                            {invoice !== undefined && invoice.id}
-                        </span>
-                    </p>
+                    <InvoiceId invoice={invoice} colorTheme={colorTheme} />
                     <p className="w-40 text-xs xs:text-right md:text-left">
                         <span
                             className={clsx(
