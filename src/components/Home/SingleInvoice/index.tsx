@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom'
-import { format } from 'date-fns'
 import clsx from 'clsx'
 
 import InvoiceId from '../InvoiceItems/InvoiceId'
+import InvoiceDate from '../InvoiceItems/InvoiceDate'
 import InvoiceName from '../InvoiceItems/InvoiceName'
 import InvoiceAmount from '../InvoiceItems/InvoiceAmount'
 import StatusBtn from '../../Reusable/StatusBtn'
@@ -16,7 +16,6 @@ interface Props {
 }
 
 const SingleInvoice = ({ invoice, colorTheme }: Props) => {
-    const date = invoice !== undefined && new Date(invoice.paymentDue)
     const param = invoice !== undefined && invoice.id
 
     return (
@@ -32,26 +31,7 @@ const SingleInvoice = ({ invoice, colorTheme }: Props) => {
             >
                 <div className="flex max-md:justify-between xs:mb-[20px] xs:w-full md:mb-0 md:w-1/3">
                     <InvoiceId invoice={invoice} colorTheme={colorTheme} />
-                    <p className="w-40 text-xs xs:text-right md:text-left">
-                        <span
-                            className={clsx(
-                                colorTheme === 'light'
-                                    ? 'text-singleGrey'
-                                    : 'text-checkboxViolet'
-                            )}
-                        >
-                            Due&nbsp;
-                        </span>
-                        <span
-                            className={clsx(
-                                colorTheme === 'light'
-                                    ? 'text-singleGrey'
-                                    : 'text-checkboxViolet'
-                            )}
-                        >
-                            {date !== false && format(date, 'dd MMM y')}
-                        </span>
-                    </p>
+                    <InvoiceDate invoice={invoice} colorTheme={colorTheme} />
                 </div>
                 <div className="flex items-center justify-between xs:w-full md:w-2/3">
                     <div className="flex justify-between xs:flex-col md:w-3/5 md:flex-row md:items-center">
