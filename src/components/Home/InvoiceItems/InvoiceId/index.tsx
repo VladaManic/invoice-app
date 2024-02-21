@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 
 import { InvoiceObj } from '../../../../types/interfaces'
-export interface Props {
+interface Props {
     invoice: InvoiceObj
     colorTheme: string
 }
