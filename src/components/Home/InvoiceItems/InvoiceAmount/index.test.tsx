@@ -2,9 +2,10 @@ import { render, screen } from '@testing-library/react'
 import InvoiceId from './index'
 import { mockInvoice } from '../../../../constants/mockInvoice'
 
-test('Render invoice id', () => {
+test('Render invoice amount', () => {
     const invoice = mockInvoice
+    const amount = parseFloat(invoice.total.toString()).toFixed(2)
     render(<InvoiceId invoice={invoice} colorTheme={'light'} />)
-    const invoiceIdElement = screen.getByText(`${invoice.id}`)
-    expect(invoiceIdElement).toBeInTheDocument()
+    const invoiceNameElement = screen.getByText(`${amount}`)
+    expect(invoiceNameElement).toBeInTheDocument()
 })

@@ -3,6 +3,8 @@ import { format } from 'date-fns'
 import clsx from 'clsx'
 
 import InvoiceId from '../InvoiceItems/InvoiceId'
+import InvoiceName from '../InvoiceItems/InvoiceName'
+import InvoiceAmount from '../InvoiceItems/InvoiceAmount'
 import StatusBtn from '../../Reusable/StatusBtn'
 
 import arrowRight from '../../../assets/img/arrow-right.svg'
@@ -53,28 +55,14 @@ const SingleInvoice = ({ invoice, colorTheme }: Props) => {
                 </div>
                 <div className="flex items-center justify-between xs:w-full md:w-2/3">
                     <div className="flex justify-between xs:flex-col md:w-3/5 md:flex-row md:items-center">
-                        <p
-                            className={clsx(
-                                'text-left text-xs xs:mb-[5px] md:mb-0 md:ml-[30px]',
-                                colorTheme === 'light'
-                                    ? 'text-defaultText'
-                                    : 'text-defaultWhite'
-                            )}
-                        >
-                            {invoice !== undefined && invoice.clientName}
-                        </p>
-                        <p
-                            className={clsx(
-                                'flex font-spartanBold text-base',
-                                colorTheme === 'light'
-                                    ? 'text-defaultBlack'
-                                    : 'text-defaultWhite'
-                            )}
-                        >
-                            <span>£</span>{' '}
-                            {invoice !== undefined &&
-                                parseFloat(invoice.total.toString()).toFixed(2)}
-                        </p>
+                        <InvoiceName
+                            invoice={invoice}
+                            colorTheme={colorTheme}
+                        />
+                        <InvoiceAmount
+                            invoice={invoice}
+                            colorTheme={colorTheme}
+                        />
                     </div>
                     <div className="flex items-center justify-between pl-[30px] md:w-2/5">
                         <StatusBtn invoice={invoice} colorTheme={colorTheme} />
