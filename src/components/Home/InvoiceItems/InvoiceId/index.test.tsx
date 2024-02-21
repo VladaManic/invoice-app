@@ -3,7 +3,7 @@ import InvoiceId from './index'
 
 test('Render invoice id', () => {
     const invoice = {
-        id: '#RT3080',
+        id: 'RT3080',
         createdAt: '',
         paymentDue: '',
         description: '',
