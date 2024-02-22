@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import isStorageSupported from '../../utils/isStorageSupported'
-import getDefaultTheme from '../../utils/getDeafultTheme'
+import getDefaultTheme from '../../utils/getDefaultTheme'
 
 import { ThemeInitialStateObj } from '../../types/interfaces'
 const initialState: ThemeInitialStateObj = {

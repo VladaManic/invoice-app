@@ -17,7 +17,7 @@ import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
     invoice: InvoiceObj
     colorTheme: string
-    onClose: React.MouseEventHandler<HTMLButtonElement>
+    onClose: React.MouseEventHandler<HTMLButtonElement> | undefined
 }
 
 const DeleteConfirmationModal = ({ invoice, colorTheme, onClose }: Props) => {
