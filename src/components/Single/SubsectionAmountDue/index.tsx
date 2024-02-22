@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import calculateTotal from '../../../utils/calculateTotal'
 
 import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
@@ -7,6 +8,8 @@ interface Props {
 }
 
 const SubsectionAmountDue = ({ invoice, colorTheme }: Props) => {
+    const invoiceTotal = calculateTotal(invoice)
+
     return (
         <div
             className={clsx(
@@ -20,7 +23,7 @@ const SubsectionAmountDue = ({ invoice, colorTheme }: Props) => {
             <p className="font-spartanBold leading-[32px] tracking-[-0.42px] text-defaultWhite xs:text-[20px] md:text-[24px]">
                 <span>£</span>{' '}
                 {invoice !== undefined &&
-                    parseFloat(invoice.total.toString()).toFixed(2)}
+                    parseFloat(invoiceTotal.toString()).toFixed(2)}
             </p>
         </div>
     )
