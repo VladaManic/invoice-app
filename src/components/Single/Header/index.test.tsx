@@ -39,9 +39,20 @@ test('Clicking the "Mark as Paid" button updates the status of the component', a
     // Click the "Mark as Paid" button
     fireEvent.click(markAsPaidButton)
 
-    // Wait for the status to update
-    await waitFor(() => {
-        const paidText = screen.getByText(/paid/i)
-        expect(paidText).toBeVisible()
-    })
+    // Wait for the status to update from pending to paid
+    await waitFor(
+        () =>
+            new Promise<void>((resolve) => {
+                const statusButton = screen.getByTestId('status-button')
+                if (
+                    statusButton.querySelector('.font-spartanBold')
+                        ?.textContent === 'Paid'
+                ) {
+                    resolve()
+                } else {
+                    setTimeout(resolve, 500)
+                }
+            }),
+        { timeout: 5000 }
+    )
 })
