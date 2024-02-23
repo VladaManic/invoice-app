@@ -10,7 +10,7 @@ const StatusBtn = ({ invoice, colorTheme }: Props) => {
     const status = invoice !== undefined && invoice.status
 
     return (
-        <>
+        <div data-testid="status-button">
             {status === 'pending' ? (
                 <div className="flex h-10 w-28 rounded-md bg-pendingBg text-pendingOrange">
                     <p className="m-auto flex items-center">
@@ -46,7 +46,7 @@ const StatusBtn = ({ invoice, colorTheme }: Props) => {
                     </p>
                 </div>
             )}
-        </>
+        </div>
     )
 }
 

@@ -1,12 +1,13 @@
 import { useAppSelector } from '../../../state/hooks'
 
 import EditBtn from '../EditBtn'
+import MarkAsPaidBtn from '../MarkAsPaidBtn'
 
 import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
     invoice: InvoiceObj
-    onClickDelete: React.MouseEventHandler<HTMLButtonElement>
-    onClickPaid: React.MouseEventHandler<HTMLButtonElement>
+    onClickDelete: React.MouseEventHandler<HTMLButtonElement> | undefined
+    onClickPaid: React.MouseEventHandler<HTMLButtonElement> | undefined
 }
 
 const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
@@ -22,12 +23,7 @@ const ChangeButtons = ({ invoice, onClickDelete, onClickPaid }: Props) => {
                 Delete
             </button>
             {invoice.status === 'pending' && (
-                <button
-                    className="rounded-[50px] bg-packmanUp pb-[15px] pl-[22px] pr-[22px] pt-[15px] font-spartanBold text-xs text-defaultWhite"
-                    onClick={onClickPaid}
-                >
-                    Mark as Paid
-                </button>
+                <MarkAsPaidBtn onClickPaid={onClickPaid} />
             )}
         </div>
     )

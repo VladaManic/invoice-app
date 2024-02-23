@@ -2,7 +2,7 @@ import ReactDom from 'react-dom'
 
 interface Props {
     children: JSX.Element
-    onClose: React.MouseEventHandler<HTMLDivElement>
+    onClose: React.MouseEventHandler<HTMLDivElement> | undefined
 }
 
 const Modal = ({ children, onClose }: Props) => {

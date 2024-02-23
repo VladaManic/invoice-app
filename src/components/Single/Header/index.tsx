@@ -14,9 +14,11 @@ interface Props {
     invoice: InvoiceObj
     openDeleteModal: boolean
     colorTheme: string
-    onClickDelete: React.MouseEventHandler<HTMLButtonElement>
-    onClickPaid: React.MouseEventHandler<HTMLButtonElement>
-    onClose: React.MouseEventHandler<HTMLDivElement | HTMLButtonElement>
+    onClickDelete: React.MouseEventHandler<HTMLButtonElement> | undefined
+    onClickPaid: React.MouseEventHandler<HTMLButtonElement> | undefined
+    onClose:
+        | React.MouseEventHandler<HTMLDivElement | HTMLButtonElement>
+        | undefined
 }
 
 const Header = ({
