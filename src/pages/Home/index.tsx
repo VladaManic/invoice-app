@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
 import { fetchInvoices, resetSuccess } from '../../state/invoice/invoiceSlice'
 import { ToastContainer, toast } from 'react-toastify'
@@ -16,7 +17,6 @@ const Home = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchInvoices())
         if (invoiceRedux.successDelete) {
             toast.success(
                 'You successfully deleted the invoice!',
@@ -27,16 +27,20 @@ const Home = () => {
         }
     }, [])
 
+    //Tanstack query call for caching fetched data
+    const { isError, isLoading, data } = useQuery({
+        queryKey: ['Invoices:'],
+        queryFn: () => dispatch(fetchInvoices()),
+    })
+
     return (
         <div>
-            {invoiceRedux.loading && <Loader />}
-            {!invoiceRedux.loading && invoiceRedux.error && (
-                <h2>Error: {invoiceRedux.error}</h2>
-            )}
-            {!invoiceRedux.loading && !invoiceRedux.error ? (
+            {isLoading && <Loader />}
+            {!isLoading && isError && <h2>Error: {isError}</h2>}
+            {!isLoading && !isError ? (
                 <>
                     <Intro colorTheme={themeRedux.colorTheme} />
-                    <Content invoice={invoiceRedux} />
+                    <Content invoice={data!.payload} />
                 </>
             ) : null}
             <ToastContainer />
