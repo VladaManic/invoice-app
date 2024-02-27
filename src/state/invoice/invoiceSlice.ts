@@ -24,7 +24,7 @@ export const fetchInvoices = createAsyncThunk('invoice/fetchInvoices', () => {
 //Filtering by invoice status (pending, fullfiled and rejected action types)
 export const fetchInvoicesByStatus = createAsyncThunk(
     'invoice/fetcInvoicesByStatus',
-    (invoiceStatus: string) => {
+    (invoiceStatus: string | null) => {
         return axios
             .get('http://localhost:3004/invoices?status=' + invoiceStatus)
             .then((response) => response.data)

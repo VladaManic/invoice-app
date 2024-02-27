@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
-import { fetchInvoices, resetSuccess } from '../../state/invoice/invoiceSlice'
+import {
+    fetchInvoices,
+    fetchInvoicesByStatus,
+    resetSuccess,
+} from '../../state/invoice/invoiceSlice'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -15,6 +19,7 @@ const Home = () => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
+    let isError, isLoading, data
 
     useEffect(() => {
         if (invoiceRedux.successDelete) {
@@ -27,11 +32,39 @@ const Home = () => {
         }
     }, [])
 
-    //Tanstack query call for caching fetched data
-    const { isError, isLoading, data } = useQuery({
+    //Tanstack query call fetching all invoice data and caching them
+    const {
+        isError: isErrorAll,
+        isLoading: isLoadingAll,
+        data: dataAll,
+    } = useQuery({
         queryKey: ['Invoices:'],
         queryFn: () => dispatch(fetchInvoices()),
+        enabled: themeRedux.filterStatus === null,
     })
+
+    //Tanstack query call fetching filtered invoice data and caching them
+    const {
+        isError: isErrorFilter,
+        isLoading: isLoadingFilter,
+        data: dataFilter,
+    } = useQuery({
+        queryKey: ['Invoices: ' + themeRedux.filterStatus],
+        queryFn: () => dispatch(fetchInvoicesByStatus(themeRedux.filterStatus)),
+        enabled: themeRedux.filterStatus !== null,
+    })
+
+    //Returned data in case before filter selected
+    if (themeRedux.filterStatus === null) {
+        isError = isErrorAll
+        isLoading = isLoadingAll
+        data = dataAll
+        //Returned data in case filter selected
+    } else {
+        isError = isErrorFilter
+        isLoading = isLoadingFilter
+        data = dataFilter
+    }
 
     return (
         <div>
@@ -39,7 +72,10 @@ const Home = () => {
             {!isLoading && isError && <h2>Error: {isError}</h2>}
             {!isLoading && !isError ? (
                 <>
-                    <Intro colorTheme={themeRedux.colorTheme} />
+                    <Intro
+                        colorTheme={themeRedux.colorTheme}
+                        invoice={data!.payload}
+                    />
                     <Content invoice={data!.payload} />
                 </>
             ) : null}

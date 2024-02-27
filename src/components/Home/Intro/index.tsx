@@ -7,12 +7,13 @@ import Modal from '../../Reusable/Modal'
 import FormModal from '../../Modal/FormModal'
 import Filter from '../Filter'
 
+import { InvoiceObj } from '../../../types/interfaces'
 interface Props {
     colorTheme: string
+    invoice: InvoiceObj[]
 }
 
-const Intro = ({ colorTheme }: Props) => {
-    const invoiceRedux = useAppSelector((state) => state.invoice)
+const Intro = ({ colorTheme, invoice }: Props) => {
     const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
 
@@ -41,14 +42,13 @@ const Intro = ({ colorTheme }: Props) => {
                 >
                     Invoices
                 </h1>
-                {invoiceRedux.invoices.length > 0 ? (
+                {invoice.length > 0 ? (
                     <>
                         <p className="text-xs max-md:hidden md:block">
-                            There are {invoiceRedux.invoices.length} total
-                            invoices
+                            There are {invoice.length} total invoices
                         </p>
                         <p className="text-xs max-md:block md:hidden">
-                            {invoiceRedux.invoices.length} invoices
+                            {invoice.length} invoices
                         </p>
                     </>
                 ) : (

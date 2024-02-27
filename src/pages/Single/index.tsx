@@ -5,6 +5,7 @@ import {
     fetchSingleInvoice,
     updateToPaid,
 } from '../../state/invoice/invoiceSlice'
+import { setStatus } from '../../state/theme/themeSlice'
 
 import Loader from '../../components/Reusable/Loader'
 import Nav from '../../components/Single/Nav'
@@ -22,6 +23,7 @@ const Single = () => {
 
     useEffect(() => {
         dispatch(fetchSingleInvoice(pathname.replace('/invoice/', '')))
+        dispatch(setStatus(null))
     }, [])
 
     //Opening delete confirmation modal

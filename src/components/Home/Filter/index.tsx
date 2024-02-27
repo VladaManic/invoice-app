@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import { fetchInvoicesByStatus } from '../../../state/invoice/invoiceSlice'
 import { setStatus } from '../../../state/theme/themeSlice'
 import clsx from 'clsx'
 
@@ -44,7 +43,6 @@ const Filter = ({ colorTheme }: Props) => {
             | React.TouchEvent<HTMLButtonElement>
     ) => {
         dispatch(setStatus(e.currentTarget.value))
-        dispatch(fetchInvoicesByStatus(e.currentTarget.value))
     }
 
     return (
