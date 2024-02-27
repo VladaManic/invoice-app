@@ -38,7 +38,7 @@ const Home = () => {
         isLoading: isLoadingAll,
         data: dataAll,
     } = useQuery({
-        queryKey: ['Invoices:'],
+        queryKey: ['Invoices'],
         queryFn: () => dispatch(fetchInvoices()),
         enabled: themeRedux.filterStatus === null,
     })
