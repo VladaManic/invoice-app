@@ -4,13 +4,10 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '../../../state/hooks'
-import {
-    addItem,
-    createInvoice,
-    updateInvoice,
-} from '../../../state/invoice/invoiceSlice'
+import { addItem, updateInvoice } from '../../../state/invoice/invoiceSlice'
 import { format } from 'date-fns'
 import clsx from 'clsx'
+import useCreateInvoiceMutation from '../../../hooks/useCreateInvoiceMutation'
 
 import stringGenerator from '../../../utils/stringGenerator'
 import reformatDate from '../../../utils/reformatDate'
@@ -34,6 +31,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
     const [submitType, setSubmitType] = useState('pending')
     const { pathname } = useLocation()
     const dispatch = useAppDispatch()
+    const createInvoiceMutation = useCreateInvoiceMutation()
 
     let singleInvoice, formTitle
     //Edit form values
@@ -154,7 +152,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
             } else {
                 newObj.status = 'draft'
             }
-            dispatch(createInvoice(newObj))
+            createInvoiceMutation.mutate(newObj)
             //If single pade (edit form)
         } else {
             newObj.id = invoice!.id
