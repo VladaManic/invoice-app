@@ -18,10 +18,9 @@ const useCreateInvoiceMutation = () => {
             }
         },
         onSuccess: (createdInvoice) => {
-            const key = ['Invoices']
-            // Update the cache
+            // Update the cache for all invoices WITHOUT re-fetch
             queryClient.setQueryData(
-                key,
+                ['Invoices'],
                 (prevData: { payload: InvoiceObj[] } | undefined) => {
                     const newData = prevData
                         ? [...prevData.payload, createdInvoice.payload]
@@ -29,6 +28,10 @@ const useCreateInvoiceMutation = () => {
                     return { payload: newData }
                 }
             )
+            // Update the cache for filtered invoices WITH re-fetch
+            queryClient.invalidateQueries({
+                queryKey: ['Invoices: ' + createdInvoice.payload.status],
+            })
         },
     })
 }
