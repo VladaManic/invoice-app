@@ -65,6 +65,7 @@ const Home = () => {
         isLoading = isLoadingFilter
         data = dataFilter
     }
+    //console.log(queryClient.getQueryData(['Invoices']))
 
     return (
         <div>

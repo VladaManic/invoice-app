@@ -11,19 +11,24 @@ const useCreateInvoiceMutation = () => {
         mutationFn: async (newObj: InvoiceObj) => {
             try {
                 const createdInvoice = await dispatch(createInvoice(newObj))
-
-                if (createdInvoice) {
-                    queryClient.invalidateQueries()
-                }
-
                 return createdInvoice
             } catch (error) {
                 console.error('Error creating invoice:', error)
                 throw error
             }
         },
-        onError: (error) => {
-            console.error('Error during mutation:', error)
+        onSuccess: (createdInvoice) => {
+            const key = ['Invoices']
+            // Update the cache
+            queryClient.setQueryData(
+                key,
+                (prevData: { payload: InvoiceObj[] } | undefined) => {
+                    const newData = prevData
+                        ? [...prevData.payload, createdInvoice.payload]
+                        : [createdInvoice.payload]
+                    return { payload: newData }
+                }
+            )
         },
     })
 }
