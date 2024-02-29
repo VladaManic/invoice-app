@@ -1,13 +1,11 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../../state/hooks'
-import {
-    deleteSingleInvoice,
-    resetError,
-} from '../../../state/invoice/invoiceSlice'
+import { resetError } from '../../../state/invoice/invoiceSlice'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import clsx from 'clsx'
+import useDeleteInvoiceMutation from '../../../hooks/useDeleteInvoiceMutation'
 
 import { TOASTIFY_PARAMS } from '../../../constants/toastifyConstant'
 
@@ -24,6 +22,9 @@ const DeleteConfirmationModal = ({ invoice, colorTheme, onClose }: Props) => {
     const navigate = useNavigate()
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const dispatch = useAppDispatch()
+    const deleteInvoiceMutation = useDeleteInvoiceMutation(
+        invoiceRedux.singleInvoice!.status
+    )
 
     useEffect(() => {
         //If error while deleting single invoice
@@ -46,7 +47,7 @@ const DeleteConfirmationModal = ({ invoice, colorTheme, onClose }: Props) => {
             | React.TouchEvent<HTMLButtonElement>
     ) => {
         const id = e.currentTarget.value
-        dispatch(deleteSingleInvoice(id))
+        deleteInvoiceMutation.mutate(id)
     }
 
     return (
