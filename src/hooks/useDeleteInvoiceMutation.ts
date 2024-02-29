@@ -9,15 +9,14 @@ const useDeleteInvoiceMutation = (status: string) => {
     return useMutation({
         mutationFn: async (id: string) => {
             try {
-                const deletedInvoice = await dispatch(deleteSingleInvoice(id))
-                return deletedInvoice
+                await dispatch(deleteSingleInvoice(id))
+                return id
             } catch (error) {
                 console.error('Error deleting invoice:', error)
                 throw error
             }
         },
-        onSuccess: (deletedInvoice) => {
-            console.log(deletedInvoice.payload)
+        onSuccess: (id) => {
             // Update the cache for all invoices WITH re-fetch
             queryClient.invalidateQueries({
                 queryKey: ['Invoices'],
@@ -26,6 +25,13 @@ const useDeleteInvoiceMutation = (status: string) => {
             queryClient.invalidateQueries({
                 queryKey: ['Invoices: ' + status],
             })
+            // Delete the cache for the single invoice
+            queryClient.setQueryData(['Single invoice: ' + id], null)
+            console.log(
+                id +
+                    ' cache data is: ' +
+                    queryClient.getQueryData(['Single invoice: ' + id])
+            )
         },
     })
 }
