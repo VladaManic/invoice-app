@@ -30,8 +30,7 @@ const Single = () => {
     //Tanstack query call fetching single invoice data and caching it
     const { isError, isLoading, data } = useQuery({
         queryKey: ['Single invoices ' + invoiceName],
-        queryFn: () =>
-            dispatch(fetchSingleInvoice(pathname.replace('/invoice/', ''))),
+        queryFn: () => dispatch(fetchSingleInvoice(invoiceName)),
     })
 
     //Opening delete confirmation modal
