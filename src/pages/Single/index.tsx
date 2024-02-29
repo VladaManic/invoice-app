@@ -2,11 +2,9 @@ import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { useAppDispatch, useAppSelector } from '../../state/hooks'
-import {
-    fetchSingleInvoice,
-    updateToPaid,
-} from '../../state/invoice/invoiceSlice'
+import { fetchSingleInvoice } from '../../state/invoice/invoiceSlice'
 import { setStatus } from '../../state/theme/themeSlice'
+import useUpdateToPaidMutation from '../../hooks/useUpdateToPaidMutation'
 
 import Loader from '../../components/Reusable/Loader'
 import Nav from '../../components/Single/Nav'
@@ -19,6 +17,7 @@ const Single = () => {
     const invoiceRedux = useAppSelector((state) => state.invoice)
     const themeRedux = useAppSelector((state) => state.theme)
     const dispatch = useAppDispatch()
+    const updateToPaidMutation = useUpdateToPaidMutation()
     //Get URL
     const { pathname } = useLocation()
     const invoiceName = pathname.replace('/invoice/', '')
@@ -29,7 +28,7 @@ const Single = () => {
 
     //Tanstack query call fetching single invoice data and caching it
     const { isError, isLoading, data } = useQuery({
-        queryKey: ['Single invoices ' + invoiceName],
+        queryKey: ['Single invoice: ' + invoiceName],
         queryFn: () => dispatch(fetchSingleInvoice(invoiceName)),
     })
 
@@ -45,7 +44,7 @@ const Single = () => {
 
     //On click 'Mark as Paid' btn
     const onClickPaid = () => {
-        dispatch(updateToPaid(invoiceRedux.singleInvoice))
+        updateToPaidMutation.mutate(invoiceRedux.singleInvoice)
     }
 
     return (
