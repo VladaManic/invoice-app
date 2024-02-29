@@ -4,10 +4,11 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAppDispatch } from '../../../state/hooks'
-import { addItem, updateInvoice } from '../../../state/invoice/invoiceSlice'
+import { addItem } from '../../../state/invoice/invoiceSlice'
 import { format } from 'date-fns'
 import clsx from 'clsx'
 import useCreateInvoiceMutation from '../../../hooks/useCreateInvoiceMutation'
+import useUpdateInvoiceMutation from '../../../hooks/useUpdateInvoiceMutation'
 
 import stringGenerator from '../../../utils/stringGenerator'
 import reformatDate from '../../../utils/reformatDate'
@@ -32,6 +33,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
     const { pathname } = useLocation()
     const dispatch = useAppDispatch()
     const createInvoiceMutation = useCreateInvoiceMutation()
+    const updateInvoiceMutation = useUpdateInvoiceMutation(false)
 
     let singleInvoice, formTitle
     //Edit form values
@@ -158,7 +160,7 @@ const FormModal = ({ invoice, colorTheme, onClose }: Props) => {
             newObj.id = invoice!.id
             newObj.createdAt = invoice!.createdAt
             newObj.status = invoice!.status
-            dispatch(updateInvoice(newObj))
+            updateInvoiceMutation.mutate(newObj)
         }
     }
 
